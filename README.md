@@ -1,12 +1,31 @@
-# React + Vite
+# 🌐 Abhay Kumar Yadav — 3D Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive 3D portfolio website built using **React**, **Vite**, and **Spline**, showcasing my projects, skills, and personal journey as a passionate B.Tech IT student and full-stack web developer.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🎨 3D scenes integrated using Spline
+- ⚛️ Built with React + Vite for high performance
+- 💡 Modern, responsive, and mobile-friendly UI
+- 🎬 Smooth animations with Framer Motion
+- 📂 Sections: About Me, Skills, Projects, Contact
 
-## Expanding the ESLint configuration
+## 🛠 Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React.js  
+- Vite  
+- Spline 3D  
+- Tailwind CSS  
+- Framer Motion
+
+## 📌 Purpose
+
+This project highlights my creativity and development skills through a unique 3D web experience — perfect for making a strong first impression with recruiters and collaborators.
+
+## 🔗 Live Demo
+
+[View Portfolio](https://your-portfolio-link.com)
+
+---
+
+Feel free to clone, explore, and get inspired!
