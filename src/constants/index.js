@@ -18,7 +18,7 @@ import {
   meta,
   starbucks,
   tesla,
-  shopify,
+  
   carrent,
   jobit,
   tripguide,
@@ -41,225 +41,104 @@ export const navLinks = [
 ];
 
 const services = [
+ 
   {
-    title: "Web Developer",
-    icon: web,
+    title: "Power Trading & Energy Markets",
+    icon: backend, // You can customize this icon or replace it with a power icon
   },
   {
-    title: "React Native Developer",
-    icon: mobile,
+    title: "Regulatory Compliance & Open Access",
+    icon: creator, // Replace with a document/legal icon if available
   },
   {
-    title: "Backend Developer",
-    icon: backend,
+    title: "Team Mentoring & Knowledge Transfer",
+    icon: backend, // Reuse or customize this icon for technical areas
   },
   {
-    title: "Content Creator",
-    icon: creator,
+    title: "Client Relations & Energy Consulting",
+    icon: creator, // Reuse or use a communication/consulting icon
   },
 ];
 
 const technologies = [
-  {
-    name: "HTML 5",
-    icon: html,
-  },
-  {
-    name: "CSS 3",
-    icon: css,
-  },
-  {
-    name: "JavaScript",
-    icon: javascript,
-  },
-  {
-    name: "TypeScript",
-    icon: typescript,
-  },
-  {
-    name: "React JS",
-    icon: reactjs,
-  },
-  {
-    name: "Redux Toolkit",
-    icon: redux,
-  },
-  {
-    name: "Tailwind CSS",
-    icon: tailwind,
-  },
-  {
-    name: "Node JS",
-    icon: nodejs,
-  },
-  {
-    name: "MongoDB",
-    icon: mongodb,
-  },
-  {
-    name: "Three JS",
-    icon: threejs,
-  },
-  {
-    name: "git",
-    icon: git,
-  },
-  {
-    name: "figma",
-    icon: figma,
-  },
-  {
-    name: "docker",
-    icon: docker,
-  },
+
 ];
 
 const experiences = [
   {
-    title: "React.js Developer",
-    company_name: "Starbucks",
-    icon: starbucks,
+    title: "Junior Manager – Power Trading",
+    company_name: "Manikaran Power Ltd",
+    icon: starbucks, // Replace with Manikaran logo if available
     iconBg: "#383E56",
-    date: "March 2020 - April 2021",
+    date: "July 2024 – Present",
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "Coordinated with SLDCs, DISCOMs, and other regulatory bodies for Open Access approvals.",
+      "Handled compliance documentation and liaised with internal and external stakeholders.",
+      "Supported renewable energy certificate (REC) submissions and power scheduling operations.",
+      "Worked closely with the trading and regulatory team to streamline approval processes.",
     ],
   },
   {
-    title: "React Native Developer",
-    company_name: "Tesla",
-    icon: tesla,
+    title: "Management Trainee – Power Trading",
+    company_name: "Manikaran Power Ltd",
+    icon: tesla, // You can also use same logo for both roles
     iconBg: "#E6DEDD",
-    date: "Jan 2021 - Feb 2022",
+    date: "Jan 2024 – June 2024",
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "Assisted in preparing and managing Open Access applications.",
+      "Learned documentation processes, SLDC communication, and compliance basics.",
+      "Supported power exchange team in trading operations and REC handling.",
+      "Built strong foundational understanding of India's power sector mechanisms.",
     ],
   },
   {
-    title: "Web Developer",
-    company_name: "Shopify",
-    icon: shopify,
-    iconBg: "#383E56",
-    date: "Jan 2022 - Jan 2023",
-    points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
-    ],
-  },
-  {
-    title: "Full stack Developer",
-    company_name: "Meta",
-    icon: meta,
+    title: "Academic Patent Filing",
+    company_name: "CGC Landran – Department of ECE",
+    icon: meta, // You can replace this with a certificate/college icon
     iconBg: "#E6DEDD",
-    date: "Jan 2023 - Present",
+    date: "March 2023 – April 2023",
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "Filed two patents as part of academic innovation and research initiatives.",
+      "Patent PIE Number 1239 filed in March 2023.",
+      "Patent PIE Number 1258 filed in April 2023.",
+      "Focused on real-world problem solving through hardware/software solutions.",
     ],
   },
 ];
+
+
 
 const testimonials = [
   {
     testimonial:
-      "I thought it was impossible to make a website as beautiful as our product, but Rick proved me wrong.",
-    name: "Sara Lee",
-    designation: "CFO",
-    company: "Acme Co",
-    image: "https://randomuser.me/api/portraits/women/4.jpg",
+      "Vikash brings remarkable dedication to energy trading operations and consistently ensures regulatory accuracy and client satisfaction.",
+    name: "Anjali Mehta",
+    designation: "Senior Manager – Operations",
+    company: "Manikaran Power Ltd",
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
   },
   {
     testimonial:
-      "I've never met a web developer who truly cares about their clients' success like Rick does.",
-    name: "Chris Brown",
-    designation: "COO",
-    company: "DEF Corp",
-    image: "https://randomuser.me/api/portraits/men/5.jpg",
+      "His coordination with SLDCs and DISCOMs has always been reliable and efficient, which makes him a valuable team asset.",
+    name: "Ravi Sharma",
+    designation: "Assistant Manager – Open Access",
+    company: "Manikaran Power Ltd",
+    image: "https://randomuser.me/api/portraits/men/32.jpg",
   },
   {
     testimonial:
-      "After Rick optimized our website, our traffic increased by 50%. We can't thank them enough!",
-    name: "Lisa Wang",
-    designation: "CTO",
-    company: "456 Enterprises",
-    image: "https://randomuser.me/api/portraits/women/6.jpg",
+      "Vikash is detail-oriented and quick to adapt. His understanding of regulatory processes and documentation is commendable.",
+    name: "Neha Bansal",
+    designation: "Energy Analyst",
+    company: "Power Exchange India Ltd",
+    image: "https://randomuser.me/api/portraits/women/45.jpg",
   },
+
 ];
 
 const projects = [
-  {
-    name: "Car Rent",
-    description:
-      "Web-based platform that allows users to search, book, and manage car rentals from various providers, providing a convenient and efficient solution for transportation needs.",
-    tags: [
-      {
-        name: "react",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "mongodb",
-        color: "green-text-gradient",
-      },
-      {
-        name: "tailwind",
-        color: "pink-text-gradient",
-      },
-    ],
-    image: carrent,
-    source_code_link: "https://github.com/",
-  },
-  {
-    name: "Job IT",
-    description:
-      "Web application that enables users to search for job openings, view estimated salary ranges for positions, and locate available jobs based on their current location.",
-    tags: [
-      {
-        name: "react",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "restapi",
-        color: "green-text-gradient",
-      },
-      {
-        name: "scss",
-        color: "pink-text-gradient",
-      },
-    ],
-    image: jobit,
-    source_code_link: "https://github.com/",
-  },
-  {
-    name: "Trip Guide",
-    description:
-      "A comprehensive travel booking platform that allows users to book flights, hotels, and rental cars, and offers curated recommendations for popular destinations.",
-    tags: [
-      {
-        name: "nextjs",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "supabase",
-        color: "green-text-gradient",
-      },
-      {
-        name: "css",
-        color: "pink-text-gradient",
-      },
-    ],
-    image: tripguide,
-    source_code_link: "https://github.com/",
-  },
+  
 ];
+
 
 export { services, technologies, experiences, testimonials, projects };

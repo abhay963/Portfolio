@@ -1,9 +1,5 @@
-import React from 'react'
+// Projects section removed intentionally
 
-const Works = () => {
-  return (
-    <div>Works</div>
-  )
-}
+const Works = () => null;
 
-export default Works
+export default Works;
