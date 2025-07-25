@@ -48,7 +48,7 @@ const About = () => {
         variants={fadeIn("", "", 0.1, 1)}
         className='mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]'
       >
-       I’m Abhay Kumar Yadav, a B.Tech in Information Technology student at Chandigarh Engineering College Landran, with a strong passion for full-stack development, problem-solving and building real-world tech solutions. Skilled in C, C++, DSA and the MERN stack, I enjoy creating scalable applications that blend AI, automation and user experience. I'm driven by curiosity, innovation and a desire to turn ideas into impactful products.
+       I’m Abhay Kumar Yadav, a B.Tech in Information Technology student at Chandigarh Engineering College Landran, with a strong passion for full-stack development, problem-solving and building real-world tech solutions. Skilled in C, C++, DSA and the MERN stack. I enjoy creating scalable applications that blend AI, automation and user experience. I'm driven by curiosity, innovation and a desire to turn ideas into impactful products.
 
 Let’s connect and innovate together!
 
