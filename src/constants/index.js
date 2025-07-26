@@ -24,11 +24,14 @@ import {
   tripguide,
   threejs,
 } from "../assets";
-
 export const navLinks = [
   {
     id: "about",
     title: "About",
+  },
+  {
+    id: "education", // 👈 add this
+    title: "Education",
   },
   {
     id: "work",
@@ -39,6 +42,8 @@ export const navLinks = [
     title: "Contact",
   },
 ];
+
+
 
 const services = [
  
@@ -89,10 +94,7 @@ const technologies = [
     name: "JavaScript",
     icon: javascript,
   },
-  {
-    name: "TypeScript",
-    icon: typescript,
-  },
+
   {
     name: "React JS",
     icon: reactjs,
@@ -113,10 +115,7 @@ const technologies = [
     name: "MongoDB",
     icon: mongodb,
   },
-  {
-    name: "Three JS",
-    icon: threejs,
-  },
+
   {
     name: "git",
     icon: git,
@@ -154,35 +153,36 @@ const experiences = [
 const testimonials = [
   {
     testimonial:
-      "I thought it was impossible to make a website as beautiful as our product, but Rick proved me wrong.",
+      "Abhay's creativity and technical skills are truly impressive. His project TechSnap is a unique and effective tool that blends news with active recall learning.",
     name: "Sara Lee",
-    designation: "CFO",
-    company: "Acme Co",
+    designation: "Mentor",
+    company: "TechSnap Community",
     image: "https://randomuser.me/api/portraits/women/4.jpg",
   },
   {
     testimonial:
-      "I've never met a web developer who truly cares about their clients' success like Rick does.",
+      "Abhay demonstrates deep passion for solving real-world problems with technology. PashuSaathi is a perfect example of innovation meeting social impact.",
     name: "Chris Brown",
-    designation: "COO",
-    company: "DEF Corp",
+    designation: "Tech Advisor",
+    company: "PashuSaathi",
     image: "https://randomuser.me/api/portraits/men/5.jpg",
   },
   {
     testimonial:
-      "After Rick optimized our website, our traffic increased by 50%. We can't thank them enough!",
+      "From UI to backend, Abhay builds complete, user-focused solutions. His work ethic and attention to detail make him a standout developer.",
     name: "Lisa Wang",
-    designation: "CTO",
-    company: "456 Enterprises",
+    designation: "UI/UX Reviewer",
+    company: "Freelance",
     image: "https://randomuser.me/api/portraits/women/6.jpg",
   },
 ];
 
+
 const projects = [
   {
-    name: "Car Rent",
+    name: "Fanta",
     description:
-      "Web-based platform that allows users to search, book, and manage car rentals from various providers, providing a convenient and efficient solution for transportation needs.",
+      "A vibrant and interactive landing page for the Fanta brand, built with HTML, CSS, and JavaScript. It features playful fruit animations, smooth transitions, and a fully responsive design — all crafted using pure front-end technologies.",
     tags: [
       {
         name: "react",
@@ -198,7 +198,7 @@ const projects = [
       },
     ],
     image: carrent,
-    source_code_link: "https://github.com/",
+    source_code_link: "https://abhay963.github.io/fanta/",
   },
   {
     name: "Job IT",
