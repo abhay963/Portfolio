@@ -4,7 +4,7 @@ import {
   creator,
   web,
   javascript,
-  typescript,
+  
   html,
   css,
   reactjs,
@@ -179,39 +179,14 @@ const experiences = [
 
 
 
-const testimonials = [
-  {
-    testimonial:
-      "Abhay's creativity and technical skills are truly impressive. His project TechSnap is a unique and effective tool that blends news with active recall learning.",
-    name: "Sara Lee",
-    designation: "Mentor",
-    company: "TechSnap Community",
-    image: "https://randomuser.me/api/portraits/women/4.jpg",
-  },
-  {
-    testimonial:
-      "Abhay demonstrates deep passion for solving real-world problems with technology. PashuSaathi is a perfect example of innovation meeting social impact.",
-    name: "Chris Brown",
-    designation: "Tech Advisor",
-    company: "PashuSaathi",
-    image: "https://randomuser.me/api/portraits/men/5.jpg",
-  },
-  {
-    testimonial:
-      "From UI to backend, Abhay builds complete, user-focused solutions. His work ethic and attention to detail make him a standout developer.",
-    name: "Lisa Wang",
-    designation: "UI/UX Reviewer",
-    company: "Freelance",
-    image: "https://randomuser.me/api/portraits/women/6.jpg",
-  },
-];
+
 
 
 const projects = [
   {
     name: "Resume Analyzer",
     description:
-      "An intelligent resume analyzer that evaluates uploaded resumes for ATS compatibility, keyword relevance, formatting clarity, and alignment with job descriptions, offering instant scoring and actionable suggestions for improvement.",
+      "An AI-powered tool that analyzes resumes for keyword matching, formatting, and ATS compliance. It provides real-time scoring, tailored suggestions, and ensures alignment with job descriptions.",
     tags: [
       { name: "nodejs", color: "blue-text-gradient" },
       { name: "express", color: "green-text-gradient" },
@@ -224,7 +199,7 @@ const projects = [
   {
     name: "Bihar Tourism",
     description:
-      "An engaging website that highlights Bihar's rich heritage, top destinations, and tourism hotspots, featuring photo galleries, interactive maps, dynamic filters, and smooth navigation to enhance cultural exploration and user experience.",
+      "A visually rich website showcasing Bihar’s culture, destinations, and history with interactive maps, photo galleries, smooth transitions, and engaging design for tourism exploration.",
     tags: [
       { name: "html", color: "blue-text-gradient" },
       { name: "css", color: "green-text-gradient" },
@@ -237,7 +212,7 @@ const projects = [
   {
     name: "Fanta",
     description:
-      "A fun and vibrant landing page for Fanta using only front-end tools, enriched with fruit animations, bold design, smooth transitions, responsive layout, and delightful UI crafted for brand engagement.",
+      "A colorful Fanta landing page with animated fruits, clean UI, bold visuals, and transitions, designed for user interaction and smooth engagement using only front-end technologies.",
     tags: [
       { name: "react", color: "blue-text-gradient" },
       { name: "mongodb", color: "green-text-gradient" },
@@ -250,7 +225,7 @@ const projects = [
   {
     name: "Random Password Generator",
     description:
-      "A robust password generator that creates strong, customizable passwords using selected criteria like symbols, numbers, uppercase, and lowercase. Includes clipboard copy support and fully responsive, user-friendly design for security-conscious users.",
+      "Generates strong, customizable passwords with options like symbols, numbers, and cases. ",
     tags: [
       { name: "javascript", color: "blue-text-gradient" },
       { name: "html", color: "green-text-gradient" },
@@ -263,7 +238,7 @@ const projects = [
   {
     name: "QR Code Generator",
     description:
-      "A fast, reliable tool to generate QR codes from text or URLs instantly. Fully client-side with image download feature, ensuring quick access, seamless sharing, and privacy-focused QR generation experience.",
+      "Quickly generates QR codes from text or links. It supports instant download and works offline. Clean UI and client-side privacy ensure seamless and safe QR code creation.",
     tags: [
       { name: "html", color: "blue-text-gradient" },
       { name: "javascript", color: "green-text-gradient" },
@@ -276,7 +251,7 @@ const projects = [
   {
     name: "Weather App",
     description:
-      "A stylish weather forecasting app displaying real-time temperature, wind, and humidity using OpenWeatherMap API. Includes 5-day forecasts, user-friendly interface, and responsive design for reliable weather updates anytime.",
+      "Displays live weather, forecasts, wind, and humidity using OpenWeatherMap API. Offers intuitive layout, modern styling, and mobile responsiveness for accurate weather data anywhere.",
     tags: [
       { name: "javascript", color: "blue-text-gradient" },
       { name: "api", color: "green-text-gradient" },
@@ -289,4 +264,5 @@ const projects = [
 
 
 
-export { services, technologies, experiences, testimonials, projects };
+
+export {  technologies, experiences,  projects };
