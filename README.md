@@ -1,8 +1,8 @@
-<!-- # 🌐 Abhay Kumar Yadav — 3D Developer Portfolio
+<!-- # 🌐 Abhay Kumar Yadav — 3D  Portfolio
 
 An interactive 3D portfolio website built using **React**, **Vite**, and **Spline**, showcasing my projects, skills, and personal journey as a passionate B.Tech IT student and full-stack web developer.
 
-## 🚀 Features
+ 🚀 Features
 
 - 🎨 3D scenes integrated using Spline
 - ⚛️ Built with React + Vite for high performance
