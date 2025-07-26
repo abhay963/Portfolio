@@ -29,9 +29,17 @@ import tesla from "./company/tesla.png";
 import carrent from "./carrent.png";
 import jobit from "./jobit.png";
 import tripguide from "./tripguide.png";
+import fanta from "./tech/fanta.png";
+import weather from "./tech/weather.png";
+import qr from "./tech/qr.png";
+import random from "./tech/random.png";
+import resume from "./tech/resume.png";
+import bihar from "./tech/bihar.png";
+
 
 export {
   logo,
+  fanta,weather,qr,random,resume,
   backend,
   creator,
   mobile,
@@ -59,4 +67,5 @@ export {
   carrent,
   jobit,
   tripguide,
+  bihar,
 };

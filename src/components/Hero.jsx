@@ -27,40 +27,42 @@ const Hero = () => {
           <div className="w-1 sm:h-80 h-40 violet-gradient" />
         </div>
 
-        {/* Text + Button */}
-        <div className="flex flex-col gap-4">
+        {/* Text + Buttons */}
+        <div className="flex flex-col gap-4 mb-6 sm:mb-0">
           <div>
-            <h1 className={`${styles.heroHeadText} text-white`}>
-              Hi, I'm <span className="text-[#915EFF] ">Abhay Kumar Yadav</span>
-            </h1>
-            <p className={`${styles.heroSubText} mt-2 text-white-100`}>
-              Full-Stack Developer <br className="sm:block hidden" />
-              
+           <h1 className={`${styles.heroHeadText} text-white leading-tight`}>
+  <span className="whitespace-nowrap">
+    Hi, I'm <span className="text-[#915EFF]">Abhay</span>
+  </span>
+  <br />
+  <span className="text-[#915EFF] block">Kumar Yadav</span>
+</h1>
+
+
+            <p className={`${styles.heroSubText} mt-4 text-white-100`}>
+              Full-Stack Developer
+              <br className="sm:block hidden" />
             </p>
           </div>
 
-          {/* ✅ Professional & Responsive Hire Me Button */}
+          {/* Buttons */}
           <div>
             <button
-              className="mt-3 w-fit px-6 py-2 pb-3 mb-10 bg-gradient-to-r from-[#915EFF] to-[#5B2EFF] text-white font-medium rounded-xl shadow-lg hover:scale-105 transition-transform duration-300 hover:shadow-2xl"
-              onClick={() => window.open("mailto:abhayyadav96312@gmail.com", "_blank")}
+              className="mt-3 w-fit px-6 py-2 pb-3 mb-4 bg-gradient-to-r from-[#915EFF] to-[#5B2EFF] text-white font-medium rounded-xl shadow-lg hover:scale-105 transition-transform duration-300 hover:shadow-2xl"
+              onClick={() =>
+                window.open("mailto:abhayyadav96312@gmail.com", "_blank")
+              }
             >
               Hire Me
             </button>
-           
-<a
-  href="/Abhay_Resume.pdf"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  <button
-    className="mt-3 w-fit px-6 py-2 pb-3 ml-5 mb-10 bg-gradient-to-r from-[#915EFF] to-[#5B2EFF] text-white font-medium rounded-xl shadow-lg hover:scale-105 transition-transform duration-300 hover:shadow-2xl"
-  >
-    Resume
-  </button>
-</a>
 
-           
+            <a href="/Abhay_Resume.pdf" target="_blank" rel="noopener noreferrer">
+              <button
+                className="mt-3 w-fit px-6 py-2 pb-3 ml-5 mb-4 bg-gradient-to-r from-[#915EFF] to-[#5B2EFF] text-white font-medium rounded-xl shadow-lg hover:scale-105 transition-transform duration-300 hover:shadow-2xl"
+              >
+                Resume
+              </button>
+            </a>
           </div>
         </div>
       </div>

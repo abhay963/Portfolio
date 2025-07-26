@@ -18,7 +18,8 @@ import {
   meta,
   starbucks,
   tesla,
-  
+  bihar,
+  fanta,qr,random,resume,weather,
   carrent,
   jobit,
   tripguide,
@@ -130,11 +131,13 @@ const technologies = [
   },
 ];
 
+
+
 const experiences = [
   {
     title: "Software Development Engineer Intern",
-    company_name: "Bluestock Fintech  ",
-    icon: starbucks, // Replace with Manikaran logo if available
+    company_name: "Bluestock Fintech",
+    icon: starbucks, // Replace with Bluestock logo if available
     iconBg: "#383E56",
     date: "Jan 2025 – Feb 2025",
     points: [
@@ -144,8 +147,34 @@ const experiences = [
       "Designed and optimized backend APIs with Node.js & Express.js, improving data handling efficiency by 45%.",
     ],
   },
-  
+  {
+    title: "Web Developer Intern",
+    company_name: "SkillCraft Technology",
+    icon: meta, // Replace with SkillCraft logo if available
+    iconBg: "#1E293B",
+    date: "Aug 2024 – Nov 2024",
+    points: [
+      "Developed and deployed responsive websites using React.js and Tailwind CSS, improving client web performance by 50%.",
+      "Implemented RESTful APIs and Firebase integration for real-time data syncing and secure user authentication.",
+      "Led UI/UX enhancements across multiple client projects, resulting in a 25% boost in user engagement and retention.",
+      "Collaborated with designers and backend developers to deliver fully functional web apps within tight deadlines.",
+    ],
+  },
+  {
+    title: "Internshala Student Partner",
+    company_name: "Internshala",
+    icon: tesla, // Replace with Internshala logo if available
+    iconBg: "#0A66C2",
+    date: "Mar 2024 – July 2024",
+    points: [
+      "Promoted Internshala's internship and training programs within college communities, increasing student signups by 70%.",
+      "Organized webinars and info sessions to educate peers about career opportunities and skill development.",
+      "Utilized social media and offline strategies to expand Internshala’s campus reach and visibility.",
+      "Recognized as a top-performing campus ambassador based on lead generation and engagement metrics.",
+    ],
+  },
 ];
+
 
 
 
@@ -179,7 +208,51 @@ const testimonials = [
 
 
 const projects = [
+   {
+    name: "Resume Analyzer",
+    description:
+      "An AI-powered tool that analyzes uploaded resumes and scores them based on ATS compliance, readability, and keyword matching with job descriptions.",
+    tags: [
+      {
+        name: "nodejs",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "express",
+        color: "green-text-gradient",
+      },
+      {
+        name: "react",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: resume,
+    source_code_link: "https://github.com/",
+  },
+ 
+ 
   {
+    name: "Bihar Tourism",
+    description:
+      "An informative website dedicated to showcasing the cultural heritage, destinations, and tourist attractions of Bihar. Includes embedded maps, image galleries, and dynamic destination filters.",
+    tags: [
+      {
+        name: "html",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "css",
+        color: "green-text-gradient",
+      },
+      {
+        name: "javascript",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: bihar,
+    source_code_link: "https://abhay963.github.io/BIHAR-TOURISM/",
+  },
+   {
     name: "Fanta",
     description:
       "A vibrant and interactive landing page for the Fanta brand, built with HTML, CSS, and JavaScript. It features playful fruit animations, smooth transitions, and a fully responsive design — all crafted using pure front-end technologies.",
@@ -197,41 +270,20 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: carrent,
+    image: fanta,
     source_code_link: "https://abhay963.github.io/fanta/",
   },
-  {
-    name: "Job IT",
+   {
+    name: "Random Password Generator",
     description:
-      "Web application that enables users to search for job openings, view estimated salary ranges for positions, and locate available jobs based on their current location.",
+      "A secure password generator that creates strong passwords based on selected criteria like uppercase, lowercase, symbols, and numbers. Supports clipboard copy and customizable length.",
     tags: [
       {
-        name: "react",
+        name: "javascript",
         color: "blue-text-gradient",
       },
       {
-        name: "restapi",
-        color: "green-text-gradient",
-      },
-      {
-        name: "scss",
-        color: "pink-text-gradient",
-      },
-    ],
-    image: jobit,
-    source_code_link: "https://github.com/",
-  },
-  {
-    name: "Trip Guide",
-    description:
-      "A comprehensive travel booking platform that allows users to book flights, hotels, and rental cars, and offers curated recommendations for popular destinations.",
-    tags: [
-      {
-        name: "nextjs",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "supabase",
+        name: "html",
         color: "green-text-gradient",
       },
       {
@@ -239,9 +291,56 @@ const projects = [
         color: "pink-text-gradient",
       },
     ],
-    image: tripguide,
-    source_code_link: "https://github.com/",
+    image: random,
+    source_code_link: "https://abhay963.github.io/Random-Password-Generator/",
   },
+  {
+    name: "QR Code Generator",
+    description:
+      "A minimalistic tool that converts any URL or text into a QR code. Supports download as image and works completely client-side using QR libraries.",
+    tags: [
+      {
+        name: "html",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "javascript",
+        color: "green-text-gradient",
+      },
+      {
+        name: "css",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: qr,
+    source_code_link: "https://abhay963.github.io/QR-code-generator/",
+  },
+  {
+    name: "Weather App",
+    description:
+      "A sleek weather application that shows real-time weather data by fetching information from OpenWeatherMap API. Users can check temperature, wind, humidity, and get 5-day forecasts.",
+    tags: [
+      {
+        name: "javascript",
+        color: "blue-text-gradient",
+      },
+      {
+        name: "api",
+        color: "green-text-gradient",
+      },
+      {
+        name: "css",
+        color: "pink-text-gradient",
+      },
+    ],
+    image: weather,
+    source_code_link: "https://abhay963.github.io/-Weather-Forecast-Application/",
+  },
+  
+ 
+ 
+  
 ];
+
 
 export { services, technologies, experiences, testimonials, projects };
