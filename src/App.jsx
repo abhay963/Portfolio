@@ -42,7 +42,8 @@ const App = () => {
           </div>
 
           {/* Scroll indicator */}
-          <div className="absolute top-8/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
+          <div className="absolute top-[85%] left-1/2 transform -translate-x-1/2 z-50">
+
             <a href="#about">
               <div className="w-[30px] h-[50px] rounded-3xl border-4 border-secondary flex justify-center items-start p-1">
                 <motion.div
@@ -60,7 +61,9 @@ const App = () => {
         <Education />
         <Experience />
         <Tech />
-        <Works />
+         <section id="projects">
+          <Works />
+        </section>
         
 
         <div className="relative z-0">
