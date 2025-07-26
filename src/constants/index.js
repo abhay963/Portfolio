@@ -208,139 +208,85 @@ const testimonials = [
 
 
 const projects = [
-   {
+  {
     name: "Resume Analyzer",
     description:
-      "An AI-powered tool that analyzes uploaded resumes and scores them based on ATS compliance, readability, and keyword matching with job descriptions.",
+      "An intelligent resume analyzer that evaluates uploaded resumes for ATS compatibility, keyword relevance, formatting clarity, and alignment with job descriptions, offering instant scoring and actionable suggestions for improvement.",
     tags: [
-      {
-        name: "nodejs",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "express",
-        color: "green-text-gradient",
-      },
-      {
-        name: "react",
-        color: "pink-text-gradient",
-      },
+      { name: "nodejs", color: "blue-text-gradient" },
+      { name: "express", color: "green-text-gradient" },
+      { name: "react", color: "pink-text-gradient" },
     ],
     image: resume,
-    source_code_link: "https://github.com/",
+    source_code_link: "https://github.com/Akshat-shukla18/ResumeAnalyzer",
   },
- 
- 
+
   {
     name: "Bihar Tourism",
     description:
-      "An informative website dedicated to showcasing the cultural heritage, destinations, and tourist attractions of Bihar. Includes embedded maps, image galleries, and dynamic destination filters.",
+      "An engaging website that highlights Bihar's rich heritage, top destinations, and tourism hotspots, featuring photo galleries, interactive maps, dynamic filters, and smooth navigation to enhance cultural exploration and user experience.",
     tags: [
-      {
-        name: "html",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "css",
-        color: "green-text-gradient",
-      },
-      {
-        name: "javascript",
-        color: "pink-text-gradient",
-      },
+      { name: "html", color: "blue-text-gradient" },
+      { name: "css", color: "green-text-gradient" },
+      { name: "javascript", color: "pink-text-gradient" },
     ],
     image: bihar,
     source_code_link: "https://abhay963.github.io/BIHAR-TOURISM/",
   },
-   {
+
+  {
     name: "Fanta",
     description:
-      "A vibrant and interactive landing page for the Fanta brand, built with HTML, CSS, and JavaScript. It features playful fruit animations, smooth transitions, and a fully responsive design — all crafted using pure front-end technologies.",
+      "A fun and vibrant landing page for Fanta using only front-end tools, enriched with fruit animations, bold design, smooth transitions, responsive layout, and delightful UI crafted for brand engagement.",
     tags: [
-      {
-        name: "react",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "mongodb",
-        color: "green-text-gradient",
-      },
-      {
-        name: "tailwind",
-        color: "pink-text-gradient",
-      },
+      { name: "react", color: "blue-text-gradient" },
+      { name: "mongodb", color: "green-text-gradient" },
+      { name: "tailwind", color: "pink-text-gradient" },
     ],
     image: fanta,
     source_code_link: "https://abhay963.github.io/fanta/",
   },
-   {
+
+  {
     name: "Random Password Generator",
     description:
-      "A secure password generator that creates strong passwords based on selected criteria like uppercase, lowercase, symbols, and numbers. Supports clipboard copy and customizable length.",
+      "A robust password generator that creates strong, customizable passwords using selected criteria like symbols, numbers, uppercase, and lowercase. Includes clipboard copy support and fully responsive, user-friendly design for security-conscious users.",
     tags: [
-      {
-        name: "javascript",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "html",
-        color: "green-text-gradient",
-      },
-      {
-        name: "css",
-        color: "pink-text-gradient",
-      },
+      { name: "javascript", color: "blue-text-gradient" },
+      { name: "html", color: "green-text-gradient" },
+      { name: "css", color: "pink-text-gradient" },
     ],
     image: random,
     source_code_link: "https://abhay963.github.io/Random-Password-Generator/",
   },
+
   {
     name: "QR Code Generator",
     description:
-      "A minimalistic tool that converts any URL or text into a QR code. Supports download as image and works completely client-side using QR libraries.",
+      "A fast, reliable tool to generate QR codes from text or URLs instantly. Fully client-side with image download feature, ensuring quick access, seamless sharing, and privacy-focused QR generation experience.",
     tags: [
-      {
-        name: "html",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "javascript",
-        color: "green-text-gradient",
-      },
-      {
-        name: "css",
-        color: "pink-text-gradient",
-      },
+      { name: "html", color: "blue-text-gradient" },
+      { name: "javascript", color: "green-text-gradient" },
+      { name: "css", color: "pink-text-gradient" },
     ],
     image: qr,
     source_code_link: "https://abhay963.github.io/QR-code-generator/",
   },
+
   {
     name: "Weather App",
     description:
-      "A sleek weather application that shows real-time weather data by fetching information from OpenWeatherMap API. Users can check temperature, wind, humidity, and get 5-day forecasts.",
+      "A stylish weather forecasting app displaying real-time temperature, wind, and humidity using OpenWeatherMap API. Includes 5-day forecasts, user-friendly interface, and responsive design for reliable weather updates anytime.",
     tags: [
-      {
-        name: "javascript",
-        color: "blue-text-gradient",
-      },
-      {
-        name: "api",
-        color: "green-text-gradient",
-      },
-      {
-        name: "css",
-        color: "pink-text-gradient",
-      },
+      { name: "javascript", color: "blue-text-gradient" },
+      { name: "api", color: "green-text-gradient" },
+      { name: "css", color: "pink-text-gradient" },
     ],
     image: weather,
     source_code_link: "https://abhay963.github.io/-Weather-Forecast-Application/",
   },
-  
- 
- 
-  
 ];
+
 
 
 export { services, technologies, experiences, testimonials, projects };
