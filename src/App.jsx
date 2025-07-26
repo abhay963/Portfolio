@@ -1,18 +1,12 @@
 // src/App.jsx
 
 import { BrowserRouter } from "react-router-dom";
-import {
-  About,
-  Contact,
-  Experience,
-  Feedbacks,
-  Hero,
-  Navbar,
-  StarsCanvas,
-} from "./components";
+import { About, Contact, Experience, Feedbacks, Hero, Navbar, StarsCanvas, Tech, Works} from "./components"; // 👈 include Education
 import useLenisScroll from "./utils/useLenisScroll";
 import Spline from "@splinetool/react-spline";
 import { motion } from "framer-motion";
+import Education from "./components/Education";
+
 
 const App = () => {
   useLenisScroll();
@@ -39,7 +33,7 @@ const App = () => {
           </div>
 
           {/* ✅ Scroll Indicator - Center of Full Screen */}
-          <div className="absolute top-10/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
+          <div className="absolute top-8/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
             <a href="#about">
               <div className="w-[30px] h-[50px] rounded-3xl border-4 border-secondary flex justify-center items-start p-1">
                 <motion.div
@@ -54,8 +48,13 @@ const App = () => {
 
         {/* Remaining Sections */}
         <About />
-        <Experience />
-        <Feedbacks />
+        <Education/>
+<Experience />
+
+<Tech />        {/* ✅ Show Technologies */}
+<Works />       {/* ✅ Show Projects */}
+<Feedbacks />
+
 
         <div className="relative z-0">
           <Contact />
