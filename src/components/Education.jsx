@@ -2,29 +2,37 @@ import { motion } from "framer-motion";
 import { fadeIn } from "../utils/motion";
 import { SectionWrapper } from "../hoc";
 import { styles } from "../styles";
-import { FaGraduationCap, FaSchool, FaUniversity } from "react-icons/fa";
+
+// College / University
+import { FaUniversity } from "react-icons/fa";
+
+// High School / Senior Secondary
+import { HiAcademicCap } from "react-icons/hi";
+
+// School / Secondary Education
+import { GiSchoolBag } from "react-icons/gi";
 
 const educations = [
   {
     title: "B.Tech in Information Technology",
     institute: "Chandigarh Engineering College, Landran",
-    duration: "2022 - Present",
-    grade: "CGPA: 8.5",
+    duration: "2023 - Present",
+    grade: "CGPA : 8.5",
     icon: <FaUniversity className="text-purple-400 text-xl" />,
   },
   {
-    title: "Senior Secondary (XII)",
-    institute: "Modern Public School, Arrah",
-    duration: "2020 - 2022",
-    grade: "Percentage: 86%",
-    icon: <FaGraduationCap className="text-pink-400 text-xl" />,
+    title: "Senior Secondary (XII) - Science Stream",
+    institute: "International Hindu School, Varanasi",
+    duration: "2022 - 2023",
+    grade: "CBSE Board",
+    icon: <HiAcademicCap className="text-pink-400 text-xl" />,
   },
   {
     title: "Secondary (X)",
-    institute: "Modern Public School, Arrah",
-    duration: "2018 - 2020",
-    grade: "Percentage: 90%",
-    icon: <FaSchool className="text-blue-400 text-xl" />,
+    institute: "DAV Public School, Mohania",
+    duration: "2020 - 2021",
+    grade: "CBSE Board ",
+    icon: <GiSchoolBag className="text-blue-400 text-xl" />,
   },
 ];
 
