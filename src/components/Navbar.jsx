@@ -12,8 +12,7 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      setScrolled(scrollTop > 100);
+      setScrolled(window.scrollY > 100);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -22,13 +21,12 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`${
-        styles.paddingX
-      } w-full flex items-center py-5 fixed top-0 z-20 ${
-        scrolled ? "bg-primary" : "bg-transparent"
+      className={`${styles.paddingX} w-full flex items-center py-4 fixed top-0 z-50 transition-colors duration-300 ${
+        scrolled ? "bg-black/80 backdrop-blur-md shadow-lg" : "bg-transparent"
       }`}
     >
-      <div className="w-full flex justify-between items-center max-w-7xl mx-auto">
+      <div className="w-full max-w-7xl mx-auto flex justify-between items-center">
+        {/* Logo */}
         <Link
           to="/"
           className="flex items-center gap-2"
@@ -37,19 +35,18 @@ const Navbar = () => {
             window.scrollTo(0, 0);
           }}
         >
-          <img src={logo} alt="logo" className="w-9 h-9 object-contain" />
-          <p className="text-white text-[18px] font-bold cursor-pointer flex ">
-            Abhay &nbsp;
-           
+          <img src={logo} alt="logo" className="w-10 h-10 object-contain" />
+          <p className="text-white text-[18px] font-bold cursor-pointer hidden sm:block">
+            Abhay
           </p>
         </Link>
 
-        {/* 🖥️ Desktop Nav */}
-        <ul className="list-none hidden sm:flex flex-row gap-10">
+        {/* Desktop Nav */}
+        <ul className="hidden sm:flex flex-row gap-8">
           {navLinks.map((nav) => (
             <li
               key={nav.id}
-              className={`text-secondary text-[18px] font-medium cursor-pointer ${
+              className={`text-secondary text-[16px] hover:text-white transition-all font-medium cursor-pointer ${
                 active === nav.title ? "text-white" : ""
               }`}
               onClick={() => setActive(nav.title)}
@@ -57,59 +54,37 @@ const Navbar = () => {
               <a href={`#${nav.id}`}>{nav.title}</a>
             </li>
           ))}
-
-          {/* ✅ Resume Button */}
-          <li
-            onClick={() => setActive("Resume")}
-            className={`text-secondary text-[18px] font-medium cursor-pointer ${
-              active === "Resume" ? "text-white" : ""
-            }`}
-          >
-            <a
-               href="/Vikash-Kumar-Yadav.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Resume
-            </a>
-          </li>
-
-          {/* ✅ LinkedIn Button */}
-          <li
-            onClick={() => setActive("LinkedIn")}
-            className={`text-secondary text-[18px] font-medium cursor-pointer ${
-              active === "LinkedIn" ? "text-white" : ""
-            }`}
-          >
+          <li>
             <a
               href="https://www.linkedin.com/in/abhay9631/"
               target="_blank"
               rel="noopener noreferrer"
+              className="text-secondary hover:text-white text-[16px] font-medium"
             >
               LinkedIn
             </a>
           </li>
         </ul>
 
-        {/* 📱 Mobile Nav */}
-        <div className="sm:hidden flex flex-1 justify-end items-center">
+        {/* Mobile Nav */}
+        <div className="sm:hidden flex items-center">
           <img
             src={toggle ? close : menu}
             alt="menu"
-            className="w-[28px] h-[28px] object-contain"
+            className="w-[28px] h-[28px] object-contain cursor-pointer"
             onClick={() => setToggle(!toggle)}
           />
 
           <div
             className={`${
-              !toggle ? "hidden" : "flex"
-            } p-6 black-gradient absolute top-20 right-0 mx-4 my-2 min-w-[160px] z-10 rounded-xl`}
+              toggle ? "flex" : "hidden"
+            } p-6 black-gradient absolute top-16 right-4 min-w-[200px] z-40 rounded-xl shadow-xl`}
           >
-            <ul className="list-none flex justify-end items-start flex-1 flex-col gap-4">
+            <ul className="flex flex-col gap-4">
               {navLinks.map((nav) => (
                 <li
                   key={nav.id}
-                  className={`text-secondary text-[16px] font-medium cursor-pointer ${
+                  className={`text-secondary text-[16px] hover:text-white font-medium cursor-pointer ${
                     active === nav.title ? "text-white" : ""
                   }`}
                   onClick={() => {
@@ -121,34 +96,12 @@ const Navbar = () => {
                 </li>
               ))}
 
-              {/* ✅ Resume Mobile */}
               <li
-                onClick={() => {
-                  setToggle(false);
-                  setActive("Resume");
-                }}
-                className={`text-secondary text-[16px] font-medium cursor-pointer ${
-                  active === "Resume" ? "text-white" : ""
-                }`}
-              >
-                <a
-                 href="/Vikash-Kumar-Yadav.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Resume
-                </a>
-              </li>
-
-              {/* ✅ LinkedIn Mobile */}
-              <li
+                className="text-secondary hover:text-white text-[16px] font-medium cursor-pointer"
                 onClick={() => {
                   setToggle(false);
                   setActive("LinkedIn");
                 }}
-                className={`text-secondary text-[16px] font-medium cursor-pointer ${
-                  active === "LinkedIn" ? "text-white" : ""
-                }`}
               >
                 <a
                   href="https://www.linkedin.com/in/abhay9631/"
