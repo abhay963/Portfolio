@@ -42,11 +42,25 @@ const Hero = () => {
           {/* ✅ Professional & Responsive Hire Me Button */}
           <div>
             <button
-              className="mt-3 w-fit px-6 py-3 bg-gradient-to-r from-[#915EFF] to-[#5B2EFF] text-white font-medium rounded-xl shadow-lg hover:scale-105 transition-transform duration-300 hover:shadow-2xl"
+              className="mt-3 w-fit px-6 py-2 pb-3 mb-10 bg-gradient-to-r from-[#915EFF] to-[#5B2EFF] text-white font-medium rounded-xl shadow-lg hover:scale-105 transition-transform duration-300 hover:shadow-2xl"
               onClick={() => window.open("mailto:abhayyadav96312@gmail.com", "_blank")}
             >
               Hire Me
             </button>
+           
+<a
+  href="/Abhay_Resume.pdf"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <button
+    className="mt-3 w-fit px-6 py-2 pb-3 ml-5 mb-10 bg-gradient-to-r from-[#915EFF] to-[#5B2EFF] text-white font-medium rounded-xl shadow-lg hover:scale-105 transition-transform duration-300 hover:shadow-2xl"
+  >
+    Resume
+  </button>
+</a>
+
+           
           </div>
         </div>
       </div>
