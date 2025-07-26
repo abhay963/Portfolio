@@ -41,7 +41,7 @@ const Navbar = () => {
           </p>
         </Link>
 
-        {/* Desktop Nav */}
+        {/* Desktop Navigation */}
         <ul className="hidden sm:flex flex-row gap-8">
           {navLinks.map((nav) => (
             <li
@@ -64,9 +64,19 @@ const Navbar = () => {
               LinkedIn
             </a>
           </li>
+          <li>
+            <a
+              href="https://github.com/abhay963"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-secondary hover:text-white text-[16px] font-medium"
+            >
+              GitHub
+            </a>
+          </li>
         </ul>
 
-        {/* Mobile Nav */}
+        {/* Mobile Menu */}
         <div className="sm:hidden flex items-center">
           <img
             src={toggle ? close : menu}
@@ -98,10 +108,7 @@ const Navbar = () => {
 
               <li
                 className="text-secondary hover:text-white text-[16px] font-medium cursor-pointer"
-                onClick={() => {
-                  setToggle(false);
-                  setActive("LinkedIn");
-                }}
+                onClick={() => setToggle(false)}
               >
                 <a
                   href="https://www.linkedin.com/in/abhay9631/"
@@ -109,6 +116,19 @@ const Navbar = () => {
                   rel="noopener noreferrer"
                 >
                   LinkedIn
+                </a>
+              </li>
+
+              <li
+                className="text-secondary hover:text-white text-[16px] font-medium cursor-pointer"
+                onClick={() => setToggle(false)}
+              >
+                <a
+                  href="https://github.com/abhay963"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub
                 </a>
               </li>
             </ul>
