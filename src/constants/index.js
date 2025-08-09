@@ -19,6 +19,7 @@ import {
   starbucks,
   tesla,
   bihar,
+  notes,
   fanta,qr,random,resume,weather,
   carrent,
   jobit,
@@ -218,6 +219,21 @@ const projects = [
     image: fanta,
     source_code_link: "https://abhay963.github.io/fanta/",
   },
+  
+  {
+    name: "QuickNotes",
+    description:
+      " ✨ A simple and sleek notes-saving web app with local storage, paste sharing, search, copy, and social sharing features. Built using React, Redux, Tailwind CSS, and react-hot-toast.",
+      
+    tags: [
+      { name: "javascript", color: "blue-text-gradient" },
+      { name: "html", color: "green-text-gradient" },
+      { name: "css", color: "pink-text-gradient" },
+    ],
+    image: notes,
+    source_code_link: "https://notes-saver-dusky.vercel.app/",
+  },
+
 
   {
     name: "Random Password Generator",

@@ -35,7 +35,7 @@ import qr from "./tech/qr.png";
 import random from "./tech/random.png";
 import resume from "./tech/resume.png";
 import bihar from "./tech/bihar.png";
-
+import notes from "./tech/notes.png"
 
 export {
   logo,
@@ -48,6 +48,7 @@ export {
   menu,
   close,
   css,
+  notes,
   docker,
   figma,
   git,
