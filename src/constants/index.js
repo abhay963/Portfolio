@@ -25,6 +25,7 @@ import {
   jobit,
   tripguide,
   threejs,
+  netflix,
 } from "../assets";
 export const navLinks = [
   {
@@ -140,6 +141,32 @@ const experiences = [
 
 
 const projects = [
+    {
+   name: "Netflix Clone",
+  description:
+    "A full-stack Netflix clone that replicates the UI and functionality of Netflix. It features user authentication, movie browsing, trailers, and dynamic content fetching using APIs.",
+  tags: [
+    { name: "react", color: "blue-text-gradient" },
+    { name: "tailwindcss", color: "green-text-gradient" },
+    { name: "firebase", color: "pink-text-gradient" },
+  ],
+    image: netflix,
+    source_code_link: "https://netmovieflixclone.netlify.app/",
+  },
+   {
+    name: "QuickNotes",
+    description:
+      " ✨ A simple and sleek notes-saving web app with local storage, paste sharing, search, copy, and social sharing features. Built using React, Redux, Tailwind CSS, and react-hot-toast.",
+      
+    tags: [
+      { name: "javascript", color: "blue-text-gradient" },
+      { name: "html", color: "green-text-gradient" },
+      { name: "css", color: "pink-text-gradient" },
+    ],
+    image: notes,
+    source_code_link: "https://notes-saver-dusky.vercel.app/",
+  },
+
   {
     name: "Resume Analyzer",
     description:
@@ -152,6 +179,7 @@ const projects = [
     image: resume,
     source_code_link: "https://github.com/Akshat-shukla18/ResumeAnalyzer",
   },
+
 
   {
     name: "Bihar Tourism",
@@ -179,20 +207,7 @@ const projects = [
     source_code_link: "https://abhay963.github.io/fanta/",
   },
   
-  {
-    name: "QuickNotes",
-    description:
-      " ✨ A simple and sleek notes-saving web app with local storage, paste sharing, search, copy, and social sharing features. Built using React, Redux, Tailwind CSS, and react-hot-toast.",
-      
-    tags: [
-      { name: "javascript", color: "blue-text-gradient" },
-      { name: "html", color: "green-text-gradient" },
-      { name: "css", color: "pink-text-gradient" },
-    ],
-    image: notes,
-    source_code_link: "https://notes-saver-dusky.vercel.app/",
-  },
-
+ 
 
   {
     name: "Random Password Generator",
