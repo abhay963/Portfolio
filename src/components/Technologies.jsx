@@ -3,12 +3,12 @@ import React from "react";
 import { FaHtml5, FaCss3Alt, FaReact, FaNodeJs, FaGithub, FaDatabase, FaCuttlefish } from "react-icons/fa";
 import { 
   SiPostman, 
-  SiVercel, 
+  
   SiMongodb, 
   SiExpress, 
+   SiExpo, 
   SiFirebase, 
-  SiNextdotjs, 
-  SiFigma, 
+  
   SiTailwindcss, 
   SiRedux, 
   SiReactrouter, 
@@ -28,8 +28,8 @@ const techCategories = {
   ],
   Frameworks_Libraries: [
     { name: "React", icon: <FaReact className="text-cyan-400 text-6xl" /> },
-    { name: "Redux", icon: <SiRedux className="text-purple-600 text-6xl" /> },
-    { name: "React Router DOM", icon: <SiReactrouter className="text-red-500 text-6xl" /> },
+    { name: "React Native", icon: <SiExpo className="text-green-400 text-6xl" /> },
+  
     { name: "Node.js", icon: <FaNodeJs className="text-green-600 text-6xl" /> },
     { name: "Express.js", icon: <SiExpress className="text-gray-700 text-6xl" /> },
   
@@ -41,9 +41,9 @@ const techCategories = {
     { name: "Firebase Firestore", icon: <SiFirebase className="text-yellow-500 text-6xl" /> },
   ],
   Tools: [
-    { name: "GitHub", icon: <FaGithub className="text-gray-900 text-6xl" /> },
+    { name: "GitHub", icon: <FaGithub className="#fff text-6xl" /> },
     { name: "Postman", icon: <SiPostman className="text-orange-500 text-6xl" /> },
-    { name: "Figma", icon: <SiFigma className="text-pink-500 text-6xl" /> },
+  
       { name: "Netlify", icon: <SiNetlify className="text-green-500 text-6xl" /> },
   ],
  

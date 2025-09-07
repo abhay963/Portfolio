@@ -151,7 +151,7 @@ const projects = [
     { name: "firebase", color: "pink-text-gradient" },
   ],
     image: netflix,
-    source_code_link: "https://netmovieflixclone.netlify.app/",
+    source_code_link: "https://github.com/abhay963/Netflix-Clone",
   },
    {
     name: "QuickNotes",
