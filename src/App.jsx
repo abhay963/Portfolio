@@ -11,7 +11,10 @@ import {
   StarsCanvas,
   Tech,
   Works,
+  
 } from "./components";
+import VapiWidget from "./VapiWidget";
+
 import useLenisScroll from "./utils/useLenisScroll";
 import Spline from "@splinetool/react-spline";
 import { motion } from "framer-motion";
@@ -71,8 +74,9 @@ const App = () => {
           <StarsCanvas />
         </div>
       </div>
-
+<VapiWidget/>
     </BrowserRouter>
+
   );
 };
 
