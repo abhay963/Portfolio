@@ -3,14 +3,61 @@
   <head>
     <meta charset="UTF-8" />
 
-    <!-- ✅ Favicon with PNG -->
+    <!-- ✅ Favicon -->
     <link rel="icon" type="image/png" href="/planet/letter-a.png" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Abhay's Portfolio</title>
   </head>
+
   <body>
     <div id="root"></div>
+
+    <!-- 🚀 Your Portfolio React App -->
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- 🎙️ Voice Assistant Widget -->
+<vapi-widget
+  public-key="d69343ea-2d95-4473-abf9-79c1cefa8b54"
+  assistant-id="7ba2a14d-0d09-4123-9647-543aa01ca4a1"
+
+  mode="voice"
+  theme="dark"
+
+  base-bg-color="#0d1117"
+  accent-color="#3b82f6"
+  cta-button-color="#1f2937"
+  cta-button-text-color="#ffffff"
+  border-radius="medium"
+
+  size="full"
+  position="bottom-right"
+
+  title="Talk With My Assistant 🤖"
+
+  start-button-text="Start"
+  end-button-text="Stop"
+
+  chat-first-message="Hello! I am Abhay Assistant. How can I help you explore this portfolio today?"
+
+  chat-placeholder="Type your message..."
+
+  voice-show-transcript="true"
+
+  consent-required="true"
+  consent-title="Terms & Conditions"
+  consent-content="By clicking Agree, you allow this AI assistant to process your input to provide responses."
+  consent-storage-key="vapi_widget_consent"
+>
+</vapi-widget>
+
+
+
+    <!-- 🎧 VAPI Script -->
+    <script
+      src="https://unpkg.com/@vapi-ai/client-sdk-react/dist/embed/widget.umd.js"
+      async
+      type="text/javascript"
+    ></script>
   </body>
 </html>
