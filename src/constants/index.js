@@ -141,6 +141,19 @@ const experiences = [
 
 
 const projects = [
+  {
+  name: "GD Arena",
+  description:
+    "Introducing GD Arena — your one-stop AI-powered platform to practice Group Discussions with real-time trending topics, voice-based interaction, and a fun, game-style experience! It helps students prepare for placements and internships with AI-generated GD topics, voice input for realistic practice, and a dedicated space to overcome GD anxiety and build confidence.",
+  tags: [
+    { name: "javascript", color: "blue-text-gradient" },
+    { name: "react", color: "green-text-gradient" },
+    { name: "ai", color: "pink-text-gradient" },
+  ],
+  image: gdArena,
+  source_code_link: "https://gd-arena-frontend-2qnz.vercel.app/",
+},
+
     {
    name: "Netflix Clone",
   description:
