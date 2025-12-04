@@ -26,6 +26,7 @@ import {
   tripguide,
   threejs,
   netflix,
+  gdarena,
 } from "../assets";
 export const navLinks = [
   {
@@ -150,7 +151,7 @@ const projects = [
     { name: "react", color: "green-text-gradient" },
     { name: "ai", color: "pink-text-gradient" },
   ],
-  image: gdArena,
+  image: gdarena,
   source_code_link: "https://gd-arena-frontend-2qnz.vercel.app/",
 },
 
