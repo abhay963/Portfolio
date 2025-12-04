@@ -145,7 +145,7 @@ const projects = [
   {
   name: "GD Arena",
   description:
-    "Introducing GD Arena — your one-stop AI-powered platform to practice Group Discussions with real-time trending topics, voice-based interaction, and a fun, game-style experience! It helps students prepare for placements and internships with AI-generated GD topics, voice input for realistic practice, and a dedicated space to overcome GD anxiety and build confidence.",
+    "GD Arena is an AI-powered platform for practicing Group Discussions with real-time topics, voice-based interaction, and a game-like experience to build confidence for placements.",
   tags: [
     { name: "javascript", color: "blue-text-gradient" },
     { name: "react", color: "green-text-gradient" },
