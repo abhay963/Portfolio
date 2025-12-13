@@ -152,7 +152,7 @@ const projects = [
     { name: "ai", color: "pink-text-gradient" },
   ],
   image: gdarena,
-  source_code_link: "https://gd-arena-frontend-2qnz.vercel.app/",
+  source_code_link: "https://gd-arena-frontend-lzuk.vercel.app/",
 },
 
     {
