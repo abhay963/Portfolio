@@ -27,6 +27,7 @@ import {
   threejs,
   netflix,
   gdarena,
+  sihstaff,
 } from "../assets";
 export const navLinks = [
   {
@@ -180,7 +181,21 @@ const projects = [
     image: notes,
     source_code_link: "https://notes-saver-dusky.vercel.app/",
   },
-
+{
+  name: "Nagar-Sahayata Portal",
+  description:
+    "A MERN-based civic complaint management platform where citizens can report local issues and authorities can track, assign, and resolve complaints through role-based dashboards.",
+  tags: [
+    { name: "react", color: "blue-text-gradient" },
+    { name: "nodejs", color: "green-text-gradient" },
+    { name: "express", color: "pink-text-gradient" },
+    { name: "mongodb", color: "orange-text-gradient" },
+    { name: "jwt-auth", color: "purple-text-gradient" },
+  ],
+  image: sihstaff,
+  source_code_link: "https://github.com/abhay963/Nagar-Sahayata-Portal",
+}
+,
   {
     name: "Resume Analyzer",
     description:

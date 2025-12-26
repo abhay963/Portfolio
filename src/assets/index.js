@@ -37,8 +37,9 @@ import random from "./tech/random.png";
 import resume from "./tech/resume.png";
 import bihar from "./tech/bihar.png";
 import notes from "./tech/notes.png"
-
+import sihstaff from "./tech/sihstaff.png";
 export {
+  sihstaff,
   gdarena,
   logo,
   fanta,weather,qr,random,resume,
