@@ -174,8 +174,8 @@ const projects = [
       " ✨ A simple and sleek notes-saving web app with local storage, paste sharing, search, copy, and social sharing features. Built using React, Redux, Tailwind CSS, and react-hot-toast.",
       
     tags: [
-      { name: "javascript", color: "blue-text-gradient" },
-      { name: "html", color: "green-text-gradient" },
+      { name: "react", color: "blue-text-gradient" },
+      { name: "tailwind", color: "green-text-gradient" },
       { name: "css", color: "pink-text-gradient" },
     ],
     image: notes,
@@ -190,7 +190,7 @@ const projects = [
     { name: "nodejs", color: "green-text-gradient" },
     { name: "express", color: "pink-text-gradient" },
     { name: "mongodb", color: "orange-text-gradient" },
-    { name: "jwt-auth", color: "purple-text-gradient" },
+    
   ],
   image: sihstaff,
   source_code_link: "https://github.com/abhay963/Nagar-Sahayata-Portal",
