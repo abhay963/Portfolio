@@ -64,15 +64,17 @@ const App = () => {
         <Education />
         <Experience />
         <Tech />
-         <section id="projects">
-          <Works />
-        </section>
+      
         
 
         <div className="relative z-0">
-          <Contact />
+             <section id="projects">
+          <Works />
+        </section>
+         
           <StarsCanvas />
         </div>
+         <Contact />
       </div>
 <VapiWidget/>
     </BrowserRouter>
