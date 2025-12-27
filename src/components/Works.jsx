@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 
 import { styles } from "../styles";
 import { github } from "../assets";
@@ -13,17 +14,28 @@ const ProjectCard = ({
   source_code_link,
 }) => {
   return (
-    <div className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full">
-      <div className="relative w-full h-[230px]">
-        <img
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      whileHover={{ y: -6 }}
+      className="bg-tertiary p-5 rounded-2xl sm:w-[360px] w-full shadow-md hover:shadow-xl transition-shadow"
+    >
+      <div className="relative w-full h-[230px] overflow-hidden rounded-2xl">
+        <motion.img
           src={image}
           alt="project_image"
-          className="w-full h-full object-cover rounded-2xl"
+          className="w-full h-full object-cover"
+          whileHover={{ scale: 1.05 }}
+          transition={{ duration: 0.35 }}
         />
 
         <div className="absolute inset-0 flex justify-end m-3 card-img_hover">
-          <div
+          <motion.div
             onClick={() => window.open(source_code_link, "_blank")}
+            whileHover={{ scale: 1.15 }}
+            whileTap={{ scale: 0.95 }}
             className="black-gradient w-10 h-10 rounded-full flex justify-center items-center cursor-pointer"
           >
             <img
@@ -31,7 +43,7 @@ const ProjectCard = ({
               alt="source code"
               className="w-1/2 h-1/2 object-contain"
             />
-          </div>
+          </motion.div>
         </div>
       </div>
 
@@ -47,7 +59,7 @@ const ProjectCard = ({
           </p>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
