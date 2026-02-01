@@ -17,7 +17,7 @@ const educations = [
     title: "B.Tech in Information Technology",
     institute: "Chandigarh Engineering College, Landran",
     duration: "2023 - Present",
-    grade: "CGPA : 8.5",
+    grade: "CGPA : 8.6",
     icon: <FaUniversity className="text-purple-400 text-xl" />,
   },
   {
