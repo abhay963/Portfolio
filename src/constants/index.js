@@ -156,6 +156,19 @@ const projects = [
   image: gdarena,
   source_code_link: "https://gd-arena-frontend-lzuk.vercel.app/",
 },
+ {
+    name: "QuickNotes",
+    description:
+      " ✨ A simple and sleek notes-saving web app with local storage, paste sharing, search, copy, and social sharing features. Built using React, Redux, Tailwind CSS, and react-hot-toast.",
+      
+    tags: [
+      { name: "react", color: "blue-text-gradient" },
+      { name: "tailwind", color: "green-text-gradient" },
+      { name: "css", color: "pink-text-gradient" },
+    ],
+    image: notes,
+    source_code_link: "https://notes-saver-dusky.vercel.app/",
+  },
 
 
     {
@@ -184,19 +197,7 @@ const projects = [
   source_code_link: "https://github.com/abhay963/LangChat",
 }
 ,
-   {
-    name: "QuickNotes",
-    description:
-      " ✨ A simple and sleek notes-saving web app with local storage, paste sharing, search, copy, and social sharing features. Built using React, Redux, Tailwind CSS, and react-hot-toast.",
-      
-    tags: [
-      { name: "react", color: "blue-text-gradient" },
-      { name: "tailwind", color: "green-text-gradient" },
-      { name: "css", color: "pink-text-gradient" },
-    ],
-    image: notes,
-    source_code_link: "https://notes-saver-dusky.vercel.app/",
-  },
+  
 {
   name: "Nagar-Sahayata Portal",
   description:
