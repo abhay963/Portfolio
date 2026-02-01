@@ -30,7 +30,7 @@ const App = () => {
           <Navbar />
 
           {/* Hero section with Spline */}
-          <div className="flex flex-col md:flex-row items-center justify-between px-6 md:px-16 pt-10 gap-11">
+          <div className="flex flex-col md:flex-row items-center justify-between px-6 md:px-16 pt-10 gap-10">
             {/* Hero content */}
             <div className="w-full md:w-1/2 z-10">
               <Hero />
