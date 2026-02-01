@@ -15,13 +15,13 @@ import {
 } from "./components";
 import VapiWidget from "./VapiWidget";
 
-import useLenisScroll from "./utils/useLenisScroll";
+
 import Spline from "@splinetool/react-spline";
 import { motion } from "framer-motion";
 import Education from "./components/Education";
 
 const App = () => {
-  useLenisScroll();
+  
 
   return (
     <BrowserRouter>
@@ -30,7 +30,7 @@ const App = () => {
           <Navbar />
 
           {/* Hero section with Spline */}
-          <div className="flex flex-col md:flex-row items-center justify-between px-6 md:px-16 pt-10 gap-10">
+          <div className="flex flex-col md:flex-row items-center justify-between px-6 md:px-16 pt-10 gap-11">
             {/* Hero content */}
             <div className="w-full md:w-1/2 z-10">
               <Hero />

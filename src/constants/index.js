@@ -27,6 +27,7 @@ import {
   threejs,
   netflix,
   gdarena,
+  langChat,
   sihstaff,
 } from "../assets";
 export const navLinks = [
@@ -156,6 +157,7 @@ const projects = [
   source_code_link: "https://gd-arena-frontend-lzuk.vercel.app/",
 },
 
+
     {
    name: "Netflix Clone",
   description:
@@ -168,6 +170,20 @@ const projects = [
     image: netflix,
     source_code_link: "https://github.com/abhay963/Netflix-Clone",
   },
+  {
+  name: "LangChat",
+  description:
+    "LangChat is a real-time language exchange and social platform where users connect globally through text, audio, and video calls using Stream to practice languages and make friends.",
+  tags: [
+    { name: "react", color: "blue-text-gradient" },
+    { name: "nodejs", color: "green-text-gradient" },
+    { name: "stream", color: "pink-text-gradient" },
+    { name: "webrtc", color: "orange-text-gradient" },
+  ],
+  image: langChat,
+  source_code_link: "https://github.com/abhay963/LangChat",
+}
+,
    {
     name: "QuickNotes",
     description:
