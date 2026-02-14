@@ -28,6 +28,7 @@ import {
   netflix,
   gdarena,
   langChat,
+  geeksforgeeks,
   sihstaff,
 } from "../assets";
 export const navLinks = [
@@ -96,43 +97,45 @@ const technologies = [
 
 const experiences = [
   {
+  title: "Campus Mantri (Official Campus Representative)",
+  company_name: "GeeksforGeeks",
+  icon: geeksforgeeks,
+  
+  date: "Jan 2026 – Present",
+  points: [
+    "Appointed as official GeeksforGeeks Campus Mantri at CEC Mohali.",
+    "Promoting coding culture and technical initiatives across campus.",
+    "Organizing workshops, coding contests, and tech events.",
+   
+  ],
+},
+
+  {
     title: "Software Development Engineer Intern",
     company_name: "Bluestock Fintech",
     icon: starbucks, // Replace with Bluestock logo if available
     iconBg: "#383E56",
     date: "Jan 2025 – Feb 2025",
-    points: [
-      "Built a scalable MERN-stack fintech dashboard, reducing load time by 30% and improving API response speed by 35%.",
-      "Integrated secure Google OAuth login, increasing user authentication success rate by 40%.",
-      "Collaborated with cross-functional teams during agile sprints and handled peer reviews via GitHub version control.",
-      "Designed and optimized backend APIs with Node.js & Express.js, improving data handling efficiency by 45%.",
-    ],
+   points: [
+  "Developed features for a MERN-stack fintech dashboard, including user authentication and data visualization.",
+  "Built and tested REST APIs using Node.js and Express.js for smooth data communication between frontend and backend.",
+  "Collaborated with team members using GitHub and participated in agile sprint discussions and code reviews."
+],
+
   },
-  {
-    title: "Web Developer Intern",
-    company_name: "SkillCraft Technology",
-    icon: meta, // Replace with SkillCraft logo if available
-    iconBg: "#1E293B",
-    date: "Aug 2024 – Nov 2024",
-    points: [
-      "Developed and deployed responsive websites using React.js and Tailwind CSS, improving client web performance by 50%.",
-      "Implemented RESTful APIs and Firebase integration for real-time data syncing and secure user authentication.",
-      "Led UI/UX enhancements across multiple client projects, resulting in a 25% boost in user engagement and retention.",
-      "Collaborated with designers and backend developers to deliver fully functional web apps within tight deadlines.",
-    ],
-  },
+ 
   {
     title: "Internshala Student Partner",
     company_name: "Internshala",
     icon: tesla, // Replace with Internshala logo if available
     iconBg: "#0A66C2",
     date: "Mar 2024 – July 2024",
-    points: [
-      "Promoted Internshala's internship and training programs within college communities, increasing student signups by 70%.",
-      "Organized webinars and info sessions to educate peers about career opportunities and skill development.",
-      "Utilized social media and offline strategies to expand Internshala’s campus reach and visibility.",
-      "Recognized as a top-performing campus ambassador based on lead generation and engagement metrics.",
-    ],
+   points: [
+  "Promoted Internshala internship and training programs within the college community.",
+  "Organized and participated in webinars and information sessions to spread awareness about career opportunities.",
+  "Used social media and peer networks to increase student engagement and registrations."
+],
+
   },
 ];
 

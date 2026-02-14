@@ -22,6 +22,7 @@ import redux from "./tech/redux.png";
 import tailwind from "./tech/tailwind.png";
 import typescript from "./tech/typescript.png";
 import threejs from "./tech/threejs.svg";
+import geeksforgeeks from "./tech/geeksforgeeks.png"
 
 import meta from "./company/meta.png";
 import shopify from "./company/shopify.png";
@@ -40,6 +41,7 @@ import bihar from "./tech/bihar.png";
 import notes from "./tech/notes.png"
 import sihstaff from "./tech/sihstaff.png";
 export {
+  geeksforgeeks,
   sihstaff,
   gdarena,
   logo,
