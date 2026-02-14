@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { styles } from "../styles";
 
 const Hero = () => {
+  
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {

@@ -9,7 +9,7 @@ import {
   FaGithub,
   FaDatabase,
   FaEnvelope,
-  FaSms,
+
 } from "react-icons/fa";
 
 import {
@@ -37,7 +37,7 @@ const techCategories = {
   Frameworks_Libraries: [
     { name: "React", icon: <FaReact className="text-cyan-400" /> },
     { name: "Next.js", icon: <SiNextdotjs className="text-white" /> },
-    { name: "React Native", icon: <SiExpo className="text-gray-200" /> },
+   
     { name: "Node.js", icon: <FaNodeJs className="text-green-500" /> },
     { name: "Express.js", icon: <SiExpress className="text-gray-300" /> },
     { name: "TanStack Query", icon: <FaReact className="text-red-400" /> },
@@ -54,8 +54,8 @@ const techCategories = {
     { name: "GitHub", icon: <FaGithub className="text-white" /> },
     { name: "Postman", icon: <SiPostman className="text-orange-500" /> },
     { name: "Netlify", icon: <SiNetlify className="text-teal-400" /> },
-    { name: "Nodemailer", icon: <FaEnvelope className="text-gray-300" /> },
-    { name: "Twilio", icon: <FaSms className="text-red-500" /> },
+   
+   
   ],
 };
 

@@ -1,4 +1,5 @@
 
+
 import React from "react";
 import { motion } from "framer-motion";
 import { styles } from "../styles";
@@ -6,181 +7,248 @@ import { SectionWrapper } from "../hoc";
 import { fadeIn, slideIn, textVariant, staggerContainer } from "../utils/motion";
 import profilePic from "../assets/abhay.jpg";
 
-// Custom SVG Icons for dependency-free usage
-const CodeIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+// --- Professional Modern Icons (Lucide Style) ---
+const Code2Icon = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
 );
-const DatabaseIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"></ellipse><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path></svg>
+const DatabaseZapIcon = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M12 12v9"/></svg>
 );
-const CpuIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="14" x2="23" y2="14"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="14" x2="4" y2="14"></line></svg>
+const CpuIcon = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><rect x="4" y="4" width="16" height="16" rx="2" ry="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3"/><path d="M15 1v3"/><path d="M9 20v3"/><path d="M15 20v3"/><path d="M20 9h3"/><path d="M20 14h3"/><path d="M1 9h3"/><path d="M1 14h3"/></svg>
 );
-const RocketIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"></path><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"></path></svg>
+const RocketIcon = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+);
+const TerminalIcon = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><polyline points="4 17 10 11 4 5"/><line x1="12" x2="20" y1="19" y2="19"/></svg>
+);
+const SparklesIcon = ({ className }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
 );
 
 const About = () => {
   return (
-    <section className={`relative w-full h-full mx-auto overflow-hidden`}>
-      {/* Background Ambient Effects */}
-      <div className="absolute top-0 left-0 w-full h-full overflow-hidden -z-10">
-        <div className="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] bg-blue-600/20 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[-10%] left-[-10%] w-[600px] h-[600px] bg-purple-600/10 rounded-full blur-[120px]" />
-        {/* Grid Pattern Overlay */}
-        <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 brightness-100 contrast-150" />
+    <section className="relative w-full min-h-screen py-20 mx-auto overflow-hidden flex items-center justify-center">
+     
+      {/* --- Ambient Background Effects --- */}
+      <div className="absolute inset-0 -z-10 bg-slate-950">
+        {/* Grid Pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+       
+        {/* Glowing Orbs */}
+        <motion.div
+          animate={{ y: [0, -50, 0], opacity: [0.3, 0.6, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[10%] left-[10%] w-[500px] h-[500px] bg-purple-600/20 rounded-full blur-[120px]"
+        />
+        <motion.div
+          animate={{ y: [0, 50, 0], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-[10%] right-[10%] w-[400px] h-[400px] bg-cyan-600/20 rounded-full blur-[120px]"
+        />
       </div>
 
       <motion.div
         variants={staggerContainer()}
         initial="hidden"
         whileInView="show"
-        viewport={{ once: true, amount: 0.25 }}
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
+        viewport={{ once: true, amount: 0.1 }}
+        className="max-w-7xl mx-auto px-4 sm:px-6 w-full"
       >
-        {/* Header Section */}
-        <motion.div variants={textVariant()} className="mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-blue-500/30 bg-blue-500/10 backdrop-blur-md">
-            <span className="w-2 h-2 rounded-full bg-blue-400 animate-ping" />
-            <p className="text-blue-300 text-xs font-bold tracking-[0.2em] uppercase">
-              Who I Am
-            </p>
+        {/* Section Header */}
+        <motion.div variants={textVariant()} className="mb-12 text-center md:text-left">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/30 backdrop-blur-sm mb-4">
+            <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)] animate-pulse" />
+            <p className="text-cyan-300 text-xs font-bold tracking-[0.2em] uppercase">Overview</p>
           </div>
-          <h2 className={`${styles.sectionHeadText} mt-4 text-white`}>
-            Beyond the <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400">Code.</span>
+          <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight">
+            Architecting the <br className="md:hidden" />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">
+              Future Web
+            </span>
           </h2>
         </motion.div>
 
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          {/* LEFT COLUMN: Image & Visuals (Span 5) */}
+        {/* --- Bento Grid Layout --- */}
+        <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 h-auto md:h-[600px]">
+         
+          {/* 1. Profile Card (Spans 2 rows on desktop) */}
           <motion.div
             variants={fadeIn("right", "tween", 0.2, 1)}
-            className="lg:col-span-5 flex justify-center lg:justify-end relative"
+            className="md:row-span-2 relative group rounded-3xl overflow-hidden border border-white/10 bg-slate-900/40 backdrop-blur-xl"
           >
-            <div className="relative w-[300px] h-[300px] md:w-[400px] md:h-[400px]">
-              {/* Rotating Tech Ring */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-[-10px] border border-dashed border-blue-500/30 rounded-full"
-              />
-              <motion.div
-                animate={{ rotate: -360 }}
-                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                className="absolute inset-[-25px] border border-dotted border-purple-500/20 rounded-full"
-              />
-
-              {/* Image Container with Glassmorphism & Glow */}
-              <div className="relative w-full h-full rounded-[2rem] overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/20 to-purple-600/20 z-10 group-hover:opacity-0 transition-opacity duration-500" />
-                
-                <img
-                  src={profilePic}
-                  alt="Abhay Kumar Yadav"
-                  className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-110"
+            {/* Decorative Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-950/90 z-10" />
+           
+            <div className="absolute inset-0 flex items-center justify-center p-6">
+              <div className="relative w-full h-full max-w-[300px] max-h-[400px]">
+                {/* Animated Border Ring */}
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                  className="absolute -inset-4 border border-dashed border-cyan-500/30 rounded-[2rem]"
                 />
-                
-                {/* Bottom Gradient Fade */}
-                <div className="absolute bottom-0 left-0 w-full h-1/3 bg-gradient-to-t from-slate-900 via-slate-900/80 to-transparent z-20" />
-                
-                {/* Floating Badge */}
-                <div className="absolute bottom-6 left-6 z-30 flex items-center gap-3 px-4 py-2 bg-slate-900/80 backdrop-blur-md border border-white/10 rounded-full shadow-lg">
-                  <div className="w-2 h-2 bg-green-400 rounded-full shadow-[0_0_10px_rgba(74,222,128,0.5)]" />
-                  <span className="text-xs font-bold text-white tracking-wide">Open to Work</span>
+                <motion.div
+                  animate={{ rotate: -360 }}
+                  transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                  className="absolute -inset-2 border border-dotted border-purple-500/30 rounded-[2rem]"
+                />
+               
+                {/* Image Container */}
+                <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl shadow-cyan-900/20">
+                  <img
+                    src={profilePic}
+                    alt="Abhay Kumar Yadav"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                  {/* Overlay Status */}
+                  <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-pulse shadow-[0_0_8px_#22c55e]" />
+                        <span className="text-white text-sm font-medium tracking-wide">Available for work</span>
+                      </div>
+                      <div className="p-2 bg-white/10 backdrop-blur-md rounded-full border border-white/10">
+                        <Code2Icon className="w-4 h-4 text-white" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-
-              {/* Decorative Elements */}
-              <motion.div 
-                animate={{ y: [0, -20, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-10 -right-10 p-4 bg-slate-800/50 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl z-20 hidden md:block"
-              >
-                <CodeIcon className="text-cyan-400 w-8 h-8" />
-              </motion.div>
-              
-              <motion.div 
-                animate={{ y: [0, 20, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -bottom-5 -left-5 p-4 bg-slate-800/50 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl z-20 hidden md:block"
-              >
-                <RocketIcon className="text-purple-400 w-8 h-8" />
-              </motion.div>
             </div>
           </motion.div>
 
-          {/* RIGHT COLUMN: Text & Skills (Span 7) */}
+          {/* 2. Intro Card (Spans 2 cols) */}
           <motion.div
-            variants={fadeIn("left", "tween", 0.4, 1)}
-            className="lg:col-span-7 w-full"
+            variants={fadeIn("left", "tween", 0.3, 1)}
+            className="md:col-span-2 relative rounded-3xl border border-white/10 bg-slate-900/40 backdrop-blur-xl p-8 flex flex-col justify-center overflow-hidden"
           >
-            {/* Bio Card */}
-            <div className="relative p-1 rounded-3xl bg-gradient-to-b from-white/10 to-white/5 backdrop-blur-sm border border-white/10">
-              <div className="bg-slate-900/80 rounded-[22px] p-6 md:p-8 h-full">
-                <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">
-                  Hello, I'm{" "}
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
-                    Abhay Kumar Yadav
-                  </span>
-                </h3>
-                
-                <p className="text-slate-400 text-[15px] md:text-[17px] leading-relaxed mb-6">
-                  A B.Tech IT student at <span className="text-white font-medium">Chandigarh Engineering College</span>, transforming complex problems into elegant digital solutions. I don't just write code; I architect experiences. My journey is driven by a relentless curiosity for Full-Stack Development and Artificial Intelligence.
-                </p>
+            <div className="absolute top-0 right-0 p-32 bg-blue-600/10 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2" />
+           
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 flex items-center gap-3">
+              <SparklesIcon className="text-purple-400 w-8 h-8" />
+              Hello, I'm <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">Abhay</span>
+            </h3>
+           
+            <p className="text-slate-300 text-lg leading-relaxed mb-6 max-w-2xl">
+              I am a B.Tech IT student at <span className="text-white font-semibold">Chandigarh Engineering College</span>.
+            Engineer by mindset. Creator by passion.
+Full-Stack Developer & AI enthusiast turning complex problems into elegant digital solutions.
+            </p>
 
-                {/* Tech Stack Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                  {/* Skill Card 1 */}
-                  <div className="group relative p-4 rounded-xl bg-slate-800/50 border border-white/5 hover:border-cyan-500/50 transition-all duration-300 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="relative z-10 flex items-start gap-4">
-                      <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400 group-hover:scale-110 transition-transform">
-                        <CpuIcon />
-                      </div>
-                      <div>
-                        <h4 className="text-white font-bold text-sm">Core Logic</h4>
-                        <p className="text-slate-400 text-xs mt-1">C, C++, Data Structures & Algorithms</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Skill Card 2 */}
-                  <div className="group relative p-4 rounded-xl bg-slate-800/50 border border-white/5 hover:border-purple-500/50 transition-all duration-300 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                    <div className="relative z-10 flex items-start gap-4">
-                      <div className="p-2 rounded-lg bg-purple-500/10 text-purple-400 group-hover:scale-110 transition-transform">
-                        <DatabaseIcon />
-                      </div>
-                      <div>
-                        <h4 className="text-white font-bold text-sm">Full Stack</h4>
-                        <p className="text-slate-400 text-xs mt-1">MERN Stack (MongoDB, Express, React, Node)</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Stats / Philosophy */}
-                <div className="flex flex-col sm:flex-row items-center gap-6 pt-6 border-t border-white/5">
-                  <div className="flex items-center gap-3">
-                    <div className="text-3xl font-bold text-white">3+</div>
-                    <div className="text-xs text-slate-400 uppercase tracking-wider">Years Coding</div>
-                  </div>
-                  <div className="h-8 w-[1px] bg-white/10 hidden sm:block" />
-                  <div className="flex items-center gap-3">
-                    <div className="text-3xl font-bold text-white">20+</div>
-                    <div className="text-xs text-slate-400 uppercase tracking-wider">Projects</div>
-                  </div>
-                  <div className="flex-1 text-right">
-                    <span className="inline-block px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-cyan-600 text-white text-sm font-bold shadow-lg shadow-blue-500/20 hover:shadow-blue-500/40 transition-shadow cursor-pointer">
-                      Let's Connect
-                    </span>
-                  </div>
-                </div>
+            <div className="flex flex-wrap gap-3">
+              <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-slate-300 flex items-center gap-2 hover:bg-white/10 transition-colors">
+                <TerminalIcon className="w-4 h-4 text-cyan-400" />
+                Full Stack Dev
+              </div>
+              <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-sm text-slate-300 flex items-center gap-2 hover:bg-white/10 transition-colors">
+                <CpuIcon className="w-4 h-4 text-purple-400" />
+                AI Enthusiast
               </div>
             </div>
           </motion.div>
+
+          {/* 3. Tech Stack Card */}
+          <motion.div
+            variants={fadeIn("up", "tween", 0.4, 1)}
+            className="relative rounded-3xl border border-white/10 bg-slate-900/40 backdrop-blur-xl p-8 flex flex-col justify-center"
+          >
+            <h4 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
+              <DatabaseZapIcon className="text-cyan-400" /> Core Competencies
+            </h4>
+            <div className="flex flex-wrap gap-5">
+              {[
+  'Problem Solving',
+ 
+,
+  'API Development',
+  'Responsive Design',
+
+]
+.map((tech, index) => (
+                <span
+                  key={index}
+                  className="px-3 py-1 text-xs font-medium text-cyan-100 bg-cyan-900/30 border border-cyan-500/20 rounded-md"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* 4. Stats & Action Card */}
+   <motion.div
+  variants={fadeIn("up", "tween", 0.5, 1)}
+  whileHover={{ y: -6 }}
+  className="relative rounded-3xl border border-white/10 bg-slate-900/40 backdrop-blur-xl p-8 flex flex-col justify-between transition-all duration-500"
+>
+
+  {/* Stats */}
+  <div className="flex justify-between items-start mb-6">
+    
+    <div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-4xl font-bold text-white mb-1"
+      >
+        3+
+      </motion.div>
+      <div className="text-slate-400 text-xs uppercase tracking-wider">
+        Years Coding
+      </div>
+    </div>
+
+    <div>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-4xl font-bold text-white mb-1"
+      >
+        20+
+      </motion.div>
+      <div className="text-slate-400 text-xs uppercase tracking-wider">
+        Projects
+      </div>
+    </div>
+
+  </div>
+
+  {/* Clickable Mail Button */}
+  <motion.a
+    href="mailto:abhayyadav96312@gmail.com"
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+    className="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-bold text-sm shadow-lg shadow-cyan-500/25 flex flex-col items-center justify-center gap-1 relative overflow-hidden cursor-pointer"
+  >
+
+    {/* Flying Rocket Emoji */}
+    <motion.span
+      animate={{
+        y: [0, -12, 0],
+        x: [0, 4, -4, 0],
+        rotate: [0, -10, 10, 0]
+      }}
+      transition={{
+        duration: 2.5,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }}
+      className="text-xl"
+    >
+      🚀
+    </motion.span>
+
+    <span>Let's Connect</span>
+
+  </motion.a>
+
+</motion.div>
+
+
         </div>
       </motion.div>
     </section>

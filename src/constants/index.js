@@ -107,22 +107,22 @@ const experiences = [
 
 const projects = [
   {
-  name: "GD Arena",
-  description:
-    "GD Arena is an AI-powered platform for practicing Group Discussions with real-time topics, voice-based interaction, and a game-like experience to build confidence for placements.",
-  tags: [
-    { name: "javascript", color: "blue-text-gradient" },
-    { name: "react", color: "green-text-gradient" },
-    { name: "ai", color: "pink-text-gradient" },
-  ],
-  image: gdarena,
-  source_code_link: "https://gd-arena-frontend-lzuk.vercel.app/",
-},
- {
+    name: "GD Arena",
+    description:
+      "• AI-powered GD practice platform\n• Real-time topic generation\n• Voice-based interaction\n• Placement-focused confidence building",
+    tags: [
+      { name: "javascript", color: "blue-text-gradient" },
+      { name: "react", color: "green-text-gradient" },
+      { name: "ai", color: "pink-text-gradient" },
+    ],
+    image: gdarena,
+    source_code_link: "https://gd-arena-frontend-lzuk.vercel.app/",
+  },
+
+  {
     name: "QuickNotes",
     description:
-      " ✨ A simple and sleek notes-saving web app with local storage, paste sharing, search, copy, and social sharing features. Built using React, Redux, Tailwind CSS, and react-hot-toast.",
-      
+      "• Notes saving with local storage\n• Search, copy & sharing features\n• Clean responsive UI\n• Built with React & Redux",
     tags: [
       { name: "react", color: "blue-text-gradient" },
       { name: "tailwind", color: "green-text-gradient" },
@@ -132,53 +132,51 @@ const projects = [
     source_code_link: "https://notes-saver-dusky.vercel.app/",
   },
 
-
-    {
-   name: "Netflix Clone",
-  description:
-    "A full-stack Netflix clone that replicates the UI and functionality of Netflix. It features user authentication, movie browsing, trailers, and dynamic content fetching using APIs.",
-  tags: [
-    { name: "react", color: "blue-text-gradient" },
-    { name: "tailwindcss", color: "green-text-gradient" },
-    { name: "firebase", color: "pink-text-gradient" },
-  ],
+  {
+    name: "Netflix Clone",
+    description:
+      "• Full-stack streaming platform clone\n• User authentication system\n• Movie API integration\n• Responsive Netflix-style UI",
+    tags: [
+      { name: "react", color: "blue-text-gradient" },
+      { name: "tailwindcss", color: "green-text-gradient" },
+      { name: "firebase", color: "pink-text-gradient" },
+    ],
     image: netflix,
     source_code_link: "https://github.com/abhay963/Netflix-Clone",
   },
+
   {
-  name: "LangChat",
-  description:
-    "LangChat is a real-time language exchange and social platform where users connect globally through text, audio, and video calls using Stream to practice languages and make friends.",
-  tags: [
-    { name: "react", color: "blue-text-gradient" },
-    { name: "nodejs", color: "green-text-gradient" },
-    { name: "stream", color: "pink-text-gradient" },
-    { name: "webrtc", color: "orange-text-gradient" },
-  ],
-  image: langChat,
-  source_code_link: "https://github.com/abhay963/LangChat",
-}
-,
-  
-{
-  name: "Nagar-Sahayata Portal",
-  description:
-    "A MERN-based civic complaint management platform where citizens can report local issues and authorities can track, assign, and resolve complaints through role-based dashboards.",
-  tags: [
-    { name: "react", color: "blue-text-gradient" },
-    { name: "nodejs", color: "green-text-gradient" },
-    { name: "express", color: "pink-text-gradient" },
-    { name: "mongodb", color: "orange-text-gradient" },
-    
-  ],
-  image: sihstaff,
-  source_code_link: "https://github.com/abhay963/Nagar-Sahayata-Portal",
-}
-,
+    name: "LangChat",
+    description:
+      "• Real-time language exchange platform\n• Text, audio & video calls\n• WebRTC integration\n• Global user connectivity",
+    tags: [
+      { name: "react", color: "blue-text-gradient" },
+      { name: "nodejs", color: "green-text-gradient" },
+      { name: "stream", color: "pink-text-gradient" },
+      { name: "webrtc", color: "orange-text-gradient" },
+    ],
+    image: langChat,
+    source_code_link: "https://github.com/abhay963/LangChat",
+  },
+
+  {
+    name: "Nagar-Sahayata Portal",
+    description:
+      "• Civic complaint management system\n• Role-based dashboards\n• Issue tracking & resolution\n• Built using MERN stack",
+    tags: [
+      { name: "react", color: "blue-text-gradient" },
+      { name: "nodejs", color: "green-text-gradient" },
+      { name: "express", color: "pink-text-gradient" },
+      { name: "mongodb", color: "orange-text-gradient" },
+    ],
+    image: sihstaff,
+    source_code_link: "https://github.com/abhay963/Nagar-Sahayata-Portal",
+  },
+
   {
     name: "Resume Analyzer",
     description:
-      "An AI-powered tool that analyzes resumes for keyword matching, formatting, and ATS compliance. It provides real-time scoring, tailored suggestions, and ensures alignment with job descriptions.",
+      "• AI-based resume analysis tool\n• ATS keyword matching\n• Real-time scoring system\n• Job description alignment",
     tags: [
       { name: "nodejs", color: "blue-text-gradient" },
       { name: "express", color: "green-text-gradient" },
@@ -188,11 +186,10 @@ const projects = [
     source_code_link: "https://github.com/Akshat-shukla18/ResumeAnalyzer",
   },
 
-
   {
     name: "Bihar Tourism",
     description:
-      "A visually rich website showcasing Bihar’s culture, destinations, and history with interactive maps, photo galleries, smooth transitions, and engaging design for tourism exploration.",
+      "• Interactive tourism showcase website\n• Maps & photo galleries\n• Smooth animations\n• Responsive design",
     tags: [
       { name: "html", color: "blue-text-gradient" },
       { name: "css", color: "green-text-gradient" },
@@ -205,7 +202,7 @@ const projects = [
   {
     name: "Fanta",
     description:
-      "A colorful Fanta landing page with animated fruits, clean UI, bold visuals, and transitions, designed for user interaction and smooth engagement using only front-end technologies.",
+      "• Animated landing page design\n• Bold visuals & transitions\n• Interactive UI elements\n• Front-end focused project",
     tags: [
       { name: "react", color: "blue-text-gradient" },
       { name: "mongodb", color: "green-text-gradient" },
@@ -214,13 +211,11 @@ const projects = [
     image: fanta,
     source_code_link: "https://abhay963.github.io/fanta/",
   },
-  
- 
 
   {
     name: "Random Password Generator",
     description:
-      "Generates strong, customizable passwords with options like symbols, numbers, and cases. ",
+      "• Custom strong password generation\n• Symbol & number options\n• Instant copy feature\n• Simple & secure UI",
     tags: [
       { name: "javascript", color: "blue-text-gradient" },
       { name: "html", color: "green-text-gradient" },
@@ -233,7 +228,7 @@ const projects = [
   {
     name: "QR Code Generator",
     description:
-      "Quickly generates QR codes from text or links. It supports instant download and works offline. Clean UI and client-side privacy ensure seamless and safe QR code creation.",
+      "• QR generation from text/links\n• Instant download option\n• Offline functionality\n• Privacy-focused design",
     tags: [
       { name: "html", color: "blue-text-gradient" },
       { name: "javascript", color: "green-text-gradient" },
@@ -246,7 +241,7 @@ const projects = [
   {
     name: "Weather App",
     description:
-      "Displays live weather, forecasts, wind, and humidity using OpenWeatherMap API. Offers intuitive layout, modern styling, and mobile responsiveness for accurate weather data anywhere.",
+      "• Live weather data display\n• API-based forecast fetching\n• Wind & humidity tracking\n• Mobile responsive UI",
     tags: [
       { name: "javascript", color: "blue-text-gradient" },
       { name: "api", color: "green-text-gradient" },
@@ -256,6 +251,7 @@ const projects = [
     source_code_link: "https://abhay963.github.io/-Weather-Forecast-Application/",
   },
 ];
+
 
 
 
