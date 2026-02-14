@@ -49,49 +49,8 @@ export const navLinks = [
 
 
 
-const services = [
- 
-  {
-    title: "Scalable Web Applications",
-    icon: backend, // You can customize this icon or replace it with a power icon
-  },
-  {
-    title: "API Integration & Architecture",
-    icon: creator, // Replace with a document/legal icon if available
-  },
-  {
-    title: "Interactive 3D Web Design",
-    icon: backend, // Reuse or customize this icon for technical areas
-  },
-  {
-    title: "Component-Based UI Development",
-    icon: creator, // Reuse or use a communication/consulting icon
-  },
-  {
-    title: "Secure Authentication & Authorization",
-    icon: backend, // Reuse or use a communication/consulting icon
-  },
-  {
-    title: "Version Control & CI/CD Workflow",
-    icon: creator, // Reuse or use a communication/consulting icon
-  },
-  {
-    title: "Database Modeling & Optimization",
-    icon: backend, // Reuse or use a communication/consulting icon
-  },
-  {
-    title: "Adaptive & Collaborative",
-    icon: creator, // Reuse or use a communication/consulting icon
-  },
-];
 
-const technologies = [
 
-  {
-    name: "CSS 3",
-    icon: css,
-  },
-];
 
 
 
@@ -301,4 +260,4 @@ const projects = [
 
 
 
-export {  technologies, experiences,  projects };
+export {   experiences,  projects };
