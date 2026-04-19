@@ -4,7 +4,7 @@ import {
   creator,
   web,
   javascript,
-  
+  vetcareai,
   html,
   css,
   reactjs,
@@ -106,6 +106,21 @@ const experiences = [
 
 
 const projects = [
+
+  {
+    name: "VetCare AI (PashuSaathi)",
+    description:
+      "• AI-powered animal healthcare platform\n• Upload images/videos for disease detection\n• Personalized remedies & nutrition suggestions\n•doctor booking system",
+    tags: [
+      { name: "nextjs", color: "blue-text-gradient" },
+      { name: "clerk", color: "green-text-gradient" },
+      { name: "prisma", color: "pink-text-gradient" },
+      { name: "ai", color: "orange-text-gradient" },
+    ],
+   image: vetcareai,
+    source_code_link: "https://vet-care-ai.vercel.app/",
+  },
+
   {
     name: "GD Arena",
     description:
