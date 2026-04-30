@@ -108,7 +108,7 @@ const experiences = [
 const projects = [
 
   {
-    name: "VetCare AI (PashuSaathi)",
+    name: "VetCare AI",
     description:
       "• AI-powered animal healthcare platform\n• Upload images/videos for disease detection\n• Personalized remedies & nutrition suggestions\n•doctor booking system",
     tags: [
