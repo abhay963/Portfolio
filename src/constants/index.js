@@ -120,7 +120,19 @@ const projects = [
    image: vetcareai,
     source_code_link: "https://vet-care-ai.vercel.app/",
   },
-
+ {
+    name: "Nagar-Sahayata Portal",
+    description:
+      "• Civic complaint management system\n• Role-based dashboards\n• Issue tracking & resolution\n• Built using MERN stack",
+    tags: [
+      { name: "react", color: "blue-text-gradient" },
+      { name: "nodejs", color: "green-text-gradient" },
+      { name: "express", color: "pink-text-gradient" },
+      { name: "mongodb", color: "orange-text-gradient" },
+    ],
+    image: sihstaff,
+    source_code_link: "https://nagar-sahayata-portal.vercel.app/",
+  },
   {
     name: "GD Arena",
     description:
@@ -174,19 +186,7 @@ const projects = [
     source_code_link: "https://github.com/abhay963/LangChat",
   },
 
-  {
-    name: "Nagar-Sahayata Portal",
-    description:
-      "• Civic complaint management system\n• Role-based dashboards\n• Issue tracking & resolution\n• Built using MERN stack",
-    tags: [
-      { name: "react", color: "blue-text-gradient" },
-      { name: "nodejs", color: "green-text-gradient" },
-      { name: "express", color: "pink-text-gradient" },
-      { name: "mongodb", color: "orange-text-gradient" },
-    ],
-    image: sihstaff,
-    source_code_link: "https://github.com/abhay963/Nagar-Sahayata-Portal",
-  },
+ 
 
   {
     name: "Resume Analyzer",
