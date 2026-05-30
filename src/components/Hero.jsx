@@ -8,18 +8,7 @@ const Hero = () => {
 
   /* ================= TYPEWRITER ================= */
 
-  const [text] = useTypewriter({
-    words: [
-      "Full Stack Developer",
-      "React Engineer",
-      "AI Enthusiast",
-      
-    ],
-    loop: true,
-    typeSpeed: 30,
-    deleteSpeed: 10,
-    delaySpeed: 10,
-  });
+ 
 
   /* ================= JSON ================= */
 
@@ -139,9 +128,9 @@ const Hero = () => {
 
             <p className="font-mono text-base sm:text-lg text-zinc-300">
 
-              {text}
+             
 
-              <Cursor cursorColor="#22d3ee" />
+            Full Stack Developer
             </p>
           </div>
 
@@ -237,7 +226,7 @@ const Hero = () => {
 
             <p className="font-mono text-[11px] sm:text-xs text-zinc-300">
 
-              <span className="text-cyan-400">&gt;</span> System Online
+              <span className="text-cyan-400">&gt;</span> 
 
             </p>
           </div>
