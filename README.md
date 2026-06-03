@@ -1,16 +1,20 @@
 <div align="center">
 
-# 🌐 Abhay Kumar Yadav — 3D Portfolio
+# 🌐 Abhay Kumar Yadav — 3D Portfolio <a href="https://abhay96portfolio.netlify.app/" target="_blank">🔗</a>
 
-### 🚀 Interactive 3D Developer Portfolio  
+### 🚀 Interactive 3D Developer Portfolio
+
 ### 🎨 Creative UI | ⚛️ Modern Tech | 💼 Recruiter Ready
+
+<p>
+  <a href="https://abhay96portfolio.netlify.app/" target="_blank">
+    <img src="https://img.shields.io/badge/🌐%20Live%20Demo-Visit%20Portfolio-blue?style=for-the-badge" alt="Live Demo"/>
+  </a>
+</p>
 
 <img src="https://media.giphy.com/media/L8K62iTDkzGX6/giphy.gif" width="420"/>
 
 ---
-
-🔴 **LIVE DEMO**  
-👉 [Live Link](https://abhay96portfolio.netlify.app/)]
 
 ![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
 ![Frontend](https://img.shields.io/badge/Frontend-React%20%7C%20Vite-blue?style=for-the-badge)
