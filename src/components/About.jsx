@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
 import { fadeIn, slideIn, textVariant, staggerContainer } from "../utils/motion";
-import profilePic from "../assets/abhay.jpg";
+import profilePic from "../assets/abhay.png";
 
 // --- Professional Modern Icons (Lucide Style) ---
 const Code2Icon = ({ className }) => (
@@ -208,7 +208,7 @@ Full-Stack Developer & AI enthusiast turning complex problems into elegant digit
         transition={{ duration: 0.8 }}
         className="text-4xl font-bold text-white mb-1"
       >
-        20+
+        10+
       </motion.div>
       <div className="text-slate-400 text-xs uppercase tracking-wider">
         Projects
