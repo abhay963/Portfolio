@@ -131,7 +131,7 @@ const projects = [
       { name: "ai", color: "pink-text-gradient" },
     ],
     image: gdarena,
-    source_code_link: "https://gd-arena-frontend-lzuk.vercel.app/",
+    source_code_link: "https://gd-arena-cgh4.vercel.app/",
   },
 {
     name: "Nagar-Sahayata Portal",
