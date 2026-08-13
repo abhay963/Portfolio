@@ -8,8 +8,9 @@ import menu from "./menu.svg";
 import close from "./close.svg";
 import gdarena from "./tech/gdarena.png";
 
-import langChat from "./langChat.png"
-import vetcareai from "./vetcareai.png"
+import langChat from "./langChat.png";
+import drivehub from "./drivehub.png";
+import vetcareai from "./vetcareai.png";
 import css from "./tech/css.png";
 import netflix from "./tech/netflix.png";
 import docker from "./tech/docker.png";
@@ -24,7 +25,7 @@ import redux from "./tech/redux.png";
 import tailwind from "./tech/tailwind.png";
 import typescript from "./tech/typescript.png";
 import threejs from "./tech/threejs.svg";
-import geeksforgeeks from "./tech/geeksforgeeks.png"
+import geeksforgeeks from "./tech/geeksforgeeks.png";
 
 import meta from "./company/meta.png";
 import shopify from "./company/shopify.png";
@@ -37,17 +38,22 @@ import tripguide from "./tripguide.png";
 import fanta from "./tech/fanta.png";
 import weather from "./tech/weather.png";
 import qr from "./tech/qr.png";
+
 import random from "./tech/random.png";
 import resume from "./tech/resume.png";
 import bihar from "./tech/bihar.png";
-import notes from "./tech/notes.png"
+import notes from "./tech/notes.png";
 import sihstaff from "./tech/sihstaff.png";
 export {
   geeksforgeeks,
   sihstaff,
   gdarena,
   logo,
-  fanta,weather,qr,random,resume,
+  fanta,
+  weather,
+  qr,
+  random,
+  resume,
   backend,
   creator,
   mobile,
@@ -61,6 +67,7 @@ export {
   docker,
   figma,
   vetcareai,
+  drivehub,
   git,
   html,
   langChat,

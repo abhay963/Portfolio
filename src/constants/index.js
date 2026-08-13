@@ -10,6 +10,7 @@ import {
   reactjs,
   redux,
   tailwind,
+  drivehub,
   nodejs,
   mongodb,
   git,
@@ -106,22 +107,7 @@ const experiences = [
 
 
 const projects = [
-
-  {
-    name: "VetCare AI",
-    description:
-      "• AI-powered animal healthcare platform\n• Upload images/videos for disease detection\n• Personalized remedies & nutrition suggestions\n•doctor booking system",
-    tags: [
-      { name: "nextjs", color: "blue-text-gradient" },
-      { name: "clerk", color: "green-text-gradient" },
-      { name: "prisma", color: "pink-text-gradient" },
-      { name: "ai", color: "orange-text-gradient" },
-    ],
-   image: vetcareai,
-    source_code_link: "https://vet-care-ai.vercel.app/",
-  },
- 
-  {
+   {
     name: "GD Arena",
     description:
       "• AI-powered GD practice platform\n• Real-time topic generation\n• Voice-based interaction\n• Placement-focused confidence building",
@@ -146,6 +132,34 @@ const projects = [
     image: sihstaff,
     source_code_link: "https://nagar-sahayata-portal.vercel.app/",
   },
+ {
+  name: "DriveHub Inventory System",
+  description:
+    "• Inventory management system for admins & customers\n• Admin can add, update & manage inventory\n• Customers can browse and purchase products\n• Real-time inventory tracking & stock management",
+  tags: [
+    { name: "react", color: "blue-text-gradient" },
+    { name: "nodejs", color: "green-text-gradient" },
+    { name: "express", color: "pink-text-gradient" },
+    { name: "mongodb", color: "orange-text-gradient" },
+  ],
+  image: drivehub,
+  source_code_link: "https://drivehub-inventory-system.vercel.app/",
+},
+  {
+    name: "VetCare AI",
+    description:
+      "• AI-powered animal healthcare platform\n• Upload images/videos for disease detection\n• Personalized remedies & nutrition suggestions\n•doctor booking system",
+    tags: [
+      { name: "nextjs", color: "blue-text-gradient" },
+      { name: "clerk", color: "green-text-gradient" },
+      { name: "prisma", color: "pink-text-gradient" },
+      { name: "ai", color: "orange-text-gradient" },
+    ],
+   image: vetcareai,
+    source_code_link: "https://vet-care-ai.vercel.app/",
+  },
+ 
+ 
   {
     name: "QuickNotes",
     description:
