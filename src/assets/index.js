@@ -6,7 +6,7 @@ import web from "./web.png";
 import github from "./github.png";
 import menu from "./menu.svg";
 import close from "./close.svg";
-import gdarena from "./tech/gdArena.png";
+import gdarena from "./tech/gdArena1.png";
 
 import langChat from "./langChat.png";
 import drivehub from "./drivehub.png";
