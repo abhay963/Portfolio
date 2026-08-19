@@ -107,18 +107,19 @@ const experiences = [
 
 
 const projects = [
-   {
-    name: "GD Arena",
-    description:
-      "• AI-powered GD practice platform\n• Real-time topic generation\n• Voice-based interaction\n• Placement-focused confidence building",
-    tags: [
-      { name: "javascript", color: "blue-text-gradient" },
-      { name: "react", color: "green-text-gradient" },
-      { name: "ai", color: "pink-text-gradient" },
-    ],
-    image: gdarena,
-    source_code_link: "https://gd-arena-cgh4.vercel.app/",
-  },
+ {
+  name: "GD Arena × StudyMate",
+  description:
+    "AI-powered GD platform  & LangChain-based StudyMate for contextual learning, smart topic assistance, and placement-focused practice.",
+  tags: [
+    { name: "react", color: "blue-text-gradient" },
+    { name: "langchain", color: "green-text-gradient" },
+    { name: "rag", color: "pink-text-gradient" },
+    { name: "ai", color: "orange-text-gradient" },
+  ],
+  image: gdarena,
+  source_code_link: "https://gd-arena-cgh4.vercel.app/",
+},
 {
     name: "Nagar-Sahayata Portal",
     description:

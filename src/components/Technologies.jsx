@@ -1,3 +1,4 @@
+// src/components/Technologies.jsx
 
 import React, {
   useEffect,
@@ -5,6 +6,27 @@ import React, {
   useRef,
   useState,
 } from "react";
+
+import {
+  Canvas,
+  useFrame,
+} from "@react-three/fiber";
+
+import {
+  Environment,
+  Float,
+  Line,
+  OrbitControls,
+  Sparkles,
+  Text,
+} from "@react-three/drei";
+
+import * as THREE from "three";
+
+import {
+  motion,
+  AnimatePresence,
+} from "framer-motion";
 
 import {
   FaHtml5,
@@ -31,939 +53,4012 @@ import {
 } from "react-icons/si";
 
 import {
+  Activity,
   Brain,
   Bot,
+  Check,
+  Cpu,
   Database as DatabaseIcon,
+  FileText,
+  GitBranch,
   Layers3,
   Network,
-  Sparkles,
+  ScanSearch,
+  Search,
   Server,
-  GitBranch,
+  Sparkles as SparklesIcon,
   Terminal,
-  ArrowUpRight,
+  Workflow,
   Zap,
-  Orbit,
-  Cpu,
 } from "lucide-react";
 
 /* =========================================================
-   TECHNOLOGY DATA
+   TECHNOLOGIES
 ========================================================= */
 
 const technologies = {
   languages: [
-    {
-      name: "C++",
-      icon: SiCplusplus,
-      color: "text-blue-400",
-      description: "DSA & problem solving",
-    },
-    {
-      name: "JavaScript",
-      icon: SiJavascript,
-      color: "text-yellow-400",
-      description: "Modern web development",
-    },
-    {
-      name: "HTML",
-      icon: FaHtml5,
-      color: "text-orange-500",
-      description: "Semantic interfaces",
-    },
-    {
-      name: "CSS",
-      icon: FaCss3Alt,
-      color: "text-blue-500",
-      description: "Responsive styling",
-    },
+    ["C++", SiCplusplus, "DSA & problem solving", "blue"],
+    ["JavaScript", SiJavascript, "Modern web development", "yellow"],
+    ["HTML", FaHtml5, "Semantic interfaces", "orange"],
+    ["CSS", FaCss3Alt, "Responsive styling", "sky"],
   ],
 
   frontend: [
-    {
-      name: "React.js",
-      icon: FaReact,
-      color: "text-cyan-400",
-      description: "Interactive interfaces",
-    },
-    {
-      name: "Next.js",
-      icon: SiNextdotjs,
-      color: "text-white",
-      description: "Full-stack React",
-    },
-    {
-      name: "TailwindCSS",
-      icon: SiTailwindcss,
-      color: "text-sky-400",
-      description: "Utility-first UI",
-    },
+    ["React.js", FaReact, "Interactive interfaces", "cyan"],
+    ["Next.js", SiNextdotjs, "Full-stack React", "white"],
+    ["TailwindCSS", SiTailwindcss, "Utility-first UI", "sky"],
   ],
 
   backend: [
-    {
-      name: "Node.js",
-      icon: FaNodeJs,
-      color: "text-green-500",
-      description: "JavaScript runtime",
-    },
-    {
-      name: "Express.js",
-      icon: SiExpress,
-      color: "text-zinc-300",
-      description: "REST API layer",
-    },
-    {
-      name: "Postman",
-      icon: SiPostman,
-      color: "text-orange-500",
-      description: "API development",
-    },
+    ["Node.js", FaNodeJs, "JavaScript runtime", "green"],
+    ["Express.js", SiExpress, "REST API layer", "white"],
+    ["Postman", SiPostman, "API development", "orange"],
   ],
 
   ai: [
-    {
-      name: "Generative AI",
-      icon: Sparkles,
-      color: "text-cyan-300",
-      description: "AI-powered experiences",
-    },
-    {
-      name: "LLMs",
-      icon: Brain,
-      color: "text-violet-300",
-      description: "Intelligent language systems",
-    },
-    {
-      name: "RAG",
-      icon: Network,
-      color: "text-blue-300",
-      description: "Grounded AI retrieval",
-    },
-    {
-      name: "AI Agents",
-      icon: Bot,
-      color: "text-fuchsia-300",
-      description: "Autonomous workflows",
-    },
-    {
-      name: "Prompt Engineering",
-      icon: Terminal,
-      color: "text-purple-300",
-      description: "LLM interaction design",
-    },
-    {
-      name: "LangChain",
-      icon: Layers3,
-      color: "text-emerald-300",
-      description: "LLM application framework",
-    },
-    {
-      name: "LangGraph",
-      icon: GitBranch,
-      color: "text-pink-300",
-      description: "Agent orchestration",
-    },
+    ["Generative AI", SparklesIcon, "AI-powered experiences", "cyan"],
+    ["LLMs", Brain, "Intelligent language systems", "violet"],
+    ["RAG", Network, "Grounded AI retrieval", "blue"],
+    ["AI Agents", Bot, "Autonomous workflows", "fuchsia"],
+    ["Prompt Engineering", Terminal, "LLM interaction design", "purple"],
+    ["LangChain", Layers3, "LLM application framework", "emerald"],
+    ["LangGraph", GitBranch, "Agent orchestration", "pink"],
   ],
 
   databases: [
-    {
-      name: "MongoDB",
-      icon: SiMongodb,
-      color: "text-green-400",
-      description: "Document database",
-    },
-    {
-      name: "PostgreSQL",
-      icon: SiPostgresql,
-      color: "text-blue-300",
-      description: "Relational database",
-    },
-    {
-      name: "SQL",
-      icon: FaDatabase,
-      color: "text-indigo-300",
-      description: "Data querying",
-    },
-    {
-      name: "NeonDB",
-      icon: DatabaseIcon,
-      color: "text-emerald-300",
-      description: "Serverless Postgres",
-    },
-    {
-      name: "Firebase",
-      icon: SiFirebase,
-      color: "text-yellow-400",
-      description: "Backend services",
-    },
-    {
-      name: "Vector Databases",
-      icon: Network,
-      color: "text-purple-300",
-      description: "Semantic retrieval",
-    },
+    ["MongoDB", SiMongodb, "Document database", "green"],
+    ["PostgreSQL", SiPostgresql, "Relational database", "blue"],
+    ["SQL", FaDatabase, "Data querying", "indigo"],
+    ["NeonDB", DatabaseIcon, "Serverless Postgres", "emerald"],
+    ["Firebase", SiFirebase, "Backend services", "yellow"],
+    ["Vector Databases", Network, "Semantic retrieval", "purple"],
   ],
 
   deployment: [
-    {
-      name: "GitHub",
-      icon: FaGithub,
-      color: "text-white",
-      description: "Version control",
-    },
-    {
-      name: "Vercel",
-      icon: SiVercel,
-      color: "text-white",
-      description: "Frontend deployment",
-    },
-    {
-      name: "Railway",
-      icon: SiRailway,
-      color: "text-purple-300",
-      description: "Backend deployment",
-    },
-    {
-      name: "Netlify",
-      icon: SiNetlify,
-      color: "text-teal-300",
-      description: "Web deployment",
-    },
+    ["GitHub", FaGithub, "Version control", "white"],
+    ["Vercel", SiVercel, "Frontend deployment", "white"],
+    ["Railway", SiRailway, "Backend deployment", "purple"],
+    ["Netlify", SiNetlify, "Web deployment", "teal"],
   ],
 };
 
 /* =========================================================
-   CATEGORY CONFIG
+   CATEGORIES
 ========================================================= */
 
 const categories = [
   {
     id: "languages",
-    label: "01",
+    number: "01",
     title: "Languages",
-    description: "The fundamentals I build with.",
+    description: "Core programming foundations",
     icon: Terminal,
   },
   {
     id: "frontend",
-    label: "02",
+    number: "02",
     title: "Frontend",
-    description: "Interfaces designed for people.",
+    description: "Interfaces & experiences",
     icon: Layers3,
   },
   {
     id: "backend",
-    label: "03",
+    number: "03",
     title: "Backend",
-    description: "APIs and systems behind the UI.",
+    description: "APIs & application systems",
     icon: Server,
   },
   {
     id: "ai",
-    label: "04",
+    number: "04",
     title: "AI Engineering",
-    description: "Where software meets intelligence.",
+    description: "Intelligent applications",
     icon: Brain,
   },
   {
     id: "databases",
-    label: "05",
+    number: "05",
     title: "Data",
-    description: "Storage, retrieval and persistence.",
+    description: "Storage & retrieval",
     icon: DatabaseIcon,
   },
   {
     id: "deployment",
-    label: "06",
+    number: "06",
     title: "Deployment",
-    description: "From local development to production.",
+    description: "Production infrastructure",
     icon: GitBranch,
   },
 ];
 
 /* =========================================================
-   MOUSE SPOTLIGHT
+   ICON COLORS
 ========================================================= */
 
-const useMousePosition = () => {
-  const [position, setPosition] = useState({
+const iconStyles = {
+  blue: {
+    text: "text-blue-300",
+    bg: "bg-blue-400/10",
+    border: "border-blue-400/20",
+  },
+  yellow: {
+    text: "text-yellow-300",
+    bg: "bg-yellow-400/10",
+    border: "border-yellow-400/20",
+  },
+  orange: {
+    text: "text-orange-300",
+    bg: "bg-orange-400/10",
+    border: "border-orange-400/20",
+  },
+  sky: {
+    text: "text-sky-300",
+    bg: "bg-sky-400/10",
+    border: "border-sky-400/20",
+  },
+  cyan: {
+    text: "text-cyan-300",
+    bg: "bg-cyan-400/10",
+    border: "border-cyan-400/20",
+  },
+  white: {
+    text: "text-zinc-200",
+    bg: "bg-white/[0.06]",
+    border: "border-white/10",
+  },
+  green: {
+    text: "text-emerald-300",
+    bg: "bg-emerald-400/10",
+    border: "border-emerald-400/20",
+  },
+  violet: {
+    text: "text-violet-300",
+    bg: "bg-violet-400/10",
+    border: "border-violet-400/20",
+  },
+  fuchsia: {
+    text: "text-fuchsia-300",
+    bg: "bg-fuchsia-400/10",
+    border: "border-fuchsia-400/20",
+  },
+  purple: {
+    text: "text-purple-300",
+    bg: "bg-purple-400/10",
+    border: "border-purple-400/20",
+  },
+  emerald: {
+    text: "text-emerald-300",
+    bg: "bg-emerald-400/10",
+    border: "border-emerald-400/20",
+  },
+  pink: {
+    text: "text-pink-300",
+    bg: "bg-pink-400/10",
+    border: "border-pink-400/20",
+  },
+  indigo: {
+    text: "text-indigo-300",
+    bg: "bg-indigo-400/10",
+    border: "border-indigo-400/20",
+  },
+  teal: {
+    text: "text-teal-300",
+    bg: "bg-teal-400/10",
+    border: "border-teal-400/20",
+  },
+};
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+const Background = () => {
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      <div
+        className="
+          absolute inset-0
+          opacity-[0.28]
+          [background-image:linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)]
+          [background-size:58px_58px]
+          [mask-image:linear-gradient(to_bottom,black,transparent_95%)]
+        "
+      />
+
+      <motion.div
+        animate={{
+          x: [0, 100, 0],
+          y: [0, -45, 0],
+          scale: [1, 1.15, 1],
+        }}
+        transition={{
+          duration: 18,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="
+          absolute
+          -left-[320px]
+          top-[8%]
+          h-[800px]
+          w-[800px]
+          rounded-full
+          bg-cyan-500/[0.07]
+          blur-[180px]
+        "
+      />
+
+      <motion.div
+        animate={{
+          x: [0, -90, 0],
+          y: [0, 55, 0],
+          scale: [1, 1.12, 1],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="
+          absolute
+          -right-[300px]
+          top-[25%]
+          h-[800px]
+          w-[800px]
+          rounded-full
+          bg-violet-600/[0.08]
+          blur-[190px]
+        "
+      />
+
+      <motion.div
+        animate={{
+          opacity: [0.2, 0.55, 0.2],
+          scale: [0.95, 1.08, 0.95],
+        }}
+        transition={{
+          duration: 11,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+        className="
+          absolute
+          left-[35%]
+          top-[12%]
+          h-[600px]
+          w-[600px]
+          rounded-full
+          bg-blue-500/[0.05]
+          blur-[160px]
+        "
+      />
+    </div>
+  );
+};
+
+/* =========================================================
+   BACKGROUND PARTICLES
+========================================================= */
+
+const BackgroundParticles = () => {
+  const particles = useMemo(
+    () =>
+      Array.from({ length: 60 }, (_, index) => ({
+        id: index,
+        left: `${(index * 37.7) % 100}%`,
+        top: `${(index * 61.3) % 100}%`,
+        duration: 3 + (index % 5),
+        delay: (index % 7) * 0.35,
+      })),
+    []
+  );
+
+  return (
+    <div className="pointer-events-none absolute inset-0 overflow-hidden">
+      {particles.map((particle) => (
+        <motion.span
+          key={particle.id}
+          animate={{
+            y: [0, -22, 0],
+            opacity: [0.05, 0.5, 0.05],
+            scale: [0.6, 1.7, 0.6],
+          }}
+          transition={{
+            duration: particle.duration,
+            delay: particle.delay,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="
+            absolute
+            h-[2px]
+            w-[2px]
+            rounded-full
+            bg-cyan-300
+            shadow-[0_0_14px_rgba(103,232,249,.9)]
+          "
+          style={{
+            left: particle.left,
+            top: particle.top,
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+/* =========================================================
+   TECHNOLOGY CARD
+========================================================= */
+
+const TechnologyCard = ({ item, index }) => {
+  const ref = useRef(null);
+
+  const [rotation, setRotation] = useState({
     x: 0,
     y: 0,
   });
 
-  useEffect(() => {
-    const handleMove = (event) => {
-      setPosition({
-        x: event.clientX,
-        y: event.clientY,
-      });
-    };
+  const [name, Icon, description, color] = item;
 
-    window.addEventListener("mousemove", handleMove);
+  const style =
+    iconStyles[color] || iconStyles.white;
 
-    return () => {
-      window.removeEventListener("mousemove", handleMove);
-    };
-  }, []);
+  const handleMove = (event) => {
+    if (!ref.current) return;
 
-  return position;
-};
-
-/* =========================================================
-   TECH ITEM
-========================================================= */
-
-const TechItem = ({ tech, index, featured = false }) => {
-  const cardRef = useRef(null);
-
-  const [hovered, setHovered] = useState(false);
-
-  const Icon = tech.icon;
-
-  const handleMouseMove = (event) => {
-    const card = cardRef.current;
-
-    if (!card) return;
-
-    const rect = card.getBoundingClientRect();
+    const rect =
+      ref.current.getBoundingClientRect();
 
     const x =
-      event.clientX -
-      rect.left -
-      rect.width / 2;
+      (event.clientX - rect.left) /
+        rect.width -
+      0.5;
 
     const y =
-      event.clientY -
-      rect.top -
-      rect.height / 2;
+      (event.clientY - rect.top) /
+        rect.height -
+      0.5;
 
-    const rotateX = (-y / rect.height) * 7;
-    const rotateY = (x / rect.width) * 7;
-
-    card.style.transform = `
-      perspective(900px)
-      translateY(-7px)
-      rotateX(${rotateX}deg)
-      rotateY(${rotateY}deg)
-      scale3d(1.015,1.015,1.015)
-    `;
-  };
-
-  const handleMouseLeave = () => {
-    setHovered(false);
-
-    if (cardRef.current) {
-      cardRef.current.style.transform = "";
-    }
+    setRotation({
+      x: -y * 7,
+      y: x * 7,
+    });
   };
 
   return (
-    <div
-      ref={cardRef}
-      onMouseEnter={() => setHovered(true)}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        animationDelay: `${index * 70}ms`,
+    <motion.article
+      ref={ref}
+      onMouseMove={handleMove}
+      onMouseLeave={() =>
+        setRotation({
+          x: 0,
+          y: 0,
+        })
+      }
+      initial={{
+        opacity: 0,
+        y: 30,
+        scale: 0.96,
       }}
-      className={`
-        tech-card
+      animate={{
+        opacity: 1,
+        y: 0,
+        scale: 1,
+      }}
+      transition={{
+        duration: 0.65,
+        delay: index * 0.06,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      whileHover={{
+        y: -9,
+      }}
+      style={{
+        transform: `
+          perspective(1400px)
+          rotateX(${rotation.x}deg)
+          rotateY(${rotation.y}deg)
+        `,
+      }}
+      className="
         group
         relative
+        min-h-[230px]
         overflow-hidden
-        rounded-[22px]
-        border border-white/[0.07]
-        bg-white/[0.025]
-        backdrop-blur-xl
-        transition-[transform,border-color,background]
-        duration-300
-        will-change-transform
-        animate-tech-in
-
-        ${
-          featured
-            ? "min-h-[145px]"
-            : "min-h-[132px]"
-        }
-
+        rounded-[30px]
+        border
+        border-white/[0.08]
+        bg-white/[0.035]
+        p-7
+        backdrop-blur-2xl
+        transition-all
+        duration-500
         hover:border-cyan-300/20
-        hover:bg-white/[0.045]
-      `}
+        hover:bg-white/[0.055]
+        hover:shadow-[0_30px_100px_rgba(0,0,0,.4)]
+      "
     >
-      {/* Cursor glow */}
-
       <div
-        className={`
+        className="
           pointer-events-none
           absolute
-          -right-12
-          -top-12
-          h-32
-          w-32
+          -right-20
+          -top-20
+          h-48
+          w-48
           rounded-full
-          blur-3xl
-          transition-all
+          bg-cyan-400/[0.07]
+          blur-[70px]
+          opacity-0
+          transition-opacity
           duration-500
-          ${tech.color.replace(
-            "text-",
-            "bg-"
-          )}
-          ${
-            hovered
-              ? "opacity-20 scale-125"
-              : "opacity-0 scale-75"
-          }
+          group-hover:opacity-100
+        "
+      />
+
+      <span
+        className="
+          absolute
+          right-6
+          top-6
+          font-mono
+          text-[10px]
+          tracking-[0.25em]
+          text-white/15
+          group-hover:text-cyan-300/50
+        "
+      >
+        {String(index + 1).padStart(2, "0")}
+      </span>
+
+      <motion.div
+        whileHover={{
+          rotate: -6,
+          scale: 1.1,
+        }}
+        className={`
+          relative
+          flex
+          h-16
+          w-16
+          items-center
+          justify-center
+          rounded-2xl
+          border
+          ${style.bg}
+          ${style.border}
+          ${style.text}
         `}
-      />
+      >
+        <Icon size={29} />
+      </motion.div>
 
-      {/* Animated top border */}
+      <div className="relative mt-8">
+        <h3 className="text-[20px] font-semibold tracking-[-0.04em] text-white">
+          {name}
+        </h3>
 
-      <div
-        className="
-          absolute
-          left-1/2
-          top-0
-          h-[1px]
-          w-0
-          -translate-x-1/2
-          bg-gradient-to-r
-          from-transparent
-          via-cyan-300
-          to-transparent
-          transition-all
-          duration-500
-          group-hover:w-[75%]
-        "
-      />
-
-      {/* Scan line */}
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          inset-x-0
-          top-0
-          h-20
-          -translate-y-full
-          bg-gradient-to-b
-          from-transparent
-          via-white/[0.025]
-          to-transparent
-          transition-transform
-          duration-1000
-          group-hover:translate-y-[500%]
-        "
-      />
-
-      <div className="relative flex h-full flex-col justify-between p-5">
-        {/* Top */}
-
-        <div className="flex items-start justify-between">
-          <div
-            className={`
-              relative
-              flex
-              h-11
-              w-11
-              items-center
-              justify-center
-              rounded-[14px]
-              border
-              border-white/[0.07]
-              bg-black/30
-              ${tech.color}
-              transition-all
-              duration-500
-
-              group-hover:scale-110
-              group-hover:border-white/[0.14]
-              group-hover:shadow-[0_0_30px_rgba(34,211,238,0.08)]
-            `}
-          >
-            <Icon
-              size={featured ? 24 : 22}
-              strokeWidth={1.7}
-            />
-
-            {/* tiny orbit dot */}
-
-            <span
-              className="
-                absolute
-                -right-1
-                -top-1
-                h-2
-                w-2
-                rounded-full
-                bg-cyan-300
-                opacity-0
-                scale-0
-                transition-all
-                duration-500
-                group-hover:scale-100
-                group-hover:opacity-100
-              "
-            />
-          </div>
-
-          <ArrowUpRight
-            size={15}
-            className="
-              text-zinc-700
-              opacity-0
-              -translate-x-2
-              translate-y-2
-              transition-all
-              duration-300
-              group-hover:translate-x-0
-              group-hover:translate-y-0
-              group-hover:opacity-100
-              group-hover:text-cyan-300
-            "
-          />
-        </div>
-
-        {/* Bottom */}
-
-        <div className="mt-7">
-          <h3
-            className="
-              text-sm
-              font-semibold
-              tracking-tight
-              text-zinc-200
-              transition-all
-              duration-300
-              group-hover:translate-x-0.5
-              group-hover:text-white
-            "
-          >
-            {tech.name}
-          </h3>
-
-          <p
-            className="
-              mt-1
-              text-[10px]
-              leading-4
-              text-zinc-600
-              transition-colors
-              duration-300
-              group-hover:text-zinc-400
-            "
-          >
-            {tech.description}
-          </p>
-        </div>
+        <p className="mt-2 max-w-[250px] text-[13px] leading-6 text-zinc-500">
+          {description}
+        </p>
       </div>
 
-      {/* Bottom indicator */}
-
       <div
         className="
           absolute
-          bottom-3
-          right-4
-          h-[2px]
-          w-4
-          overflow-hidden
-          rounded-full
-          bg-white/[0.05]
+          bottom-6
+          left-7
+          flex
+          items-center
+          gap-2
+          font-mono
+          text-[9px]
+          uppercase
+          tracking-[0.2em]
+          text-white/20
+        "
+      >
+        <span
+          className="
+            h-1.5
+            w-1.5
+            rounded-full
+            bg-cyan-300
+            opacity-40
+            shadow-[0_0_10px_rgba(103,232,249,.8)]
+            group-hover:opacity-100
+          "
+        />
+        active stack
+      </div>
+    </motion.article>
+  );
+};
+
+/* =========================================================
+   CATEGORY SELECTOR
+========================================================= */
+
+const CategorySelector = ({
+  active,
+  setActive,
+}) => {
+  return (
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: 20,
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+      }}
+      viewport={{
+        once: true,
+        amount: 0.2,
+      }}
+      transition={{
+        duration: 0.7,
+      }}
+      className="
+        rounded-[32px]
+        border
+        border-white/[0.08]
+        bg-white/[0.025]
+        p-2
+        shadow-[0_25px_100px_rgba(0,0,0,.28)]
+        backdrop-blur-2xl
+      "
+    >
+      <div
+        className="
+          grid
+          grid-cols-2
+          gap-1.5
+          sm:grid-cols-3
+          lg:grid-cols-6
+        "
+      >
+        {categories.map((category) => {
+          const Icon = category.icon;
+
+          const isActive =
+            active === category.id;
+
+          return (
+            <motion.button
+              key={category.id}
+              onClick={() =>
+                setActive(category.id)
+              }
+              whileTap={{
+                scale: 0.97,
+              }}
+              className={`
+                group
+                relative
+                min-h-[110px]
+                overflow-hidden
+                rounded-[24px]
+                px-4
+                py-4
+                text-left
+                transition-all
+                duration-300
+                ${
+                  isActive
+                    ? "bg-gradient-to-br from-cyan-400/15 via-blue-500/10 to-violet-500/10 text-white shadow-[0_0_45px_rgba(34,211,238,.08)]"
+                    : "text-zinc-500 hover:bg-white/[0.04] hover:text-white"
+                }
+              `}
+            >
+              {isActive && (
+                <>
+                  <motion.span
+                    layoutId="categoryGlow"
+                    className="
+                      absolute
+                      -right-12
+                      -top-12
+                      h-28
+                      w-28
+                      rounded-full
+                      bg-cyan-300/10
+                      blur-3xl
+                    "
+                  />
+
+                  <motion.span
+                    layoutId="categoryLine"
+                    className="
+                      absolute
+                      bottom-0
+                      left-5
+                      right-5
+                      h-[2px]
+                      rounded-full
+                      bg-gradient-to-r
+                      from-transparent
+                      via-cyan-300
+                      to-transparent
+                    "
+                  />
+                </>
+              )}
+
+              <div className="relative flex items-center justify-between">
+                <span
+                  className={`
+                    font-mono
+                    text-[10px]
+                    tracking-[0.2em]
+                    ${
+                      isActive
+                        ? "text-cyan-300/70"
+                        : "text-white/15"
+                    }
+                  `}
+                >
+                  {category.number}
+                </span>
+
+                <Icon
+                  size={20}
+                  className={
+                    isActive
+                      ? "text-cyan-300"
+                      : "text-zinc-600"
+                  }
+                />
+              </div>
+
+              <div className="relative mt-6">
+                <div
+                  className={`
+                    text-[14px]
+                    font-semibold
+                    ${
+                      isActive
+                        ? "text-white"
+                        : "text-zinc-400"
+                    }
+                  `}
+                >
+                  {category.title}
+                </div>
+
+                <div
+                  className={`
+                    mt-1
+                    hidden
+                    text-[10px]
+                    leading-4
+                    sm:block
+                    ${
+                      isActive
+                        ? "text-white/40"
+                        : "text-zinc-600"
+                    }
+                  `}
+                >
+                  {category.description}
+                </div>
+              </div>
+            </motion.button>
+          );
+        })}
+      </div>
+    </motion.div>
+  );
+};
+
+/* =========================================================
+   RAG SIMULATION CONSTANTS
+========================================================= */
+
+const QUERY =
+  "How does RAG improve LLM accuracy?";
+
+const RESPONSE =
+  "RAG improves LLM accuracy by grounding generation in retrieved external context, reducing unsupported responses.";
+
+const PHASES = [
+  "idle",
+  "query",
+  "embedding",
+  "retrieval",
+  "context",
+  "thinking",
+  "generation",
+  "response",
+];
+
+const phaseMeta = {
+  idle: {
+    label: "SYSTEM READY",
+    description: "Awaiting intelligent request",
+  },
+  query: {
+    label: "QUERY INGESTED",
+    description: "Transforming language into vectors",
+  },
+  embedding: {
+    label: "SEMANTIC EMBEDDING",
+    description: "Calculating vector similarity",
+  },
+  retrieval: {
+    label: "VECTOR RETRIEVAL",
+    description: "Searching the knowledge space",
+  },
+  context: {
+    label: "CONTEXT ASSEMBLED",
+    description: "Top-K relevant chunks selected",
+  },
+  thinking: {
+    label: "LLM REASONING",
+    description: "Processing grounded context",
+  },
+  generation: {
+    label: "TOKEN GENERATION",
+    description: "Producing grounded response",
+  },
+  response: {
+    label: "RESPONSE COMPLETE",
+    description: "Answer generated successfully",
+  },
+};
+
+/* =========================================================
+   SIMULATION CONTROLLER
+========================================================= */
+
+const useSimulationController = () => {
+  const [phaseIndex, setPhaseIndex] =
+    useState(0);
+
+  const [typedQuery, setTypedQuery] =
+    useState("");
+
+  const [typedResponse, setTypedResponse] =
+    useState("");
+
+  const phase = PHASES[phaseIndex];
+
+  useEffect(() => {
+    const durations = {
+      idle: 900,
+      query: 2200,
+      embedding: 2100,
+      retrieval: 2500,
+      context: 1800,
+      thinking: 2300,
+      generation: 2700,
+      response: 3600,
+    };
+
+    const timer = setTimeout(() => {
+      setPhaseIndex(
+        (current) =>
+          (current + 1) % PHASES.length
+      );
+    }, durations[phase]);
+
+    return () => clearTimeout(timer);
+  }, [phase]);
+
+  useEffect(() => {
+    if (phase !== "query") {
+      setTypedQuery("");
+      return;
+    }
+
+    let index = 0;
+
+    const interval = setInterval(() => {
+      index += 1;
+
+      setTypedQuery(
+        QUERY.slice(0, index)
+      );
+
+      if (index >= QUERY.length) {
+        clearInterval(interval);
+      }
+    }, 32);
+
+    return () =>
+      clearInterval(interval);
+  }, [phase]);
+
+  useEffect(() => {
+    if (phase !== "response") {
+      setTypedResponse("");
+      return;
+    }
+
+    let index = 0;
+
+    const interval = setInterval(() => {
+      index += 2;
+
+      setTypedResponse(
+        RESPONSE.slice(0, index)
+      );
+
+      if (index >= RESPONSE.length) {
+        clearInterval(interval);
+      }
+    }, 20);
+
+    return () =>
+      clearInterval(interval);
+  }, [phase]);
+
+  return {
+    phase,
+    phaseIndex,
+    typedQuery,
+    typedResponse,
+  };
+};
+
+/* =========================================================
+   3D POSITIONS
+========================================================= */
+
+const positions = [
+  [-5.8, 0.0, 0],
+  [-3.55, 0.25, 0],
+  [-1.25, -0.15, 0],
+  [0.9, 0.25, 0],
+  [3.25, 0.15, 0],
+  [5.7, 0.0, 0],
+];
+
+/* =========================================================
+   DOCUMENTS
+========================================================= */
+
+const docs = [
+  {
+    title: "RAG Architecture.pdf",
+    subtitle: "retrieval / generation",
+    position: [-1.8, 1.5, -0.4],
+    relevant: true,
+  },
+  {
+    title: "LLM Retrieval Guide",
+    subtitle: "semantic search",
+    position: [-1.55, -1.45, 0],
+    relevant: true,
+  },
+  {
+    title: "Vector Search Notes",
+    subtitle: "embeddings",
+    position: [-0.1, 1.85, -0.3],
+    relevant: true,
+  },
+  {
+    title: "Knowledge Base",
+    subtitle: "general information",
+    position: [0.4, -1.7, -0.15],
+    relevant: false,
+  },
+  {
+    title: "AI Research.pdf",
+    subtitle: "language models",
+    position: [1.2, 1.45, -0.5],
+    relevant: false,
+  },
+];
+
+/* =========================================================
+   SHARED GLOW MATERIAL
+========================================================= */
+
+const GlowSphere = ({
+  radius = 0.1,
+  color = "#67e8f9",
+  opacity = 1,
+}) => {
+  return (
+    <mesh>
+      <sphereGeometry
+        args={[radius, 12, 12]}
+      />
+
+      <meshBasicMaterial
+        color={color}
+        transparent
+        opacity={opacity}
+        blending={THREE.AdditiveBlending}
+      />
+    </mesh>
+  );
+};
+
+/* =========================================================
+   DATA STREAM
+========================================================= */
+
+const DataStream = ({
+  start,
+  end,
+  color = "#67e8f9",
+  active = true,
+  count = 16,
+  speed = 0.55,
+  curveLift = 0.5,
+}) => {
+  const refs = useRef([]);
+
+  const curve = useMemo(() => {
+    const a = new THREE.Vector3(
+      ...start
+    );
+
+    const b = new THREE.Vector3(
+      ...end
+    );
+
+    const direction = new THREE.Vector3()
+      .subVectors(b, a);
+
+    const mid = new THREE.Vector3()
+      .addVectors(a, b)
+      .multiplyScalar(0.5);
+
+    mid.y +=
+      curveLift +
+      direction.length() * 0.05;
+
+    mid.z += 0.45;
+
+    return new THREE.CatmullRomCurve3([
+      a,
+      mid,
+      b,
+    ]);
+  }, [start, end, curveLift]);
+
+  useFrame(({ clock }) => {
+    const t =
+      clock.getElapsedTime() * speed;
+
+    refs.current.forEach(
+      (mesh, index) => {
+        if (!mesh) return;
+
+        mesh.visible = active;
+
+        if (!active) return;
+
+        const progress =
+          (t + index / count) % 1;
+
+        const point =
+          curve.getPointAt(progress);
+
+        mesh.position.copy(point);
+
+        const pulse =
+          0.55 +
+          Math.sin(
+            progress * Math.PI
+          ) *
+            0.8;
+
+        mesh.scale.setScalar(pulse);
+      }
+    );
+  });
+
+  return (
+    <>
+      <Line
+        points={curve.getPoints(80)}
+        color={color}
+        transparent
+        opacity={active ? 0.3 : 0.05}
+        lineWidth={1}
+      />
+
+      <Line
+        points={curve.getPoints(80)}
+        color={color}
+        transparent
+        opacity={active ? 0.08 : 0}
+        lineWidth={4}
+      />
+
+      {Array.from({ length: count }).map(
+        (_, index) => (
+          <mesh
+            key={index}
+            ref={(node) => {
+              refs.current[index] =
+                node;
+            }}
+          >
+            <sphereGeometry
+              args={[
+                index % 4 === 0
+                  ? 0.065
+                  : 0.032,
+                8,
+                8,
+              ]}
+            />
+
+            <meshBasicMaterial
+              color={color}
+              transparent
+              opacity={0.95}
+              blending={
+                THREE.AdditiveBlending
+              }
+            />
+          </mesh>
+        )
+      )}
+    </>
+  );
+};
+
+/* =========================================================
+   ENERGY BURST
+========================================================= */
+
+const EnergyBurst = ({
+  position,
+  active,
+  color = "#67e8f9",
+}) => {
+  const refs = useRef([]);
+
+  useFrame(({ clock }) => {
+    const t =
+      clock.getElapsedTime();
+
+    refs.current.forEach(
+      (mesh, index) => {
+        if (!mesh) return;
+
+        if (!active) {
+          mesh.visible = false;
+          return;
+        }
+
+        mesh.visible = true;
+
+        const angle =
+          (index / 18) *
+            Math.PI *
+            2 +
+          t * 0.35;
+
+        const cycle =
+          (t * 0.85) % 1;
+
+        const radius =
+          0.1 + cycle * 1.05;
+
+        mesh.position.set(
+          position[0] +
+            Math.cos(angle) * radius,
+          position[1] +
+            Math.sin(angle) * radius,
+          position[2] +
+            Math.sin(
+              angle * 2
+            ) *
+              0.2
+        );
+
+        mesh.material.opacity =
+          1 - cycle;
+      }
+    );
+  });
+
+  return (
+    <>
+      {Array.from({ length: 18 }).map(
+        (_, index) => (
+          <mesh
+            key={index}
+            ref={(node) => {
+              refs.current[index] =
+                node;
+            }}
+          >
+            <sphereGeometry
+              args={[0.035, 7, 7]}
+            />
+
+            <meshBasicMaterial
+              color={color}
+              transparent
+              opacity={0}
+              blending={
+                THREE.AdditiveBlending
+              }
+            />
+          </mesh>
+        )
+      )}
+    </>
+  );
+};
+
+/* =========================================================
+   USER QUERY
+========================================================= */
+
+const UserQuery = ({
+  position,
+  phase,
+}) => {
+  const group = useRef(null);
+  const ring1 = useRef(null);
+  const ring2 = useRef(null);
+
+  const active =
+    phase === "query";
+
+  useFrame(({ clock }) => {
+    const t =
+      clock.getElapsedTime();
+
+    if (group.current) {
+      group.current.position.y =
+        position[1] +
+        Math.sin(t * 1.6) *
+          0.09;
+    }
+
+    if (ring1.current) {
+      ring1.current.rotation.z =
+        t * 0.65;
+
+      ring1.current.scale.setScalar(
+        active
+          ? 1 +
+              Math.sin(t * 6) *
+                0.09
+          : 1
+      );
+    }
+
+    if (ring2.current) {
+      ring2.current.rotation.z =
+        -t * 0.35;
+    }
+  });
+
+  return (
+    <group
+      ref={group}
+      position={position}
+    >
+      <mesh>
+        <sphereGeometry
+          args={[0.72, 32, 32]}
+        />
+
+        <meshBasicMaterial
+          color="#061523"
+          transparent
+          opacity={0.96}
+        />
+      </mesh>
+
+      <mesh ref={ring1}>
+        <torusGeometry
+          args={[
+            0.88,
+            0.022,
+            10,
+            80,
+          ]}
+        />
+
+        <meshBasicMaterial
+          color="#22d3ee"
+          transparent
+          opacity={
+            active ? 0.95 : 0.3
+          }
+          blending={
+            THREE.AdditiveBlending
+          }
+        />
+      </mesh>
+
+      <mesh
+        ref={ring2}
+        rotation={[0, 0, Math.PI / 4]}
+      >
+        <torusGeometry
+          args={[
+            1.03,
+            0.012,
+            10,
+            80,
+          ]}
+        />
+
+        <meshBasicMaterial
+          color="#818cf8"
+          transparent
+          opacity={0.45}
+          blending={
+            THREE.AdditiveBlending
+          }
+        />
+      </mesh>
+
+      <Text
+        position={[0, 0.14, 0.75]}
+        fontSize={0.22}
+        color="#67e8f9"
+        anchorX="center"
+        anchorY="middle"
+      >
+        USER
+      </Text>
+
+      <Text
+        position={[0, -0.2, 0.75]}
+        fontSize={0.095}
+        color="#ffffff"
+        maxWidth={1.25}
+        textAlign="center"
+        anchorX="center"
+        anchorY="middle"
+      >
+        QUERY
+      </Text>
+
+      <Sparkles
+        count={active ? 70 : 25}
+        scale={2}
+        size={2}
+        speed={active ? 1.5 : 0.4}
+        color="#67e8f9"
+      />
+    </group>
+  );
+};
+
+/* =========================================================
+   EMBEDDING SPACE
+========================================================= */
+
+const EmbeddingSpace = ({
+  position,
+  phase,
+}) => {
+  const pointsRef = useRef(null);
+
+  const data = useMemo(() => {
+    const clusters = [
+      [-0.48, 0.35, 0],
+      [0.2, 0.5, 0.1],
+      [0.55, -0.18, -0.1],
+      [-0.4, -0.55, 0.1],
+      [0.45, 0.65, 0.15],
+    ];
+
+    const positionsArray = [];
+    const colorsArray = [];
+
+    const colorList = [
+      new THREE.Color("#22d3ee"),
+      new THREE.Color("#60a5fa"),
+      new THREE.Color("#818cf8"),
+      new THREE.Color("#a78bfa"),
+      new THREE.Color("#67e8f9"),
+    ];
+
+    clusters.forEach(
+      (cluster, clusterIndex) => {
+        for (let i = 0; i < 55; i++) {
+          const angle =
+            Math.random() *
+            Math.PI *
+            2;
+
+          const radius =
+            Math.sqrt(
+              Math.random()
+            ) * 0.48;
+
+          positionsArray.push(
+            cluster[0] +
+              Math.cos(angle) *
+                radius,
+            cluster[1] +
+              Math.sin(angle) *
+                radius,
+            cluster[2] +
+              (Math.random() - 0.5) *
+                0.5
+          );
+
+          const color =
+            colorList[
+              clusterIndex %
+                colorList.length
+            ];
+
+          colorsArray.push(
+            color.r,
+            color.g,
+            color.b
+          );
+        }
+      }
+    );
+
+    return {
+      positions:
+        new Float32Array(
+          positionsArray
+        ),
+      colors:
+        new Float32Array(
+          colorsArray
+        ),
+    };
+  }, []);
+
+  const scanning =
+    phase === "embedding";
+
+  useFrame(({ clock }) => {
+    if (!pointsRef.current)
+      return;
+
+    const t =
+      clock.getElapsedTime();
+
+    pointsRef.current.rotation.y =
+      t * 0.08;
+
+    pointsRef.current.rotation.x =
+      Math.sin(t * 0.3) *
+      0.05;
+
+    pointsRef.current.material.opacity =
+      scanning ? 0.95 : 0.5;
+  });
+
+  return (
+    <group position={position}>
+      <points ref={pointsRef}>
+        <bufferGeometry>
+          <bufferAttribute
+            attach="attributes-position"
+            count={
+              data.positions.length / 3
+            }
+            array={data.positions}
+            itemSize={3}
+          />
+
+          <bufferAttribute
+            attach="attributes-color"
+            count={
+              data.colors.length / 3
+            }
+            array={data.colors}
+            itemSize={3}
+          />
+        </bufferGeometry>
+
+        <pointsMaterial
+          size={0.055}
+          vertexColors
+          transparent
+          opacity={0.5}
+          sizeAttenuation
+          blending={
+            THREE.AdditiveBlending
+          }
+        />
+      </points>
+
+      <mesh>
+        <sphereGeometry
+          args={[0.85, 32, 32]}
+        />
+
+        <meshBasicMaterial
+          color="#22d3ee"
+          transparent
+          opacity={0.035}
+          wireframe
+        />
+      </mesh>
+
+      {scanning && (
+        <ScanningRing />
+      )}
+
+      <Text
+        position={[0, 1.05, 0]}
+        fontSize={0.19}
+        color="#67e8f9"
+        anchorX="center"
+      >
+        EMBEDDING
+      </Text>
+
+      <Text
+        position={[0, 0.82, 0]}
+        fontSize={0.105}
+        color="#dbeafe"
+        anchorX="center"
+      >
+        SEMANTIC VECTOR SPACE
+      </Text>
+    </group>
+  );
+};
+
+/* =========================================================
+   SCANNING RING
+========================================================= */
+
+const ScanningRing = () => {
+  const ref = useRef(null);
+
+  useFrame(({ clock }) => {
+    if (!ref.current)
+      return;
+
+    const progress =
+      (clock.getElapsedTime() %
+        1.7) /
+      1.7;
+
+    ref.current.scale.setScalar(
+      0.2 + progress * 2.2
+    );
+
+    ref.current.material.opacity =
+      (1 - progress) * 0.9;
+  });
+
+  return (
+    <mesh
+      ref={ref}
+      rotation={[
+        Math.PI / 2,
+        0,
+        0,
+      ]}
+    >
+      <ringGeometry
+        args={[
+          0.025,
+          0.055,
+          64,
+        ]}
+      />
+
+      <meshBasicMaterial
+        color="#22d3ee"
+        transparent
+        opacity={0.8}
+        side={THREE.DoubleSide}
+        blending={
+          THREE.AdditiveBlending
+        }
+      />
+    </mesh>
+  );
+};
+
+/* =========================================================
+   DOCUMENT NODE
+========================================================= */
+
+const DocumentNode = ({
+  document,
+  phase,
+  index,
+}) => {
+  const group = useRef(null);
+
+  const selected =
+    document.relevant &&
+    phase === "retrieval";
+
+  useFrame(({ clock }) => {
+    if (!group.current)
+      return;
+
+    const t =
+      clock.getElapsedTime();
+
+    group.current.position.y =
+      document.position[1] +
+      Math.sin(
+        t * 0.8 + index
+      ) *
+        0.12;
+
+    group.current.rotation.y =
+      Math.sin(
+        t * 0.5 + index
+      ) *
+        0.08;
+
+    group.current.rotation.x =
+      Math.cos(
+        t * 0.35 + index
+      ) *
+        0.025;
+  });
+
+  return (
+    <group
+      ref={group}
+      position={document.position}
+    >
+      <mesh>
+        <boxGeometry
+          args={[
+            1.05,
+            0.78,
+            0.055,
+          ]}
+        />
+
+        <meshBasicMaterial
+          color={
+            selected
+              ? "#092f3b"
+              : "#07101c"
+          }
+          transparent
+          opacity={
+            selected ? 0.98 : 0.7
+          }
+        />
+      </mesh>
+
+      <Line
+        points={[
+          [-0.525, -0.39, 0.04],
+          [0.525, -0.39, 0.04],
+          [0.525, 0.39, 0.04],
+          [-0.525, 0.39, 0.04],
+          [-0.525, -0.39, 0.04],
+        ]}
+        color={
+          selected
+            ? "#22d3ee"
+            : "#31506a"
+        }
+        transparent
+        opacity={
+          selected ? 1 : 0.35
+        }
+        lineWidth={
+          selected ? 2 : 1
+        }
+      />
+
+      <Text
+        position={[
+          -0.43,
+          0.17,
+          0.065,
+        ]}
+        fontSize={0.085}
+        color={
+          selected
+            ? "#67e8f9"
+            : "#dbeafe"
+        }
+        maxWidth={0.82}
+        anchorX="left"
+        anchorY="middle"
+      >
+        {document.title}
+      </Text>
+
+      <Text
+        position={[
+          -0.43,
+          -0.03,
+          0.065,
+        ]}
+        fontSize={0.06}
+        color="#94a3b8"
+        anchorX="left"
+        anchorY="middle"
+      >
+        {document.subtitle}
+      </Text>
+
+      <Line
+        points={[
+          [-0.42, -0.19, 0.065],
+          [-0.1, -0.19, 0.065],
+        ]}
+        color={
+          selected
+            ? "#22d3ee"
+            : "#334155"
+        }
+        transparent
+        opacity={0.75}
+        lineWidth={2}
+      />
+
+      <Line
+        points={[
+          [-0.42, -0.27, 0.065],
+          [0.25, -0.27, 0.065],
+        ]}
+        color={
+          selected
+            ? "#818cf8"
+            : "#26394c"
+        }
+        transparent
+        opacity={0.65}
+        lineWidth={2}
+      />
+
+      {selected && (
+        <>
+          <Sparkles
+            count={30}
+            scale={1.6}
+            size={2}
+            speed={1}
+            color="#22d3ee"
+          />
+
+          <mesh>
+            <boxGeometry
+              args={[
+                1.18,
+                0.91,
+                0.02,
+              ]}
+            />
+
+            <meshBasicMaterial
+              color="#22d3ee"
+              transparent
+              opacity={0.05}
+              blending={
+                THREE.AdditiveBlending
+              }
+            />
+          </mesh>
+        </>
+      )}
+    </group>
+  );
+};
+
+/* =========================================================
+   VECTOR DATABASE
+========================================================= */
+
+const VectorDatabase = ({
+  position,
+  phase,
+}) => {
+  const group = useRef(null);
+  const rings = useRef([]);
+
+  const active =
+    phase === "retrieval";
+
+  useFrame(({ clock }) => {
+    const t =
+      clock.getElapsedTime();
+
+    if (group.current) {
+      group.current.rotation.y =
+        t * 0.35;
+
+      group.current.rotation.x =
+        Math.sin(t * 0.4) *
+        0.08;
+    }
+
+    rings.current.forEach(
+      (ring, index) => {
+        if (!ring) return;
+
+        ring.rotation.z =
+          t *
+          (index % 2 === 0
+            ? 0.55
+            : -0.4);
+      }
+    );
+  });
+
+  return (
+    <group
+      ref={group}
+      position={position}
+    >
+      <mesh>
+        <cylinderGeometry
+          args={[
+            0.72,
+            0.72,
+            0.82,
+            48,
+          ]}
+        />
+
+        <meshBasicMaterial
+          color="#061523"
+          transparent
+          opacity={0.95}
+        />
+      </mesh>
+
+      {[0, 1, 2].map(
+        (index) => (
+          <mesh
+            key={index}
+            ref={(node) => {
+              rings.current[index] =
+                node;
+            }}
+            position={[
+              0,
+              -0.27 +
+                index * 0.27,
+              0,
+            ]}
+          >
+            <torusGeometry
+              args={[
+                0.74,
+                0.018,
+                10,
+                80,
+              ]}
+            />
+
+            <meshBasicMaterial
+              color={
+                active
+                  ? "#22d3ee"
+                  : "#31506a"
+              }
+              transparent
+              opacity={
+                active ? 0.95 : 0.3
+              }
+              blending={
+                THREE.AdditiveBlending
+              }
+            />
+          </mesh>
+        )
+      )}
+
+      <Text
+        position={[0, 0.12, 0.76]}
+        fontSize={0.19}
+        color="#67e8f9"
+        anchorX="center"
+      >
+        VECTOR DB
+      </Text>
+
+      <Text
+        position={[0, -0.18, 0.76]}
+        fontSize={0.09}
+        color="#cbd5e1"
+        anchorX="center"
+      >
+        TOP-K SEARCH
+      </Text>
+
+      {active && (
+        <>
+          <ScanningRing />
+
+          <Sparkles
+            count={50}
+            scale={1.9}
+            size={2}
+            speed={1.3}
+            color="#22d3ee"
+          />
+        </>
+      )}
+    </group>
+  );
+};
+
+/* =========================================================
+   CONTEXT NODE
+========================================================= */
+
+const ContextNode = ({
+  position,
+  phase,
+}) => {
+  const group = useRef(null);
+
+  const active =
+    phase === "context" ||
+    phase === "thinking" ||
+    phase === "generation";
+
+  useFrame(({ clock }) => {
+    if (!group.current)
+      return;
+
+    const t =
+      clock.getElapsedTime();
+
+    group.current.rotation.y =
+      t * 0.3;
+
+    group.current.scale.setScalar(
+      active
+        ? 1 +
+            Math.sin(t * 5) *
+              0.055
+        : 1
+    );
+  });
+
+  return (
+    <group
+      ref={group}
+      position={position}
+    >
+      <mesh>
+        <icosahedronGeometry
+          args={[0.62, 2]}
+        />
+
+        <meshBasicMaterial
+          color="#22d3ee"
+          transparent
+          opacity={
+            active ? 0.28 : 0.09
+          }
+          wireframe
+        />
+      </mesh>
+
+      {[0, 1, 2].map(
+        (index) => (
+          <mesh
+            key={index}
+            rotation={[
+              index * 0.8,
+              index * 0.6,
+              index * 0.5,
+            ]}
+          >
+            <torusGeometry
+              args={[
+                0.78 +
+                  index * 0.1,
+                0.016,
+                10,
+                80,
+              ]}
+            />
+
+            <meshBasicMaterial
+              color={
+                index % 2 === 0
+                  ? "#22d3ee"
+                  : "#818cf8"
+              }
+              transparent
+              opacity={
+                active ? 0.7 : 0.15
+              }
+              blending={
+                THREE.AdditiveBlending
+              }
+            />
+          </mesh>
+        )
+      )}
+
+      <Text
+        position={[0, 0.15, 0.75]}
+        fontSize={0.2}
+        color="#67e8f9"
+        anchorX="center"
+      >
+        CONTEXT
+      </Text>
+
+      <Text
+        position={[0, -0.17, 0.75]}
+        fontSize={0.095}
+        color="#dbeafe"
+        anchorX="center"
+      >
+        3 CHUNKS
+      </Text>
+
+      {active && (
+        <Sparkles
+          count={55}
+          scale={1.8}
+          size={2}
+          speed={1.2}
+          color="#67e8f9"
+        />
+      )}
+    </group>
+  );
+};
+
+/* =========================================================
+   RETRIEVAL PARTICLES
+========================================================= */
+
+const RetrievalParticles = ({
+  phase,
+}) => {
+  const refs = useRef([]);
+
+  const active =
+    phase === "retrieval" ||
+    phase === "context";
+
+  const starts = useMemo(
+    () =>
+      docs
+        .filter(
+          (doc) => doc.relevant
+        )
+        .map(
+          (doc) =>
+            doc.position
+        ),
+    []
+  );
+
+  const target = [
+    positions[3][0],
+    positions[3][1],
+    positions[3][2],
+  ];
+
+  useFrame(({ clock }) => {
+    const t =
+      clock.getElapsedTime();
+
+    refs.current.forEach(
+      (mesh, index) => {
+        if (!mesh) return;
+
+        mesh.visible = active;
+
+        if (!active) return;
+
+        const start =
+          starts[
+            index %
+              starts.length
+          ];
+
+        const p =
+          new THREE.Vector3(
+            ...start
+          );
+
+        const e =
+          new THREE.Vector3(
+            ...target
+          );
+
+        const mid =
+          new THREE.Vector3()
+            .addVectors(p, e)
+            .multiplyScalar(0.5);
+
+        mid.y +=
+          index % 2 === 0
+            ? 0.6
+            : -0.5;
+
+        mid.z += 0.5;
+
+        const curve =
+          new THREE.CatmullRomCurve3(
+            [p, mid, e]
+          );
+
+        const progress =
+          (t * 0.42 +
+            index * 0.17) %
+          1;
+
+        mesh.position.copy(
+          curve.getPointAt(
+            progress
+          )
+        );
+
+        mesh.scale.setScalar(
+          0.7 +
+            Math.sin(
+              progress * Math.PI
+            ) *
+              1.2
+        );
+      }
+    );
+  });
+
+  return (
+    <>
+      {Array.from({
+        length: 24,
+      }).map((_, index) => (
+        <mesh
+          key={index}
+          ref={(node) => {
+            refs.current[index] =
+              node;
+          }}
+        >
+          <sphereGeometry
+            args={[
+              index % 4 === 0
+                ? 0.065
+                : 0.032,
+              8,
+              8,
+            ]}
+          />
+
+          <meshBasicMaterial
+            color={
+              index % 2 === 0
+                ? "#22d3ee"
+                : "#818cf8"
+            }
+            transparent
+            opacity={0.95}
+            blending={
+              THREE.AdditiveBlending
+            }
+          />
+        </mesh>
+      ))}
+    </>
+  );
+};
+
+/* =========================================================
+   LLM CORE
+========================================================= */
+
+const LLMCore = ({
+  position,
+  phase,
+}) => {
+  const core = useRef(null);
+  const rings = useRef([]);
+  const nodes = useRef([]);
+
+  const active =
+    phase === "thinking" ||
+    phase === "generation";
+
+  const intense =
+    phase === "generation";
+
+  useFrame(({ clock }) => {
+    const t =
+      clock.getElapsedTime();
+
+    if (core.current) {
+      core.current.rotation.x =
+        t * 0.28;
+
+      core.current.rotation.y =
+        t * 0.48;
+
+      core.current.rotation.z =
+        Math.sin(t * 0.4) *
+        0.15;
+
+      const breathe =
+        1 +
+        Math.sin(
+          t * (active ? 6 : 2.3)
+        ) *
+          (active ? 0.075 : 0.035);
+
+      core.current.scale.setScalar(
+        breathe
+      );
+    }
+
+    rings.current.forEach(
+      (ring, index) => {
+        if (!ring) return;
+
+        const speed =
+          active
+            ? 0.5 +
+              index * 0.12
+            : 0.18 +
+              index * 0.04;
+
+        ring.rotation.x =
+          t * speed;
+
+        ring.rotation.y =
+          t *
+          (index % 2 === 0
+            ? 0.28
+            : -0.24);
+
+        ring.rotation.z =
+          t *
+          (index % 2 === 0
+            ? 0.12
+            : -0.16);
+      }
+    );
+
+    nodes.current.forEach(
+      (node, index) => {
+        if (!node) return;
+
+        const angle =
+          t *
+            (active
+              ? 0.75
+              : 0.3) +
+          index;
+
+        const radius =
+          0.95 +
+          Math.sin(
+            t * 0.7 + index
+          ) *
+            0.08;
+
+        node.position.set(
+          Math.cos(angle) *
+            radius,
+          Math.sin(angle) *
+            radius,
+          Math.sin(
+            t * 0.9 + index
+          ) * 0.42
+        );
+      }
+    );
+  });
+
+  return (
+    <group position={position}>
+      <group ref={core}>
+        <mesh>
+          <sphereGeometry
+            args={[0.7, 40, 40]}
+          />
+
+          <meshBasicMaterial
+            color="#172554"
+            transparent
+            opacity={
+              active ? 0.35 : 0.2
+            }
+          />
+        </mesh>
+
+        <mesh>
+          <icosahedronGeometry
+            args={[0.58, 3]}
+          />
+
+          <meshBasicMaterial
+            color={
+              intense
+                ? "#e9d5ff"
+                : "#818cf8"
+            }
+            wireframe
+            transparent
+            opacity={
+              active ? 0.95 : 0.58
+            }
+            blending={
+              THREE.AdditiveBlending
+            }
+          />
+        </mesh>
+
+        <mesh>
+          <sphereGeometry
+            args={[0.19, 24, 24]}
+          />
+
+          <meshBasicMaterial
+            color="#ffffff"
+            transparent
+            opacity={
+              intense ? 1 : 0.85
+            }
+            blending={
+              THREE.AdditiveBlending
+            }
+          />
+        </mesh>
+
+        {[0, 1, 2, 3, 4].map(
+          (index) => (
+            <mesh
+              key={index}
+              ref={(node) => {
+                rings.current[index] =
+                  node;
+              }}
+              rotation={[
+                index * 0.7,
+                index * 0.4,
+                index * 0.5,
+              ]}
+            >
+              <torusGeometry
+                args={[
+                  0.86 +
+                    index * 0.13,
+                  0.015 +
+                    index * 0.003,
+                  10,
+                  100,
+                ]}
+              />
+
+              <meshBasicMaterial
+                color={
+                  index % 2 === 0
+                    ? "#22d3ee"
+                    : "#8b5cf6"
+                }
+                transparent
+                opacity={
+                  active ? 0.75 : 0.25
+                }
+                blending={
+                  THREE.AdditiveBlending
+                }
+              />
+            </mesh>
+          )
+        )}
+
+        {Array.from({
+          length: 18,
+        }).map((_, index) => (
+          <mesh
+            key={index}
+            ref={(node) => {
+              nodes.current[index] =
+                node;
+            }}
+          >
+            <sphereGeometry
+              args={[
+                index % 3 === 0
+                  ? 0.045
+                  : 0.025,
+                8,
+                8,
+              ]}
+            />
+
+            <meshBasicMaterial
+              color={
+                index % 2 === 0
+                  ? "#67e8f9"
+                  : "#c4b5fd"
+              }
+              blending={
+                THREE.AdditiveBlending
+              }
+            />
+          </mesh>
+        ))}
+      </group>
+
+      <Sparkles
+        count={active ? 140 : 55}
+        scale={3}
+        size={active ? 2.7 : 1.5}
+        speed={active ? 1.8 : 0.45}
+        color="#67e8f9"
+      />
+
+      <Text
+        position={[0, 1.55, 0]}
+        fontSize={0.25}
+        color="#e9d5ff"
+        anchorX="center"
+      >
+        LLM CORE
+      </Text>
+
+      <Text
+        position={[0, 1.25, 0]}
+        fontSize={0.115}
+        color="#c4b5fd"
+        anchorX="center"
+      >
+        NEURAL GENERATION ENGINE
+      </Text>
+
+      <Text
+        position={[0, -1.55, 0]}
+        fontSize={0.12}
+        color={
+          intense
+            ? "#67e8f9"
+            : active
+            ? "#c4b5fd"
+            : "#64748b"
+        }
+        anchorX="center"
+      >
+        {phase === "thinking"
+          ? "CONTEXT RECEIVED"
+          : phase === "generation"
+          ? "GENERATING TOKENS"
+          : "WAITING FOR CONTEXT"}
+      </Text>
+    </group>
+  );
+};
+
+/* =========================================================
+   TOKEN STREAM
+========================================================= */
+
+const TokenStream = ({
+  phase,
+}) => {
+  const refs = useRef([]);
+
+  const active =
+    phase === "generation" ||
+    phase === "response";
+
+  const start =
+    positions[4];
+
+  const end =
+    positions[5];
+
+  const curve = useMemo(() => {
+    const a = new THREE.Vector3(
+      ...start
+    );
+
+    const b = new THREE.Vector3(
+      ...end
+    );
+
+    const mid = new THREE.Vector3()
+      .addVectors(a, b)
+      .multiplyScalar(0.5);
+
+    mid.y += 0.9;
+    mid.z += 0.45;
+
+    return new THREE.CatmullRomCurve3([
+      a,
+      mid,
+      b,
+    ]);
+  }, [start, end]);
+
+  useFrame(({ clock }) => {
+    const t =
+      clock.getElapsedTime();
+
+    refs.current.forEach(
+      (mesh, index) => {
+        if (!mesh) return;
+
+        mesh.visible = active;
+
+        if (!active) return;
+
+        const progress =
+          (t * 0.55 +
+            index * 0.12) %
+          1;
+
+        mesh.position.copy(
+          curve.getPointAt(
+            progress
+          )
+        );
+
+        mesh.scale.setScalar(
+          0.7 +
+            Math.sin(
+              progress * Math.PI
+            ) *
+              1.3
+        );
+      }
+    );
+  });
+
+  return (
+    <>
+      <Line
+        points={curve.getPoints(70)}
+        color="#a78bfa"
+        transparent
+        opacity={active ? 0.28 : 0.04}
+        lineWidth={1}
+      />
+
+      {Array.from({
+        length: 22,
+      }).map((_, index) => (
+        <mesh
+          key={index}
+          ref={(node) => {
+            refs.current[index] =
+              node;
+          }}
+        >
+          <sphereGeometry
+            args={[
+              index % 4 === 0
+                ? 0.065
+                : 0.032,
+              8,
+              8,
+            ]}
+          />
+
+          <meshBasicMaterial
+            color={
+              index % 2 === 0
+                ? "#c4b5fd"
+                : "#67e8f9"
+            }
+            blending={
+              THREE.AdditiveBlending
+            }
+          />
+        </mesh>
+      ))}
+    </>
+  );
+};
+
+/* =========================================================
+   RESPONSE NODE
+========================================================= */
+
+const ResponseNode = ({
+  position,
+  phase,
+}) => {
+  const ref = useRef(null);
+
+  const active =
+    phase === "response";
+
+  useFrame(({ clock }) => {
+    if (!ref.current)
+      return;
+
+    const t =
+      clock.getElapsedTime();
+
+    ref.current.rotation.x =
+      t * 0.25;
+
+    ref.current.rotation.y =
+      t * 0.45;
+
+    ref.current.rotation.z =
+      t * 0.35;
+
+    ref.current.scale.setScalar(
+      active
+        ? 1 +
+            Math.sin(t * 5) *
+              0.07
+        : 1
+    );
+  });
+
+  return (
+    <group position={position}>
+      <group ref={ref}>
+        <mesh>
+          <torusKnotGeometry
+            args={[
+              0.48,
+              0.075,
+              100,
+              18,
+              2,
+              3,
+            ]}
+          />
+
+          <meshBasicMaterial
+            color="#c4b5fd"
+            wireframe
+            transparent
+            opacity={
+              active ? 0.95 : 0.4
+            }
+            blending={
+              THREE.AdditiveBlending
+            }
+          />
+        </mesh>
+
+        <mesh>
+          <sphereGeometry
+            args={[0.15, 24, 24]}
+          />
+
+          <meshBasicMaterial
+            color="#ffffff"
+            blending={
+              THREE.AdditiveBlending
+            }
+          />
+        </mesh>
+      </group>
+
+      <Text
+        position={[0, 0.95, 0]}
+        fontSize={0.24}
+        color="#d8b4fe"
+        anchorX="center"
+      >
+        RESPONSE
+      </Text>
+
+      <Text
+        position={[0, 0.68, 0]}
+        fontSize={0.105}
+        color="#cbd5e1"
+        anchorX="center"
+      >
+        GROUNDED ANSWER
+      </Text>
+
+      {active && (
+        <Sparkles
+          count={75}
+          scale={2}
+          size={2.5}
+          speed={1.4}
+          color="#c4b5fd"
+        />
+      )}
+    </group>
+  );
+};
+
+/* =========================================================
+   FLOATING NEURAL WORDS
+========================================================= */
+
+const NeuralWords = ({
+  phase,
+}) => {
+  const words = [
+    "context",
+    "attention",
+    "tokens",
+    "reasoning",
+    "retrieval",
+    "generation",
+  ];
+
+  const active =
+    phase === "thinking" ||
+    phase === "generation";
+
+  return (
+    <>
+      {words.map(
+        (word, index) => {
+          const angle =
+            (index / words.length) *
+            Math.PI *
+            2;
+
+          return (
+            <FloatingWord
+              key={word}
+              word={word}
+              index={index}
+              angle={angle}
+              active={active}
+            />
+          );
+        }
+      )}
+    </>
+  );
+};
+
+const FloatingWord = ({
+  word,
+  index,
+  angle,
+  active,
+}) => {
+  const ref = useRef(null);
+
+  useFrame(({ clock }) => {
+    if (!ref.current)
+      return;
+
+    const t =
+      clock.getElapsedTime();
+
+    const a =
+      angle +
+      t *
+        (index % 2 === 0
+          ? 0.3
+          : -0.24);
+
+    ref.current.position.set(
+      positions[4][0] +
+        Math.cos(a) * 1.65,
+      positions[4][1] +
+        Math.sin(a) *
+          1.1,
+      Math.sin(a) * 0.45
+    );
+
+    ref.current.material.opacity =
+      active
+        ? 0.25 +
+          Math.sin(
+            t * 2.4 + index
+          ) *
+            0.2
+        : 0;
+  });
+
+  return (
+    <Text
+      ref={ref}
+      fontSize={0.095}
+      color={
+        index % 2 === 0
+          ? "#67e8f9"
+          : "#c4b5fd"
+      }
+      anchorX="center"
+      anchorY="middle"
+    >
+      {word}
+    </Text>
+  );
+};
+
+/* =========================================================
+   PIPELINE SCENE
+========================================================= */
+
+const PipelineScene = ({
+  phase,
+}) => {
+  const connections = [
+    [0, 1, "#67e8f9"],
+    [1, 2, "#60a5fa"],
+    [2, 3, "#818cf8"],
+    [3, 4, "#22d3ee"],
+    [4, 5, "#a78bfa"],
+  ];
+
+  const streamActive = [
+    phase === "query" ||
+      phase === "embedding" ||
+      phase === "retrieval" ||
+      phase === "context" ||
+      phase === "thinking" ||
+      phase === "generation" ||
+      phase === "response",
+
+    phase === "embedding" ||
+      phase === "retrieval" ||
+      phase === "context" ||
+      phase === "thinking" ||
+      phase === "generation" ||
+      phase === "response",
+
+    phase === "retrieval" ||
+      phase === "context" ||
+      phase === "thinking" ||
+      phase === "generation" ||
+      phase === "response",
+
+    phase === "context" ||
+      phase === "thinking" ||
+      phase === "generation" ||
+      phase === "response",
+
+    phase === "generation" ||
+      phase === "response",
+  ];
+
+  return (
+    <>
+      <ambientLight
+        intensity={0.25}
+      />
+
+      <pointLight
+        position={[0, 3, 6]}
+        intensity={3}
+        color="#22d3ee"
+      />
+
+      <pointLight
+        position={[4, -2, 5]}
+        intensity={2.8}
+        color="#8b5cf6"
+      />
+
+      <pointLight
+        position={[-4, 0, 3]}
+        intensity={1.8}
+        color="#60a5fa"
+      />
+
+      <Environment preset="night" />
+
+      <Sparkles
+        count={170}
+        scale={14}
+        size={1.4}
+        speed={0.25}
+        color="#334155"
+      />
+
+      <UserQuery
+        position={positions[0]}
+        phase={phase}
+      />
+
+      <EmbeddingSpace
+        position={positions[1]}
+        phase={phase}
+      />
+
+      <VectorDatabase
+        position={positions[2]}
+        phase={phase}
+      />
+
+      <ContextNode
+        position={positions[3]}
+        phase={phase}
+      />
+
+      <LLMCore
+        position={positions[4]}
+        phase={phase}
+      />
+
+      <ResponseNode
+        position={positions[5]}
+        phase={phase}
+      />
+
+      {docs.map(
+        (document, index) => (
+          <DocumentNode
+            key={document.title}
+            document={document}
+            phase={phase}
+            index={index}
+          />
+        )
+      )}
+
+      <RetrievalParticles
+        phase={phase}
+      />
+
+      <TokenStream
+        phase={phase}
+      />
+
+      <NeuralWords
+        phase={phase}
+      />
+
+      {connections.map(
+        ([from, to, color], index) => (
+          <DataStream
+            key={index}
+            start={positions[from]}
+            end={positions[to]}
+            color={color}
+            active={
+              streamActive[index]
+            }
+            count={
+              index === 4 ? 20 : 16
+            }
+            speed={
+              phase === "generation"
+                ? 1.1
+                : 0.55
+            }
+            curveLift={
+              index === 2
+                ? 0.75
+                : 0.45
+            }
+          />
+        )
+      )}
+
+      <EnergyBurst
+        position={positions[0]}
+        active={
+          phase === "query"
+        }
+        color="#67e8f9"
+      />
+
+      <EnergyBurst
+        position={positions[2]}
+        active={
+          phase === "retrieval"
+        }
+        color="#818cf8"
+      />
+
+      <EnergyBurst
+        position={positions[4]}
+        active={
+          phase === "thinking" ||
+          phase === "generation"
+        }
+        color="#c4b5fd"
+      />
+
+      <EnergyBurst
+        position={positions[5]}
+        active={
+          phase === "response"
+        }
+        color="#a78bfa"
+      />
+
+      <OrbitControls
+        enablePan={false}
+        enableZoom
+        minDistance={9}
+        maxDistance={15}
+        minPolarAngle={
+          Math.PI / 2.6
+        }
+        maxPolarAngle={
+          Math.PI / 1.95
+        }
+        minAzimuthAngle={
+          -Math.PI / 8
+        }
+        maxAzimuthAngle={
+          Math.PI / 8
+        }
+        enableDamping
+        dampingFactor={0.045}
+      />
+    </>
+  );
+};
+
+/* =========================================================
+   RAG HUD
+========================================================= */
+
+const RagHUD = ({
+  phase,
+  typedQuery,
+  typedResponse,
+}) => {
+  const [retrieved, setRetrieved] =
+    useState(0);
+
+  useEffect(() => {
+    if (phase !== "retrieval") {
+      if (phase === "context") {
+        setRetrieved(3);
+      }
+
+      if (phase === "idle") {
+        setRetrieved(0);
+      }
+
+      return;
+    }
+
+    let value = 0;
+
+    const timer = setInterval(() => {
+      value += 1;
+
+      setRetrieved(value);
+
+      if (value >= 3) {
+        clearInterval(timer);
+      }
+    }, 450);
+
+    return () =>
+      clearInterval(timer);
+  }, [phase]);
+
+  return (
+    <>
+      {/* TOP LEFT */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          left-7
+          top-6
+          z-30
+          flex
+          items-center
+          gap-4
         "
       >
         <div
           className="
-            h-full
-            w-full
-            -translate-x-full
-            bg-cyan-300
-            transition-transform
-            duration-500
-            group-hover:translate-x-0
-          "
-        />
-      </div>
-    </div>
-  );
-};
-
-/* =========================================================
-   CATEGORY BLOCK
-========================================================= */
-
-const CategoryBlock = ({
-  category,
-  index,
-}) => {
-  const Icon = category.icon;
-
-  const items = technologies[category.id];
-
-  const isAI = category.id === "ai";
-
-  return (
-    <div
-      style={{
-        animationDelay: `${index * 120}ms`,
-      }}
-      className="
-        category-card
-        group/category
-        relative
-        overflow-hidden
-        rounded-[30px]
-        border
-        border-white/[0.06]
-        bg-white/[0.018]
-        p-5
-        sm:p-7
-        backdrop-blur-xl
-        animate-category-in
-
-        transition-all
-        duration-500
-
-        hover:border-white/[0.10]
-        hover:bg-white/[0.025]
-      "
-    >
-      {/* Ambient glow */}
-
-      <div
-        className="
-          pointer-events-none
-          absolute
-          -left-24
-          -top-24
-          h-56
-          w-56
-          rounded-full
-          bg-cyan-400/[0.035]
-          blur-[100px]
-          transition-all
-          duration-700
-          group-hover/category:bg-cyan-400/[0.07]
-        "
-      />
-
-      {/* Header */}
-
-      <div className="relative mb-7 flex items-center gap-4">
-        {/* Number */}
-
-        <div
-          className="
-            relative
             flex
-            h-10
-            w-10
-            shrink-0
+            h-12
+            w-12
             items-center
             justify-center
-            rounded-xl
+            rounded-2xl
             border
-            border-white/[0.07]
-            bg-black/20
-            font-mono
-            text-[10px]
-            tracking-widest
-            text-zinc-600
-            transition-all
-            duration-500
-            group-hover/category:border-cyan-400/20
-            group-hover/category:text-cyan-300
+            border-cyan-300/20
+            bg-cyan-300/[0.07]
+            text-cyan-300
+            shadow-[0_0_35px_rgba(34,211,238,.12)]
           "
         >
-          {category.label}
-
-          <span
-            className="
-              absolute
-              -right-1
-              -top-1
-              h-2
-              w-2
-              scale-0
-              rounded-full
-              bg-cyan-300
-              opacity-0
-              transition-all
-              duration-500
-              group-hover/category:scale-100
-              group-hover/category:opacity-100
-            "
-          />
+          <Workflow size={21} />
         </div>
 
-        {/* Icon */}
-
-        <div
-          className="
-            hidden
-            h-10
-            w-10
-            shrink-0
-            items-center
-            justify-center
-            rounded-xl
-            border
-            border-cyan-400/[0.07]
-            bg-cyan-400/[0.035]
-            text-cyan-400/70
-            transition-all
-            duration-500
-
-            sm:flex
-
-            group-hover/category:rotate-6
-            group-hover/category:scale-110
-            group-hover/category:bg-cyan-400/[0.08]
-            group-hover/category:text-cyan-300
-          "
-        >
-          <Icon size={18} />
-        </div>
-
-        {/* Heading */}
-
-        <div className="min-w-0">
-          <div className="flex items-center gap-2">
-            <h2
-              className="
-                text-lg
-                font-semibold
-                tracking-tight
-                text-zinc-100
-                sm:text-xl
-              "
-            >
-              {category.title}
-            </h2>
-
-            {isAI && (
-              <span
-                className="
-                  hidden
-                  items-center
-                  gap-1.5
-                  rounded-full
-                  border
-                  border-cyan-400/15
-                  bg-cyan-400/[0.04]
-                  px-2
-                  py-1
-                  font-mono
-                  text-[8px]
-                  uppercase
-                  tracking-widest
-                  text-cyan-300/70
-
-                  sm:inline-flex
-                "
-              >
-                <span
-                  className="
-                    h-1.5
-                    w-1.5
-                    animate-pulse
-                    rounded-full
-                    bg-cyan-400
-                    shadow-[0_0_10px_rgba(34,211,238,0.8)]
-                  "
-                />
-
-                Focus
-              </span>
-            )}
+        <div>
+          <div className="font-mono text-[12px] font-semibold uppercase tracking-[0.28em] text-cyan-300/85">
+            LIVE RAG PIPELINE
           </div>
 
-          <p className="mt-0.5 text-xs text-zinc-600">
-            {category.description}
-          </p>
+          <div className="mt-1 font-mono text-[10px] tracking-[0.16em] text-white/30">
+            RETRIEVE → AUGMENT → GENERATE
+          </div>
         </div>
-
-        {/* Line */}
-
-        <div
-          className="
-            ml-auto
-            hidden
-            h-px
-            flex-1
-            bg-gradient-to-r
-            from-white/[0.06]
-            to-transparent
-
-            md:block
-          "
-        />
       </div>
 
-      {/* Items */}
-
-      <div className="relative grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-        {items.map((tech, techIndex) => (
-          <TechItem
-            key={tech.name}
-            tech={tech}
-            index={techIndex}
-            featured={isAI}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-/* =========================================================
-   AI PIPELINE
-========================================================= */
-
-const AIPipeline = () => {
-  const pipeline = [
-    {
-      name: "RAG",
-      icon: Network,
-    },
-    {
-      name: "LLMs",
-      icon: Brain,
-    },
-    {
-      name: "Agents",
-      icon: Bot,
-    },
-    {
-      name: "LangChain",
-      icon: Layers3,
-    },
-    {
-      name: "LangGraph",
-      icon: GitBranch,
-    },
-  ];
-
-  return (
-    <div
-      className="
-        relative
-        mt-8
-        overflow-hidden
-        rounded-2xl
-        border
-        border-white/[0.07]
-        bg-black/20
-        p-3
-      "
-    >
-      {/* Moving beam */}
-
+      {/* TOP RIGHT */}
       <div
         className="
           pointer-events-none
           absolute
-          inset-y-0
-          left-0
-          w-24
-          animate-pipeline-beam
-          bg-gradient-to-r
-          from-transparent
-          via-cyan-300/[0.07]
-          to-transparent
-          blur-xl
+          right-7
+          top-6
+          z-30
+          flex
+          items-center
+          gap-4
         "
-      />
+      >
+        <div
+          className="
+            rounded-full
+            border
+            border-emerald-300/15
+            bg-emerald-300/[0.045]
+            px-5
+            py-3
+            backdrop-blur-xl
+          "
+        >
+          <div className="flex items-center gap-3">
+            <motion.span
+              animate={{
+                scale: [1, 1.6, 1],
+                opacity: [
+                  0.4,
+                  1,
+                  0.4,
+                ],
+              }}
+              transition={{
+                duration: 1.3,
+                repeat: Infinity,
+              }}
+              className="
+                h-2
+                w-2
+                rounded-full
+                bg-emerald-300
+                shadow-[0_0_15px_rgba(110,231,183,.9)]
+              "
+            />
 
-      <div className="relative flex flex-wrap items-center gap-2">
-        {pipeline.map((item, index) => {
-          const ItemIcon = item.icon;
+            <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-emerald-300/80">
+              {phaseMeta[phase]?.label}
+            </span>
+          </div>
+        </div>
 
-          return (
-            <React.Fragment key={item.name}>
-              <div
-                className="
-                  group/pipeline
-                  flex
-                  items-center
-                  gap-2
-                  rounded-xl
-                  border
-                  border-white/[0.06]
-                  bg-white/[0.025]
-                  px-3
-                  py-2
-                  transition-all
-                  duration-300
-                  hover:-translate-y-0.5
-                  hover:border-cyan-400/20
-                  hover:bg-cyan-400/[0.05]
-                "
+        <div className="hidden rounded-full border border-white/10 bg-black/30 px-4 py-3 backdrop-blur-xl sm:block">
+          <span className="font-mono text-[10px] tracking-[0.16em] text-white/35">
+            142ms
+          </span>
+        </div>
+      </div>
+
+      {/* PHASE DESCRIPTION */}
+      <motion.div
+        key={phase}
+        initial={{
+          opacity: 0,
+          y: -8,
+        }}
+        animate={{
+          opacity: 1,
+          y: 0,
+        }}
+        className="
+          pointer-events-none
+          absolute
+          left-1/2
+          top-[17%]
+          z-30
+          -translate-x-1/2
+          rounded-full
+          border
+          border-white/10
+          bg-black/35
+          px-6
+          py-3
+          backdrop-blur-xl
+        "
+      >
+        <div className="flex items-center gap-3">
+          <Activity
+            size={14}
+            className="text-cyan-300"
+          />
+
+          <span className="font-mono text-[11px] tracking-[0.14em] text-white/55">
+            {phaseMeta[phase]?.description}
+          </span>
+        </div>
+      </motion.div>
+
+      <AnimatePresence mode="wait">
+        {/* QUERY */}
+        {phase === "query" && (
+          <motion.div
+            initial={{
+              opacity: 0,
+              x: -30,
+              scale: 0.94,
+            }}
+            animate={{
+              opacity: 1,
+              x: 0,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+              x: -30,
+              scale: 0.94,
+            }}
+            className="
+              absolute
+              bottom-7
+              left-7
+              z-30
+              max-w-[390px]
+              rounded-[24px]
+              border
+              border-cyan-300/15
+              bg-[#050816]/80
+              px-6
+              py-5
+              shadow-[0_25px_80px_rgba(0,0,0,.45)]
+              backdrop-blur-2xl
+            "
+          >
+            <div className="mb-3 flex items-center gap-3">
+              <Search
+                size={15}
+                className="text-cyan-300"
+              />
+
+              <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-300/70">
+                Incoming Query
+              </span>
+            </div>
+
+            <p className="font-mono text-[17px] leading-7 text-white/85">
+              {typedQuery}
+              <span className="ml-1 animate-pulse text-cyan-300">
+                |
+              </span>
+            </p>
+          </motion.div>
+        )}
+
+        {/* RETRIEVAL */}
+        {phase === "retrieval" && (
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 20,
+              scale: 0.92,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+              y: 20,
+              scale: 0.92,
+            }}
+            className="
+              absolute
+              bottom-7
+              left-1/2
+              z-30
+              w-[260px]
+              -translate-x-1/2
+              rounded-[24px]
+              border
+              border-cyan-300/15
+              bg-[#050816]/85
+              px-6
+              py-5
+              text-center
+              shadow-[0_25px_80px_rgba(0,0,0,.45)]
+              backdrop-blur-2xl
+            "
+          >
+            <div className="font-mono text-[12px] font-semibold tracking-[0.22em] text-cyan-300">
+              TOP-K RETRIEVAL
+            </div>
+
+            <motion.div
+              key={retrieved}
+              initial={{
+                opacity: 0,
+                y: 8,
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+              }}
+              className="mt-2 text-[22px] font-bold text-white"
+            >
+              {retrieved}
+            </motion.div>
+
+            <div className="mt-1 text-[11px] tracking-[0.08em] text-white/45">
+              RELEVANT CHUNKS FOUND
+            </div>
+          </motion.div>
+        )}
+
+        {/* THINKING */}
+        {phase === "thinking" && (
+          <motion.div
+            initial={{
+              opacity: 0,
+              scale: 0.9,
+            }}
+            animate={{
+              opacity: 1,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+              scale: 0.9,
+            }}
+            className="
+              absolute
+              bottom-7
+              left-1/2
+              z-30
+              -translate-x-1/2
+              rounded-full
+              border
+              border-violet-300/20
+              bg-violet-300/[0.06]
+              px-7
+              py-4
+              backdrop-blur-xl
+            "
+          >
+            <div className="flex items-center gap-3">
+              <Brain
+                size={16}
+                className="text-violet-300"
+              />
+
+              <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-violet-200/80">
+                LLM processing context
+              </span>
+
+              <motion.span
+                animate={{
+                  opacity: [
+                    0.2,
+                    1,
+                    0.2,
+                  ],
+                }}
+                transition={{
+                  duration: 0.9,
+                  repeat: Infinity,
+                }}
+                className="text-violet-300"
               >
-                <ItemIcon
-                  size={13}
-                  className="
-                    text-zinc-500
-                    transition-colors
-                    duration-300
-                    group-hover/pipeline:text-cyan-300
-                  "
+                •••
+              </motion.span>
+            </div>
+          </motion.div>
+        )}
+
+        {/* GENERATION */}
+        {phase === "generation" && (
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 20,
+              scale: 0.94,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+              y: 20,
+            }}
+            className="
+              absolute
+              bottom-7
+              left-1/2
+              z-30
+              -translate-x-1/2
+              rounded-full
+              border
+              border-violet-300/20
+              bg-violet-300/[0.06]
+              px-7
+              py-4
+              shadow-[0_0_50px_rgba(139,92,246,.12)]
+              backdrop-blur-xl
+            "
+          >
+            <div className="flex items-center gap-3">
+              <Cpu
+                size={16}
+                className="text-violet-300"
+              />
+
+              <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-violet-200/80">
+                Generating grounded tokens
+              </span>
+
+              <motion.span
+                animate={{
+                  x: [0, 4, 0],
+                }}
+                transition={{
+                  duration: 0.6,
+                  repeat: Infinity,
+                }}
+                className="text-violet-300"
+              >
+                →
+              </motion.span>
+            </div>
+          </motion.div>
+        )}
+
+        {/* RESPONSE */}
+        {phase === "response" && (
+          <motion.div
+            initial={{
+              opacity: 0,
+              y: 30,
+              scale: 0.94,
+            }}
+            animate={{
+              opacity: 1,
+              y: 0,
+              scale: 1,
+            }}
+            exit={{
+              opacity: 0,
+              y: 30,
+            }}
+            className="
+              absolute
+              bottom-6
+              left-1/2
+              z-30
+              w-[calc(100%-48px)]
+              max-w-[620px]
+              -translate-x-1/2
+              rounded-[28px]
+              border
+              border-violet-300/20
+              bg-[#050816]/90
+              p-6
+              shadow-[0_30px_100px_rgba(139,92,246,.18)]
+              backdrop-blur-2xl
+            "
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <SparklesIcon
+                  size={17}
+                  className="text-violet-300"
                 />
 
-                <span
-                  className="
-                    text-[9px]
-                    font-mono
-                    tracking-wide
-                    text-zinc-500
-                    transition-colors
-                    duration-300
-                    group-hover/pipeline:text-cyan-300
-                  "
-                >
-                  {item.name}
+                <span className="font-mono text-[11px] font-semibold uppercase tracking-[0.2em] text-violet-200/80">
+                  Generated Response
                 </span>
               </div>
 
-              {index < pipeline.length - 1 && (
-                <span
-                  className="
-                    hidden
-                    text-[10px]
-                    text-zinc-700
-                    sm:block
-                  "
-                >
-                  →
+              <div className="flex items-center gap-2">
+                <Check
+                  size={14}
+                  className="text-emerald-300"
+                />
+
+                <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-emerald-300/70">
+                  Grounded
                 </span>
-              )}
-            </React.Fragment>
-          );
-        })}
+              </div>
+            </div>
+
+            <p className="mt-4 text-[15px] leading-7 text-white/75">
+              {typedResponse}
+              <span className="ml-1 animate-pulse text-violet-300">
+                |
+              </span>
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* BOTTOM TECHNICAL BAR */}
+      <div className="pointer-events-none absolute bottom-5 left-7 z-20 hidden font-mono text-[10px] uppercase tracking-[0.2em] text-white/20 lg:block">
+        QUERY → EMBEDDING → RETRIEVAL → CONTEXT → LLM → RESPONSE
       </div>
+
+      <div className="pointer-events-none absolute bottom-5 right-7 z-20 hidden font-mono text-[10px] uppercase tracking-[0.18em] text-white/20 lg:block">
+        TOP-K 3 · VECTOR SEARCH · 142MS
+      </div>
+    </>
+  );
+};
+
+/* =========================================================
+   RAG VISUALIZATION
+========================================================= */
+
+const RagVisualization = () => {
+  const {
+    phase,
+    typedQuery,
+    typedResponse,
+  } = useSimulationController();
+
+  return (
+    <div
+      className="
+        group
+        relative
+        h-[760px]
+        overflow-hidden
+        rounded-[38px]
+        border
+        border-cyan-300/[0.12]
+        bg-[#02040d]
+        shadow-[0_45px_150px_rgba(0,0,0,.6)]
+        sm:h-[800px]
+        lg:h-[850px]
+      "
+    >
+      {/* GRID */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          z-10
+          opacity-[0.16]
+          [background-image:linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)]
+          [background-size:42px_42px]
+        "
+      />
+
+      {/* RADIAL LIGHT */}
+      <div
+        className="
+          pointer-events-none
+          absolute
+          left-1/2
+          top-1/2
+          z-10
+          h-[600px]
+          w-[900px]
+          -translate-x-1/2
+          -translate-y-1/2
+          rounded-full
+          bg-cyan-400/[0.025]
+          blur-[100px]
+        "
+      />
+
+      {/* MOVING SCAN */}
+      <motion.div
+        animate={{
+          y: [
+            "-20%",
+            "120%",
+          ],
+        }}
+        transition={{
+          duration: 7,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+        className="
+          pointer-events-none
+          absolute
+          left-0
+          right-0
+          top-0
+          z-20
+          h-[1px]
+          bg-gradient-to-r
+          from-transparent
+          via-cyan-300/40
+          to-transparent
+          shadow-[0_0_25px_rgba(34,211,238,.5)]
+        "
+      />
+
+      {/* CANVAS */}
+      <div className="absolute inset-0 z-0">
+        <Canvas
+          camera={{
+            position: [
+              0,
+              0,
+              14,
+            ],
+            fov: 42,
+          }}
+          dpr={[1, 1.6]}
+          gl={{
+            antialias: true,
+            alpha: true,
+            powerPreference:
+              "high-performance",
+          }}
+        >
+          <PipelineScene
+            phase={phase}
+          />
+        </Canvas>
+      </div>
+
+      <RagHUD
+        phase={phase}
+        typedQuery={typedQuery}
+        typedResponse={
+          typedResponse
+        }
+      />
+
+      {/* CENTER STATUS */}
+      <motion.div
+        key={phase}
+        initial={{
+          opacity: 0,
+          scale: 0.85,
+          y: 10,
+        }}
+        animate={{
+          opacity: 1,
+          scale: 1,
+          y: 0,
+        }}
+        className="
+          pointer-events-none
+          absolute
+          left-1/2
+          top-[30%]
+          z-30
+          -translate-x-1/2
+          text-center
+        "
+      >
+        <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.35em] text-white/25">
+          {phase === "idle"
+            ? "INITIALIZING"
+            : phaseMeta[phase]?.label}
+        </div>
+      </motion.div>
+
+      {/* EDGE GLOW */}
+      <motion.div
+        animate={{
+          opacity: [
+            0.15,
+            0.65,
+            0.15,
+          ],
+        }}
+        transition={{
+          duration: 2.8,
+          repeat: Infinity,
+        }}
+        className="
+          pointer-events-none
+          absolute
+          bottom-0
+          left-0
+          right-0
+          z-40
+          h-[2px]
+          bg-gradient-to-r
+          from-transparent
+          via-cyan-300
+          to-transparent
+          shadow-[0_0_30px_rgba(34,211,238,.6)]
+        "
+      />
+
+      <div
+        className="
+          pointer-events-none
+          absolute
+          inset-0
+          rounded-[38px]
+          border
+          border-white/[0.025]
+        "
+      />
     </div>
   );
 };
 
 /* =========================================================
-   MAIN COMPONENT
+   AI ENGINEERING
+========================================================= */
+
+const AIEngineering = () => {
+  const capabilities = [
+    "RAG",
+    "LLMs",
+    "Vector Search",
+    "AI Agents",
+    "LangChain",
+    "LangGraph",
+  ];
+
+  return (
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: 40,
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+      }}
+      viewport={{
+        once: true,
+        amount: 0.15,
+      }}
+      transition={{
+        duration: 0.9,
+        ease: [0.22, 1, 0.36, 1],
+      }}
+      className="
+        relative
+        overflow-hidden
+        rounded-[42px]
+        border
+        border-cyan-300/[0.12]
+        bg-[#050816]
+        text-white
+        shadow-[0_45px_150px_rgba(0,0,0,.55)]
+      "
+    >
+      <div className="pointer-events-none absolute inset-0">
+        <motion.div
+          animate={{
+            x: [0, 70, 0],
+            y: [0, -45, 0],
+          }}
+          transition={{
+            duration: 16,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="
+            absolute
+            -right-40
+            -top-40
+            h-[600px]
+            w-[600px]
+            rounded-full
+            bg-cyan-500/[0.09]
+            blur-[140px]
+          "
+        />
+
+        <motion.div
+          animate={{
+            x: [0, -60, 0],
+            y: [0, 35, 0],
+          }}
+          transition={{
+            duration: 18,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="
+            absolute
+            -bottom-40
+            left-[20%]
+            h-[550px]
+            w-[550px]
+            rounded-full
+            bg-violet-600/[0.08]
+            blur-[140px]
+          "
+        />
+
+        <div
+          className="
+            absolute
+            inset-0
+            opacity-[0.06]
+            [background-image:linear-gradient(to_right,#ffffff_1px,transparent_1px),linear-gradient(to_bottom,#ffffff_1px,transparent_1px)]
+            [background-size:48px_48px]
+          "
+        />
+      </div>
+
+      <div
+        className="
+          relative
+          grid
+          gap-12
+          p-7
+          sm:p-10
+          lg:grid-cols-[0.82fr_1.18fr]
+          lg:p-12
+        "
+      >
+        <div className="flex flex-col justify-center">
+          <div className="flex items-center gap-4">
+            <div
+              className="
+                flex
+                h-14
+                w-14
+                items-center
+                justify-center
+                rounded-2xl
+                border
+                border-cyan-300/20
+                bg-cyan-300/[0.06]
+                text-cyan-300
+              "
+            >
+              <Brain size={25} />
+            </div>
+
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-cyan-300/65">
+                Primary capability
+              </p>
+
+              <h3 className="mt-1 text-xl font-semibold">
+                AI Engineering
+              </h3>
+            </div>
+          </div>
+
+          <h4
+            className="
+              mt-10
+              max-w-3xl
+              text-[clamp(3.2rem,5vw,5.5rem)]
+              font-black
+              leading-[0.88]
+              tracking-[-0.065em]
+            "
+          >
+            Building software
+            <br />
+            <span className="bg-gradient-to-r from-cyan-200 via-blue-300 to-violet-300 bg-clip-text text-transparent">
+              that understands.
+            </span>
+            <br />
+            <span className="text-white/25">
+              retrieves & acts.
+            </span>
+          </h4>
+
+          <p className="mt-8 max-w-xl text-[15px] leading-8 text-white/45">
+            I build grounded AI systems that
+            connect knowledge, retrieval,
+            embeddings, language models and
+            agent workflows into useful
+            products.
+          </p>
+
+          <div className="mt-9 flex flex-wrap gap-2.5">
+            {capabilities.map(
+              (capability, index) => (
+                <motion.div
+                  key={capability}
+                  whileHover={{
+                    y: -4,
+                    scale: 1.03,
+                  }}
+                  className="
+                    flex
+                    items-center
+                    gap-3
+                    rounded-full
+                    border
+                    border-white/[0.08]
+                    bg-white/[0.035]
+                    px-4
+                    py-3
+                    transition-all
+                    duration-300
+                    hover:border-cyan-300/25
+                    hover:bg-cyan-300/[0.06]
+                  "
+                >
+                  <span
+                    className="
+                      flex
+                      h-6
+                      w-6
+                      items-center
+                      justify-center
+                      rounded-full
+                      border
+                      border-cyan-300/10
+                      bg-cyan-300/[0.05]
+                      text-cyan-300
+                    "
+                  >
+                    <Check size={11} />
+                  </span>
+
+                  <span className="font-mono text-[10px] text-white/55">
+                    {capability}
+                  </span>
+
+                  {index === 0 && (
+                    <motion.span
+                      animate={{
+                        scale: [
+                          1,
+                          1.5,
+                          1,
+                        ],
+                        opacity: [
+                          0.5,
+                          1,
+                          0.5,
+                        ],
+                      }}
+                      transition={{
+                        duration: 1.4,
+                        repeat: Infinity,
+                      }}
+                      className="
+                        h-1.5
+                        w-1.5
+                        rounded-full
+                        bg-cyan-300
+                        shadow-[0_0_12px_rgba(103,232,249,.9)]
+                      "
+                    />
+                  )}
+                </motion.div>
+              )
+            )}
+          </div>
+
+          <div className="mt-9 grid max-w-xl grid-cols-3 gap-2">
+            {[
+              [
+                "01",
+                "Retrieve",
+              ],
+              [
+                "02",
+                "Augment",
+              ],
+              [
+                "03",
+                "Generate",
+              ],
+            ].map(
+              ([number, label]) => (
+                <div
+                  key={number}
+                  className="
+                    rounded-2xl
+                    border
+                    border-white/[0.06]
+                    bg-white/[0.02]
+                    p-4
+                  "
+                >
+                  <div className="font-mono text-[9px] text-cyan-300/50">
+                    {number}
+                  </div>
+
+                  <div className="mt-2 text-[12px] font-medium text-white/55">
+                    {label}
+                  </div>
+                </div>
+              )
+            )}
+          </div>
+        </div>
+
+        <div className="relative">
+          <RagVisualization />
+        </div>
+      </div>
+
+      <motion.div
+        animate={{
+          opacity: [
+            0.25,
+            0.9,
+            0.25,
+          ],
+        }}
+        transition={{
+          duration: 2.8,
+          repeat: Infinity,
+        }}
+        className="
+          absolute
+          bottom-0
+          left-0
+          right-0
+          h-[2px]
+          bg-gradient-to-r
+          from-transparent
+          via-cyan-300
+          to-transparent
+        "
+      />
+    </motion.div>
+  );
+};
+
+/* =========================================================
+   MAIN
 ========================================================= */
 
 const Technologies = () => {
-  const mouse = useMousePosition();
+  const [active, setActive] =
+    useState("ai");
 
-  const [activeTech, setActiveTech] =
-    useState("AI Engineering");
+  const [mouse, setMouse] =
+    useState({
+      x: 0,
+      y: 0,
+    });
 
-  const totalTechnologies = useMemo(
+  const total = useMemo(
     () =>
-      Object.values(technologies).reduce(
-        (total, category) =>
-          total + category.length,
+      Object.values(
+        technologies
+      ).reduce(
+        (sum, list) =>
+          sum + list.length,
         0
       ),
     []
   );
+
+  const selectedCategory =
+    categories.find(
+      (category) =>
+        category.id === active
+    );
+
+  const items =
+    technologies[active];
+
+  useEffect(() => {
+    const handleMouseMove =
+      (event) => {
+        setMouse({
+          x: event.clientX,
+          y: event.clientY,
+        });
+      };
+
+    window.addEventListener(
+      "mousemove",
+      handleMouseMove,
+      {
+        passive: true,
+      }
+    );
+
+    return () =>
+      window.removeEventListener(
+        "mousemove",
+        handleMouseMove
+      );
+  }, []);
 
   return (
     <section
@@ -978,874 +4073,657 @@ const Technologies = () => {
         text-white
         sm:px-8
         lg:px-12
+        lg:py-36
       "
     >
-      {/* =====================================================
-          GLOBAL MOUSE SPOTLIGHT
-      ===================================================== */}
+      <Background />
+      <BackgroundParticles />
 
-      <div
+      <motion.div
         className="
           pointer-events-none
           fixed
           z-0
+          hidden
           h-[450px]
           w-[450px]
           -translate-x-1/2
           -translate-y-1/2
           rounded-full
-          bg-cyan-400/[0.035]
-          blur-[120px]
+          bg-cyan-400/[0.025]
+          blur-[130px]
+          lg:block
         "
-        style={{
-          left: mouse.x,
-          top: mouse.y,
+        animate={{
+          x: mouse.x,
+          y: mouse.y,
+        }}
+        transition={{
+          type: "spring",
+          stiffness: 65,
+          damping: 25,
+          mass: 0.5,
         }}
       />
 
-      {/* =====================================================
-          BACKGROUND
-      ===================================================== */}
-
-      <div className="pointer-events-none absolute inset-0">
-        {/* Grid */}
-
-        <div
-          className="
-            absolute
-            inset-0
-            opacity-[0.35]
-            bg-[linear-gradient(to_right,#ffffff04_1px,transparent_1px),linear-gradient(to_bottom,#ffffff04_1px,transparent_1px)]
-            bg-[size:55px_55px]
-            [mask-image:linear-gradient(to_bottom,black,transparent_90%)]
-          "
-        />
-
-        {/* Cyan orb */}
-
-        <div
-          className="
-            absolute
-            left-[-12%]
-            top-[3%]
-            h-[500px]
-            w-[500px]
-            animate-orb
-            rounded-full
-            bg-cyan-500/[0.06]
-            blur-[140px]
-          "
-        />
-
-        {/* Purple orb */}
-
-        <div
-          className="
-            absolute
-            bottom-[-12%]
-            right-[-8%]
-            h-[550px]
-            w-[550px]
-            animate-orb-reverse
-            rounded-full
-            bg-[#915EFF]/[0.07]
-            blur-[150px]
-          "
-        />
-
-        {/* Center */}
-
-        <div
-          className="
-            absolute
-            left-1/2
-            top-[35%]
-            h-[400px]
-            w-[400px]
-            -translate-x-1/2
-            rounded-full
-            bg-blue-500/[0.025]
-            blur-[130px]
-          "
-        />
-
-        {/* Noise */}
-
-        <div
-          className="
-            absolute
-            inset-0
-            opacity-[0.025]
-            [background-image:url('data:image/svg+xml,%3Csvg viewBox=%220 0 180 180%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%22.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23n)%22 opacity=%22.4%22/%3E%3C/svg%3E')]
-          "
-        />
-      </div>
-
-      {/* =====================================================
-          CONTENT
-      ===================================================== */}
-
-      <div className="relative z-10 mx-auto max-w-7xl">
-        {/* ===================================================
+      <div className="relative z-10 mx-auto max-w-[1500px]">
+        {/* =================================================
             HEADER
-        =================================================== */}
+        ================================================= */}
 
-        <div className="mb-16 max-w-4xl">
-          {/* Eyebrow */}
-
-          <div
-            className="
-              mb-7
-              inline-flex
-              animate-fade-up
-              items-center
-              gap-2
-              rounded-full
-              border
-              border-cyan-400/15
-              bg-cyan-400/[0.04]
-              px-4
-              py-2
-              backdrop-blur-xl
-            "
-          >
-            <span
+        <header
+          className="
+            grid
+            gap-14
+            lg:grid-cols-[1.15fr_.85fr]
+            lg:items-end
+          "
+        >
+          <div>
+            <motion.div
+              initial={{
+                opacity: 0,
+                y: 15,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
               className="
-                relative
-                flex
-                h-2
-                w-2
+                mb-9
+                inline-flex
+                items-center
+                gap-3
+                rounded-full
+                border
+                border-cyan-300/10
+                bg-cyan-300/[0.04]
+                px-5
+                py-3
+                backdrop-blur-xl
               "
             >
-              <span
+              <motion.span
+                animate={{
+                  scale: [
+                    1,
+                    1.6,
+                    1,
+                  ],
+                  opacity: [
+                    0.5,
+                    1,
+                    0.5,
+                  ],
+                }}
+                transition={{
+                  duration: 1.7,
+                  repeat: Infinity,
+                }}
                 className="
-                  absolute
-                  inline-flex
-                  h-full
-                  w-full
-                  animate-ping
-                  rounded-full
-                  bg-cyan-400
-                  opacity-50
-                "
-              />
-
-              <span
-                className="
-                  relative
-                  inline-flex
                   h-2
                   w-2
                   rounded-full
-                  bg-cyan-400
-                  shadow-[0_0_15px_rgba(34,211,238,0.8)]
+                  bg-cyan-300
+                  shadow-[0_0_16px_rgba(103,232,249,.9)]
                 "
               />
-            </span>
 
-            <span
+              <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.28em] text-cyan-300/70">
+                Engineering Stack
+              </span>
+
+              <Zap
+                size={13}
+                className="text-white/20"
+              />
+            </motion.div>
+
+            <motion.h1
+              initial={{
+                opacity: 0,
+                y: 35,
+              }}
+              whileInView={{
+                opacity: 1,
+                y: 0,
+              }}
+              viewport={{
+                once: true,
+              }}
+              transition={{
+                duration: 0.9,
+                ease: [
+                  0.22,
+                  1,
+                  0.36,
+                  1,
+                ],
+              }}
               className="
-                text-[10px]
-                font-mono
-                uppercase
-                tracking-[0.3em]
-                text-cyan-300
+                max-w-7xl
+                text-[clamp(4.5rem,10vw,9.5rem)]
+                font-black
+                leading-[0.78]
+                tracking-[-0.085em]
               "
             >
-              Technology Stack
-            </span>
+              <span className="text-white">
+                The tools
+              </span>
 
-            <Zap
-              size={11}
-              className="text-cyan-400/60"
-            />
+              <br />
+
+              <span
+                className="
+                  bg-gradient-to-r
+                  from-cyan-200
+                  via-blue-300
+                  to-violet-300
+                  bg-clip-text
+                  text-transparent
+                "
+              >
+                behind the
+              </span>
+
+              <br />
+
+              <span
+                className="
+                  bg-gradient-to-r
+                  from-zinc-300
+                  via-zinc-500
+                  to-zinc-800
+                  bg-clip-text
+                  text-transparent
+                "
+              >
+                work.
+              </span>
+            </motion.h1>
           </div>
 
-          {/* Heading */}
-
-          <h1
-            className="
-              animate-fade-up
-              text-4xl
-              font-black
-              leading-[0.95]
-              tracking-[-2px]
-              sm:text-5xl
-              md:text-6xl
-              lg:text-[76px]
-            "
-            style={{
-              animationDelay: "100ms",
+          <motion.div
+            initial={{
+              opacity: 0,
+              x: 30,
             }}
+            whileInView={{
+              opacity: 1,
+              x: 0,
+            }}
+            viewport={{
+              once: true,
+            }}
+            transition={{
+              duration: 0.8,
+            }}
+            className="lg:pb-3"
           >
-            <span className="text-zinc-100">
-              The stack behind
-            </span>
-
-            <br />
-
-            <span
+            <div
               className="
-                relative
+                mb-7
+                h-[2px]
+                w-20
                 bg-gradient-to-r
                 from-cyan-300
-                via-blue-400
-                to-[#915EFF]
-                bg-clip-text
-                text-transparent
+                to-transparent
               "
-            >
-              intelligent products.
-            </span>
-          </h1>
+            />
 
-          {/* Description */}
-
-          <p
-            className="
-              mt-7
-              max-w-2xl
-              animate-fade-up
-              text-sm
-              leading-7
-              text-zinc-500
-              sm:text-base
-            "
-            style={{
-              animationDelay: "180ms",
-            }}
-          >
-            A carefully selected engineering stack for
-            building scalable products across modern
-            frontend, backend infrastructure, data,
-            deployment and AI systems.
-          </p>
-
-          {/* Stats */}
-
-          <div
-            className="
-              mt-9
-              flex
-              animate-fade-up
-              flex-wrap
-              items-center
-              gap-3
-            "
-            style={{
-              animationDelay: "260ms",
-            }}
-          >
-            {/* Stat */}
-
-            <div
+            <p
               className="
-                group/stat
-                rounded-xl
-                border
-                border-white/[0.06]
-                bg-white/[0.025]
-                px-4
-                py-2.5
-                backdrop-blur-xl
-                transition-all
-                duration-300
-                hover:-translate-y-1
-                hover:border-cyan-400/15
+                max-w-md
+                text-[16px]
+                leading-8
+                text-zinc-500
               "
             >
-              <span className="font-mono text-xs text-cyan-300">
-                {totalTechnologies}+
-              </span>
+              A carefully selected engineering
+              stack for building modern products —
+              from interfaces and APIs to intelligent
+              AI systems and production infrastructure.
+            </p>
 
-              <span className="ml-2 text-[10px] uppercase tracking-wider text-zinc-600">
-                technologies
-              </span>
-            </div>
-
-            {/* Stat */}
-
-            <div
-              className="
-                group/stat
-                rounded-xl
-                border
-                border-white/[0.06]
-                bg-white/[0.025]
-                px-4
-                py-2.5
-                backdrop-blur-xl
-                transition-all
-                duration-300
-                hover:-translate-y-1
-                hover:border-purple-400/15
-              "
-            >
-              <span className="font-mono text-xs text-purple-300">
-                AI
-              </span>
-
-              <span className="ml-2 text-[10px] uppercase tracking-wider text-zinc-600">
-                focused
-              </span>
-            </div>
-
-            {/* Stat */}
-
-            <div
-              className="
-                group/stat
-                rounded-xl
-                border
-                border-white/[0.06]
-                bg-white/[0.025]
-                px-4
-                py-2.5
-                backdrop-blur-xl
-                transition-all
-                duration-300
-                hover:-translate-y-1
-                hover:border-emerald-400/15
-              "
-            >
-              <span className="font-mono text-xs text-emerald-300">
-                Full Stack
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* ===================================================
-            AI FEATURE PANEL
-        =================================================== */}
-
-        <div
-          className="
-            group/ai
-            relative
-            mb-8
-            overflow-hidden
-            rounded-[32px]
-            border
-            border-cyan-400/10
-            bg-gradient-to-br
-            from-cyan-400/[0.055]
-            via-white/[0.018]
-            to-purple-500/[0.045]
-            p-6
-            animate-panel-in
-            sm:p-8
-          "
-        >
-          {/* Animated border */}
-
-          <div
-            className="
-              pointer-events-none
-              absolute
-              inset-0
-              rounded-[32px]
-              opacity-0
-              transition-opacity
-              duration-700
-              group-hover/ai:opacity-100
-              [background:linear-gradient(90deg,transparent,rgba(34,211,238,.12),transparent)]
-              animate-border-flow
-            "
-          />
-
-          {/* Glows */}
-
-          <div
-            className="
-              pointer-events-none
-              absolute
-              -right-24
-              -top-24
-              h-72
-              w-72
-              rounded-full
-              bg-cyan-400/[0.08]
-              blur-[100px]
-              transition-transform
-              duration-1000
-              group-hover/ai:scale-125
-            "
-          />
-
-          <div
-            className="
-              pointer-events-none
-              absolute
-              -bottom-24
-              right-1/3
-              h-56
-              w-56
-              rounded-full
-              bg-purple-500/[0.07]
-              blur-[100px]
-            "
-          />
-
-          <div
-            className="
-              relative
-              flex
-              flex-col
-              gap-8
-              lg:flex-row
-              lg:items-center
-              lg:justify-between
-            "
-          >
-            {/* Left */}
-
-            <div className="max-w-xl">
-              <div className="mb-5 flex items-center gap-3">
-                <div
-                  className="
-                    relative
-                    flex
-                    h-11
-                    w-11
-                    items-center
-                    justify-center
-                    rounded-xl
-                    border
-                    border-cyan-400/15
-                    bg-cyan-400/[0.05]
-                    text-cyan-300
-                    transition-all
-                    duration-500
-                    group-hover/ai:rotate-6
-                    group-hover/ai:scale-110
-                  "
-                >
-                  <Brain size={20} />
-
-                  <span
-                    className="
-                      absolute
-                      inset-0
-                      animate-pulse
-                      rounded-xl
-                      border
-                      border-cyan-300/10
-                    "
-                  />
-                </div>
-
-                <div>
-                  <p
-                    className="
-                      text-[9px]
-                      font-mono
-                      uppercase
-                      tracking-[0.25em]
-                      text-cyan-300
-                    "
-                  >
-                    Primary Focus
-                  </p>
-
-                  <h2 className="text-lg font-semibold text-zinc-100">
-                    AI Engineering
-                  </h2>
-                </div>
-              </div>
-
-              <p className="text-sm leading-6 text-zinc-500">
-                Designing applications around LLMs,
-                retrieval, agents and intelligent
-                workflows — not just adding AI as
-                another feature.
-              </p>
-
-              <AIPipeline />
-            </div>
-
-            {/* Visual */}
-
-            <div
-              className="
-                relative
-                hidden
-                h-40
-                w-40
-                shrink-0
-                items-center
-                justify-center
-                lg:flex
-              "
-            >
-              {/* Outer orbit */}
-
+            <div className="mt-9 flex flex-wrap gap-3">
               <div
                 className="
-                  absolute
-                  h-36
-                  w-36
-                  animate-spin-slow
-                  rounded-full
-                  border
-                  border-cyan-400/10
-                  border-dashed
-                "
-              />
-
-              {/* Second orbit */}
-
-              <div
-                className="
-                  absolute
-                  h-28
-                  w-28
-                  animate-spin-reverse
-                  rounded-full
-                  border
-                  border-purple-400/10
-                "
-              />
-
-              {/* Core */}
-
-              <div
-                className="
-                  relative
-                  flex
-                  h-16
-                  w-16
-                  items-center
-                  justify-center
                   rounded-2xl
                   border
-                  border-cyan-300/20
-                  bg-cyan-300/[0.05]
-                  text-cyan-300
-                  shadow-[0_0_50px_rgba(34,211,238,0.12)]
+                  border-white/[0.08]
+                  bg-white/[0.035]
+                  px-5
+                  py-4
+                  backdrop-blur-xl
                 "
               >
-                <Cpu size={26} />
+                <span className="font-mono text-lg font-semibold text-cyan-300">
+                  {total}+
+                </span>
 
-                <div
-                  className="
-                    absolute
-                    inset-[-8px]
-                    animate-ping
-                    rounded-2xl
-                    border
-                    border-cyan-300/10
-                  "
-                />
-              </div>
-
-              {/* Orbit node */}
-
-              <div
-                className="
-                  absolute
-                  right-2
-                  top-8
-                  flex
-                  h-7
-                  w-7
-                  items-center
-                  justify-center
-                  rounded-lg
-                  border
-                  border-purple-400/15
-                  bg-purple-400/[0.06]
-                  text-purple-300
-                "
-              >
-                <Sparkles size={12} />
+                <span className="ml-2 text-[10px] uppercase tracking-[0.16em] text-white/25">
+                  technologies
+                </span>
               </div>
 
               <div
                 className="
-                  absolute
-                  bottom-7
-                  left-2
-                  flex
-                  h-7
-                  w-7
-                  items-center
-                  justify-center
-                  rounded-lg
+                  rounded-2xl
                   border
-                  border-cyan-400/15
-                  bg-cyan-400/[0.06]
-                  text-cyan-300
+                  border-white/[0.08]
+                  bg-white/[0.035]
+                  px-5
+                  py-4
                 "
               >
-                <Network size={12} />
+                <span className="font-mono text-lg font-semibold text-white">
+                  06
+                </span>
+
+                <span className="ml-2 text-[10px] uppercase tracking-[0.16em] text-white/25">
+                  layers
+                </span>
+              </div>
+
+              <div
+                className="
+                  rounded-2xl
+                  border
+                  border-cyan-300/10
+                  bg-cyan-300/[0.035]
+                  px-5
+                  py-4
+                "
+              >
+                <span className="font-mono text-lg font-semibold text-cyan-300">
+                  AI
+                </span>
+
+                <span className="ml-2 text-[10px] uppercase tracking-[0.16em] text-white/25">
+                  focused
+                </span>
               </div>
             </div>
-          </div>
+          </motion.div>
+        </header>
+
+        {/* =================================================
+            CATEGORY NAV
+        ================================================= */}
+
+        <div className="mt-20">
+          <CategorySelector
+            active={active}
+            setActive={setActive}
+          />
         </div>
 
-        {/* ===================================================
-            CATEGORY GRID
-        =================================================== */}
+        {/* =================================================
+            SELECTED CATEGORY
+        ================================================= */}
 
-        <div className="grid gap-5 lg:grid-cols-2">
-          {categories.map((category, index) => (
-            <CategoryBlock
-              key={category.id}
-              category={category}
-              index={index}
+        <div className="mt-8">
+          <motion.div
+            layout
+            className="
+              relative
+              overflow-hidden
+              rounded-[40px]
+              border
+              border-white/[0.08]
+              bg-white/[0.025]
+              p-6
+              shadow-[0_30px_110px_rgba(0,0,0,.3)]
+              backdrop-blur-2xl
+              sm:p-8
+              lg:p-10
+            "
+          >
+            <div
+              className="
+                absolute
+                left-0
+                right-0
+                top-0
+                h-[2px]
+                bg-gradient-to-r
+                from-transparent
+                via-cyan-300/35
+                to-transparent
+              "
             />
-          ))}
+
+            <div
+              className="
+                mb-9
+                flex
+                flex-col
+                gap-5
+                sm:flex-row
+                sm:items-end
+                sm:justify-between
+              "
+            >
+              <div>
+                <div
+                  className="
+                    mb-3
+                    flex
+                    items-center
+                    gap-3
+                  "
+                >
+                  <span className="font-mono text-[10px] tracking-[0.25em] text-cyan-300/50">
+                    {selectedCategory.number}
+                  </span>
+
+                  <span className="h-[2px] w-8 bg-white/10" />
+
+                  <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/25">
+                    {items.length} tools
+                  </span>
+                </div>
+
+                <AnimatePresence
+                  mode="wait"
+                >
+                  <motion.h2
+                    key={active}
+                    initial={{
+                      opacity: 0,
+                      y: 15,
+                    }}
+                    animate={{
+                      opacity: 1,
+                      y: 0,
+                    }}
+                    exit={{
+                      opacity: 0,
+                      y: -10,
+                    }}
+                    transition={{
+                      duration: 0.35,
+                    }}
+                    className="
+                      text-4xl
+                      font-black
+                      tracking-[-0.055em]
+                      text-white
+                      sm:text-5xl
+                    "
+                  >
+                    {selectedCategory.title}
+                  </motion.h2>
+                </AnimatePresence>
+
+                <p className="mt-2 text-sm text-zinc-600">
+                  {selectedCategory.description}
+                </p>
+              </div>
+
+              <div
+                className="
+                  flex
+                  w-fit
+                  items-center
+                  gap-3
+                  rounded-full
+                  border
+                  border-emerald-400/10
+                  bg-emerald-400/[0.035]
+                  px-4
+                  py-2.5
+                "
+              >
+                <motion.span
+                  animate={{
+                    scale: [
+                      1,
+                      1.5,
+                      1,
+                    ],
+                    opacity: [
+                      0.5,
+                      1,
+                      0.5,
+                    ],
+                  }}
+                  transition={{
+                    duration: 1.6,
+                    repeat: Infinity,
+                  }}
+                  className="
+                    h-2
+                    w-2
+                    rounded-full
+                    bg-emerald-400
+                    shadow-[0_0_14px_rgba(52,211,153,.8)]
+                  "
+                />
+
+                <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-emerald-300/50">
+                  Active layer
+                </span>
+              </div>
+            </div>
+
+            <AnimatePresence
+              mode="wait"
+            >
+              <motion.div
+                key={active}
+                initial={{
+                  opacity: 0,
+                  y: 20,
+                }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                exit={{
+                  opacity: 0,
+                  y: -10,
+                }}
+                transition={{
+                  duration: 0.4,
+                }}
+                className="
+                  grid
+                  gap-3
+                  sm:grid-cols-2
+                  lg:grid-cols-4
+                "
+              >
+                {items.map(
+                  (
+                    item,
+                    index
+                  ) => (
+                    <TechnologyCard
+                      key={
+                        item[0]
+                      }
+                      item={item}
+                      index={
+                        index
+                      }
+                    />
+                  )
+                )}
+              </motion.div>
+            </AnimatePresence>
+          </motion.div>
         </div>
 
-        {/* ===================================================
-            FOOTER
-        =================================================== */}
+        {/* =================================================
+            AI ENGINEERING
+        ================================================= */}
+
+        <div className="mt-8">
+          <AIEngineering />
+        </div>
+
+        {/* =================================================
+            PRINCIPLES
+        ================================================= */}
 
         <div
           className="
-            mt-10
+            mt-8
+            grid
+            gap-4
+            sm:grid-cols-3
+          "
+        >
+          {[
+            [
+              "01 / BUILD",
+              "Product first.",
+              "Technology serves the product, not the other way around.",
+            ],
+            [
+              "02 / LEARN",
+              "Always evolving.",
+              "The stack changes as better tools and ideas emerge.",
+            ],
+            [
+              "03 / SHIP",
+              "Built for production.",
+              "From local development to real users and real systems.",
+            ],
+          ].map(
+            (
+              [
+                label,
+                title,
+                description,
+              ],
+              index
+            ) => (
+              <motion.div
+                key={label}
+                initial={{
+                  opacity: 0,
+                  y: 20,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                viewport={{
+                  once: true,
+                  amount: 0.2,
+                }}
+                transition={{
+                  delay:
+                    index * 0.08,
+                }}
+                whileHover={{
+                  y: -7,
+                }}
+                className="
+                  group
+                  rounded-[30px]
+                  border
+                  border-white/[0.07]
+                  bg-white/[0.025]
+                  p-7
+                  transition-all
+                  duration-300
+                  hover:border-cyan-300/15
+                  hover:bg-white/[0.04]
+                  hover:shadow-[0_25px_70px_rgba(0,0,0,.25)]
+                "
+              >
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-cyan-300/30 transition-colors group-hover:text-cyan-300/60">
+                  {label}
+                </span>
+
+                <h3 className="mt-6 text-xl font-semibold tracking-[-0.03em] text-white">
+                  {title}
+                </h3>
+
+                <p className="mt-2 text-[13px] leading-6 text-zinc-600">
+                  {description}
+                </p>
+              </motion.div>
+            )
+          )}
+        </div>
+
+        {/* =================================================
+            FOOTER
+        ================================================= */}
+
+        <footer
+          className="
+            mt-14
             flex
             flex-col
-            gap-4
+            gap-3
             border-t
-            border-white/[0.05]
-            pt-6
+            border-white/[0.07]
+            pt-7
             sm:flex-row
             sm:items-center
             sm:justify-between
           "
         >
-          <p
-            className="
-              text-[10px]
-              font-mono
-              uppercase
-              tracking-[0.2em]
-              text-zinc-700
-            "
-          >
+          <p className="font-mono text-[9px] uppercase tracking-[0.28em] text-white/20">
             Always learning. Always building.
           </p>
 
-          <div className="flex items-center gap-2">
-            <span
+          <div className="flex items-center gap-3">
+            <motion.span
+              animate={{
+                scale: [
+                  1,
+                  1.5,
+                  1,
+                ],
+                opacity: [
+                  0.5,
+                  1,
+                  0.5,
+                ],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+              }}
               className="
-                relative
-                flex
                 h-2
                 w-2
+                rounded-full
+                bg-cyan-300
+                shadow-[0_0_12px_rgba(103,232,249,.8)]
               "
-            >
-              <span
-                className="
-                  absolute
-                  h-full
-                  w-full
-                  animate-ping
-                  rounded-full
-                  bg-emerald-400
-                  opacity-40
-                "
-              />
+            />
 
-              <span
-                className="
-                  relative
-                  h-2
-                  w-2
-                  rounded-full
-                  bg-emerald-400
-                  shadow-[0_0_10px_rgba(52,211,153,0.7)]
-                "
-              />
-            </span>
-
-            <span
-              className="
-                text-[10px]
-                font-mono
-                uppercase
-                tracking-[0.18em]
-                text-zinc-600
-              "
-            >
+            <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-white/25">
               Stack evolving
             </span>
           </div>
-        </div>
+        </footer>
       </div>
 
-      {/* =====================================================
-          ANIMATIONS
-      ===================================================== */}
-
       <style>{`
-        @keyframes fadeUp {
-          from {
-            opacity: 0;
-            transform: translateY(25px);
-          }
-
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes techIn {
-          from {
-            opacity: 0;
-            transform: translateY(20px) scale(.97);
-          }
-
-          to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
-        }
-
-        @keyframes categoryIn {
-          from {
-            opacity: 0;
-            transform: translateY(35px);
-          }
-
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-
-        @keyframes panelIn {
-          from {
-            opacity: 0;
-            transform: translateY(25px) scale(.985);
-          }
-
-          to {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-          }
-        }
-
-        @keyframes orb {
-          0%, 100% {
-            transform: translate3d(0, 0, 0) scale(1);
-          }
-
-          50% {
-            transform: translate3d(35px, 25px, 0) scale(1.08);
-          }
-        }
-
-        @keyframes orbReverse {
-          0%, 100% {
-            transform: translate3d(0, 0, 0) scale(1);
-          }
-
-          50% {
-            transform: translate3d(-30px, -25px, 0) scale(1.1);
-          }
-        }
-
-        @keyframes pipelineBeam {
-          from {
-            transform: translateX(-120%);
-          }
-
-          to {
-            transform: translateX(900%);
-          }
-        }
-
-        @keyframes spinSlow {
-          from {
-            transform: rotate(0deg);
-          }
-
-          to {
-            transform: rotate(360deg);
-          }
-        }
-
-        @keyframes spinReverse {
-          from {
-            transform: rotate(360deg);
-          }
-
-          to {
-            transform: rotate(0deg);
-          }
-        }
-
-        @keyframes borderFlow {
-          0% {
-            transform: translateX(-100%);
-          }
-
-          100% {
-            transform: translateX(100%);
-          }
-        }
-
-        .animate-fade-up {
-          opacity: 0;
-          animation: fadeUp .8s cubic-bezier(.22,1,.36,1) forwards;
-        }
-
-        .animate-tech-in {
-          opacity: 0;
-          animation: techIn .7s cubic-bezier(.22,1,.36,1) forwards;
-        }
-
-        .animate-category-in {
-          opacity: 0;
-          animation: categoryIn .8s cubic-bezier(.22,1,.36,1) forwards;
-        }
-
-        .animate-panel-in {
-          opacity: 0;
-          animation: panelIn .8s cubic-bezier(.22,1,.36,1) forwards;
-        }
-
-        .animate-orb {
-          animation: orb 12s ease-in-out infinite;
-        }
-
-        .animate-orb-reverse {
-          animation: orbReverse 14s ease-in-out infinite;
-        }
-
-        .animate-pipeline-beam {
-          animation: pipelineBeam 5s linear infinite;
-        }
-
-        .animate-spin-slow {
-          animation: spinSlow 18s linear infinite;
-        }
-
-        .animate-spin-reverse {
-          animation: spinReverse 12s linear infinite;
-        }
-
-        .animate-border-flow {
-          animation: borderFlow 4s linear infinite;
-        }
-
-        .tech-card {
-          transform-style: preserve-3d;
-        }
-
         @media (prefers-reduced-motion: reduce) {
           *,
           *::before,
           *::after {
-            scroll-behavior: auto !important;
             animation-duration: 0.01ms !important;
             animation-iteration-count: 1 !important;
             transition-duration: 0.01ms !important;
           }
+        }
+
+        canvas {
+          display: block;
         }
       `}</style>
     </section>
