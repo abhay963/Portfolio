@@ -7,7 +7,7 @@ import github from "./github.png";
 import menu from "./menu.svg";
 import close from "./close.svg";
 import gdarena from "./tech/gdArena1.png";
-
+import empcopilot from "./tech/empcopilot.png"
 import langChat from "./langChat.png";
 import drivehub from "./drivehub.png";
 import vetcareai from "./vetcareai.png";
@@ -48,6 +48,7 @@ export {
   geeksforgeeks,
   sihstaff,
   gdarena,
+  empcopilot,
   logo,
   fanta,
   weather,

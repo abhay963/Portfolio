@@ -29,6 +29,7 @@ import {
   netflix,
   gdarena,
   langChat,
+  empcopilot,
   geeksforgeeks,
   sihstaff,
 } from "../assets";
@@ -107,6 +108,19 @@ const experiences = [
 
 
 const projects = [
+  {
+  name: "Employee Copilot",
+  description:
+    "AI-powered workplace assistant for contextual employee support, intelligent knowledge retrieval, and workflow automation across company tools.",
+  tags: [
+    { name: "react", color: "blue-text-gradient" },
+    { name: "langchain", color: "green-text-gradient" },
+    { name: "langgraph", color: "pink-text-gradient" },
+    { name: "gemini", color: "orange-text-gradient" },
+  ],
+  image: empcopilot,
+  source_code_link: "https://employee-copilot.vercel.app/",
+},
  {
   name: "GD Arena × StudyMate",
   description:
