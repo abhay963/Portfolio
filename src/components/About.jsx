@@ -58,10 +58,7 @@ const About = () => {
       >
         {/* Section Header */}
         <motion.div variants={textVariant()} className="mb-12 text-center md:text-left">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-cyan-500/30 bg-cyan-950/30 backdrop-blur-sm mb-4">
-            <span className="w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_10px_rgba(34,211,238,0.8)] animate-pulse" />
-            <p className="text-cyan-300 text-xs font-bold tracking-[0.2em] uppercase">Overview</p>
-          </div>
+        
           <h2 className="text-4xl md:text-6xl font-bold text-white tracking-tight">
             Architecting the <br className="md:hidden" />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600">

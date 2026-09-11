@@ -85,19 +85,7 @@ const experiences = [
 
   },
  
-  {
-    title: "Internshala Student Partner",
-    company_name: "Internshala",
-    icon: tesla, // Replace with Internshala logo if available
-    iconBg: "#0A66C2",
-    date: "Mar 2024 – July 2024",
-   points: [
-  "Promoted Internshala internship and training programs within the college community.",
-  "Organized and participated in webinars and information sessions to spread awareness about career opportunities.",
-  "Used social media and peer networks to increase student engagement and registrations."
-],
 
-  },
 ];
 
 
