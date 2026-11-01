@@ -11,7 +11,7 @@ import { navLinks } from "../constants";
 
 import {
   FiUser,
-  FiFolder,
+  FiLayers,
   FiBriefcase,
   FiMail,
   FiCode,
@@ -21,6 +21,7 @@ import {
   FiX,
   FiArrowUpRight,
   FiHome,
+  FiZap,
 } from "react-icons/fi";
 
 import {
@@ -29,20 +30,47 @@ import {
 } from "react-icons/si";
 
 // ==================================================
-// CONFIGURATION
+// CONFIGURATION & AUDIO SYNTHESIZER
 // ==================================================
 
-const SCROLL_OFFSET = 110;
-const ROBOT_WIDTH = 36;
+const SCROLL_OFFSET = 80;
+const ROBOT_WIDTH = 28;
 
 const clamp = (value, min, max) =>
   Math.min(Math.max(value, min), max);
+
+// Web Audio API Synthesizer (Retro 8-Bit Jump Sound)
+const playJumpSound = () => {
+  try {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContext) return;
+
+    const ctx = new AudioContext();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+
+    osc.type = "sine";
+    osc.frequency.setValueAtTime(340, ctx.currentTime);
+    osc.frequency.exponentialRampToValueAtTime(820, ctx.currentTime + 0.18);
+
+    gain.gain.setValueAtTime(0.1, ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.22);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start();
+    osc.stop(ctx.currentTime + 0.22);
+  } catch (e) {
+    // Graceful fallback for un-interacted browsers
+  }
+};
 
 const getNavIcon = (title = "") => {
   const name = title.toLowerCase();
 
   if (name.includes("about")) return FiUser;
-  if (name.includes("project")) return FiFolder;
+  if (name.includes("project")) return FiLayers;
   if (name.includes("experience") || name.includes("work"))
     return FiBriefcase;
   if (name.includes("contact")) return FiMail;
@@ -86,18 +114,18 @@ const robotStyles = `
     position: absolute;
     left: 0;
     bottom: -2px;
-    width: 36px;
-    height: 44px;
+    width: 28px;
+    height: 34px;
     z-index: 30;
     pointer-events: none;
     will-change: transform;
-    filter: drop-shadow(0 2px 8px rgba(145,94,255,0.45));
+    filter: drop-shadow(0 3px 8px rgba(145,94,255,0.6));
   }
 
   .robot-character .robot-flip {
     width: 100%;
     height: 100%;
-    transform-origin: center;
+    transform-origin: bottom center;
     transition: transform 180ms ease;
   }
 
@@ -154,25 +182,8 @@ const robotStyles = `
     animation: robotShadow .35s infinite ease-in-out;
   }
 
-  /* JUMPING STATE ON CLICK */
   .robot-character[data-state="jumping"] .robot-flip {
-    animation: robotJump 0.6s cubic-bezier(0.28, 0.84, 0.42, 1);
-  }
-
-  .robot-character[data-state="jumping"] .robot-arm-left {
-    transform: rotate(-60deg);
-  }
-
-  .robot-character[data-state="jumping"] .robot-arm-right {
-    transform: rotate(60deg);
-  }
-
-  .robot-character[data-state="jumping"] .robot-leg-left {
-    transform: rotate(30deg);
-  }
-
-  .robot-character[data-state="jumping"] .robot-leg-right {
-    transform: rotate(-30deg);
+    animation: smoothRobotJump 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
   }
 
   .robot-antenna {
@@ -187,24 +198,6 @@ const robotStyles = `
     animation: robotCore 1.4s infinite ease-in-out;
   }
 
-  @keyframes robotJump {
-    0% {
-      transform: translateY(0) scale(1, 1);
-    }
-    20% {
-      transform: translateY(4px) scale(1.15, 0.85);
-    }
-    50% {
-      transform: translateY(-22px) scale(0.9, 1.1);
-    }
-    80% {
-      transform: translateY(0) scale(1.05, 0.95);
-    }
-    100% {
-      transform: translateY(0) scale(1, 1);
-    }
-  }
-
   @keyframes antennaPulse {
     0%, 100% {
       fill: #915EFF;
@@ -212,7 +205,7 @@ const robotStyles = `
     }
     50% {
       fill: #C4B5FD;
-      filter: drop-shadow(0 0 10px #C4B5FD);
+      filter: drop-shadow(0 0 12px #C4B5FD);
     }
   }
 
@@ -231,7 +224,25 @@ const robotStyles = `
       transform: translateY(0) rotate(0);
     }
     50% {
-      transform: translateY(-1.5px) rotate(.5deg);
+      transform: translateY(-2px) rotate(.8deg);
+    }
+  }
+
+  @keyframes smoothRobotJump {
+    0% {
+      transform: translateY(0) scale(1, 1);
+    }
+    15% {
+      transform: translateY(3px) scale(1.18, 0.82);
+    }
+    45% {
+      transform: translateY(-18px) scale(0.9, 1.15);
+    }
+    75% {
+      transform: translateY(1px) scale(1.08, 0.92);
+    }
+    100% {
+      transform: translateY(0) scale(1, 1);
     }
   }
 
@@ -268,14 +279,24 @@ const robotStyles = `
 
   @keyframes robotShadow {
     0%, 100% { transform: scaleX(1); opacity: .4; }
-    50% { transform: scaleX(.7); opacity: .2; }
+    50% { transform: scaleX(.6); opacity: .15; }
+  }
+
+  @keyframes shineSweep {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(200%); }
+  }
+
+  .cta-shine {
+    animation: shineSweep 3.5s infinite;
   }
 
   @media (prefers-reduced-motion: reduce) {
     .robot-character *,
     .robot-antenna,
     .robot-eye,
-    .robot-core {
+    .robot-core,
+    .cta-shine {
       animation: none !important;
     }
   }
@@ -290,13 +311,12 @@ const WalkingRobot = () => {
     <div className="robot-flip">
       <svg
         viewBox="0 0 40 44"
-        width="36"
-        height="44"
+        width="28"
+        height="34"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         aria-hidden="true"
       >
-        {/* Shadow */}
         <ellipse
           className="robot-shadow"
           cx="21"
@@ -307,7 +327,6 @@ const WalkingRobot = () => {
           opacity=".35"
         />
 
-        {/* Back arm */}
         <g className="robot-arm-left">
           <rect
             x="13"
@@ -325,7 +344,6 @@ const WalkingRobot = () => {
           />
         </g>
 
-        {/* Back leg */}
         <g className="robot-leg-left">
           <rect
             x="15"
@@ -341,10 +359,8 @@ const WalkingRobot = () => {
           />
         </g>
 
-        {/* Body */}
         <g className="robot-body-group">
           <g className="robot-torso-head">
-            {/* Antenna */}
             <line
               x1="21"
               y1="10"
@@ -362,7 +378,6 @@ const WalkingRobot = () => {
               className="robot-antenna"
             />
 
-            {/* Head */}
             <rect
               x="14"
               y="9"
@@ -374,7 +389,6 @@ const WalkingRobot = () => {
               strokeWidth="1"
             />
 
-            {/* Side-facing visor */}
             <rect
               x="22"
               y="12"
@@ -399,7 +413,6 @@ const WalkingRobot = () => {
               fill="#ffffff"
             />
 
-            {/* Ear */}
             <circle
               cx="14"
               cy="15"
@@ -407,7 +420,6 @@ const WalkingRobot = () => {
               fill="#6d28d9"
             />
 
-            {/* Neck */}
             <rect
               x="19"
               y="21"
@@ -416,7 +428,6 @@ const WalkingRobot = () => {
               fill="#4c1d95"
             />
 
-            {/* Torso */}
             <rect
               x="15"
               y="23"
@@ -428,7 +439,6 @@ const WalkingRobot = () => {
               strokeWidth="1"
             />
 
-            {/* Chest core */}
             <circle
               cx="23"
               cy="28"
@@ -459,7 +469,6 @@ const WalkingRobot = () => {
           </g>
         </g>
 
-        {/* Front leg */}
         <g className="robot-leg-right">
           <rect
             x="21"
@@ -475,7 +484,6 @@ const WalkingRobot = () => {
           />
         </g>
 
-        {/* Front arm */}
         <g className="robot-arm-right">
           <rect
             x="19"
@@ -493,7 +501,6 @@ const WalkingRobot = () => {
           />
         </g>
 
-        {/* Gradients */}
         <defs>
           <linearGradient
             id="robotHeadGradient"
@@ -531,6 +538,7 @@ const WalkingRobot = () => {
 const Navbar = () => {
   const [active, setActive] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const trackRef = useRef(null);
   const robotRef = useRef(null);
@@ -541,8 +549,6 @@ const Navbar = () => {
   const directionRef = useRef("right");
   const animationRef = useRef(null);
   const idleTimerRef = useRef(null);
-  const jumpTimerRef = useRef(null);
-  const isJumpingRef = useRef(false);
 
   // ------------------------------------------------
   // GET CENTER POSITION OF EACH NAV ITEM
@@ -566,30 +572,11 @@ const Navbar = () => {
   }, []);
 
   // ------------------------------------------------
-  // TRIGGER JUMP ANIMATION ON CLICK
-  // ------------------------------------------------
-
-  const triggerJump = useCallback(() => {
-    if (!robotRef.current) return;
-
-    isJumpingRef.current = true;
-    robotRef.current.dataset.state = "jumping";
-
-    clearTimeout(jumpTimerRef.current);
-    jumpTimerRef.current = setTimeout(() => {
-      isJumpingRef.current = false;
-      if (robotRef.current) {
-        robotRef.current.dataset.state = "idle";
-      }
-    }, 600);
-  }, []);
-
-  // ------------------------------------------------
-  // SET ROBOT TARGET
+  // SET ROBOT TARGET WITH JUMP & SOUND EFFECT
   // ------------------------------------------------
 
   const moveRobotTo = useCallback(
-    (id, isClick = false) => {
+    (id) => {
       const position = getLinkPosition(id);
 
       targetXRef.current = position;
@@ -601,15 +588,19 @@ const Navbar = () => {
       }
 
       if (robotRef.current) {
-        robotRef.current.dataset.direction =
-          directionRef.current;
-      }
+        robotRef.current.dataset.direction = directionRef.current;
 
-      if (isClick) {
-        triggerJump();
+        playJumpSound();
+        robotRef.current.dataset.state = "jumping";
+
+        setTimeout(() => {
+          if (robotRef.current && robotRef.current.dataset.state === "jumping") {
+            robotRef.current.dataset.state = "walking";
+          }
+        }, 750);
       }
     },
-    [getLinkPosition, triggerJump]
+    [getLinkPosition]
   );
 
   // ------------------------------------------------
@@ -620,62 +611,47 @@ const Navbar = () => {
     let lastTime = performance.now();
 
     const animate = (time) => {
-      const delta = Math.min(
-        (time - lastTime) / 1000,
-        0.1
-      );
-
+      const delta = Math.min((time - lastTime) / 1000, 0.1);
       lastTime = time;
 
-      const difference =
-        targetXRef.current - currentXRef.current;
+      const difference = targetXRef.current - currentXRef.current;
 
       if (Math.abs(difference) > 0.35) {
-        const factor = 12;
-        const step =
-          difference * Math.min(delta * factor, 1);
+        const factor = 10;
+        const step = difference * Math.min(delta * factor, 1);
 
         currentXRef.current += step;
 
         if (Math.abs(step) > 0.01) {
-          const direction =
-            step > 0 ? "right" : "left";
-
+          const direction = step > 0 ? "right" : "left";
           directionRef.current = direction;
 
           if (robotRef.current) {
-            robotRef.current.dataset.direction =
-              direction;
-
-            if (!isJumpingRef.current) {
+            robotRef.current.dataset.direction = direction;
+            if (robotRef.current.dataset.state !== "jumping") {
               robotRef.current.dataset.state = "walking";
             }
           }
         }
 
         if (robotRef.current) {
-          robotRef.current.style.transform =
-            `translate3d(${currentXRef.current}px, 0, 0)`;
+          robotRef.current.style.transform = `translate3d(${currentXRef.current}px, 0, 0)`;
         }
       } else {
         currentXRef.current = targetXRef.current;
 
         if (robotRef.current) {
-          robotRef.current.style.transform =
-            `translate3d(${currentXRef.current}px, 0, 0)`;
-
-          if (!isJumpingRef.current) {
+          robotRef.current.style.transform = `translate3d(${currentXRef.current}px, 0, 0)`;
+          if (robotRef.current.dataset.state !== "jumping") {
             robotRef.current.dataset.state = "idle";
           }
         }
       }
 
-      animationRef.current =
-        requestAnimationFrame(animate);
+      animationRef.current = requestAnimationFrame(animate);
     };
 
-    animationRef.current =
-      requestAnimationFrame(animate);
+    animationRef.current = requestAnimationFrame(animate);
 
     return () => {
       if (animationRef.current) {
@@ -685,7 +661,7 @@ const Navbar = () => {
   }, []);
 
   // ------------------------------------------------
-  // SCROLL POSITION -> ROBOT POSITION
+  // SCROLL POSITION -> ROBOT POSITION & SCROLL DETECT
   // ------------------------------------------------
 
   useEffect(() => {
@@ -700,8 +676,7 @@ const Navbar = () => {
           return {
             id: nav.id,
             top: element
-              ? element.getBoundingClientRect().top +
-                window.scrollY
+              ? element.getBoundingClientRect().top + window.scrollY
               : null,
           };
         }),
@@ -712,13 +687,12 @@ const Navbar = () => {
 
     const updateFromScroll = () => {
       scrollFrame = null;
+      setScrolled(window.scrollY > 30);
 
       const sections = getSectionPositions();
-
       if (!sections.length) return;
 
-      const scrollPosition =
-        window.scrollY + SCROLL_OFFSET + 30;
+      const scrollPosition = window.scrollY + SCROLL_OFFSET + 20;
 
       let progressPosition = 0;
       let currentActive = "";
@@ -731,22 +705,16 @@ const Navbar = () => {
           const next = sections[i + 1];
 
           if (scrollPosition >= current.top) {
-            currentActive =
-              current.id === "home" ? "" : current.id;
+            currentActive = current.id === "home" ? "" : current.id;
 
             if (next) {
-              const sectionDistance =
-                Math.max(next.top - current.top, 1);
-
+              const sectionDistance = Math.max(next.top - current.top, 1);
               const fraction = clamp(
-                (scrollPosition - current.top) /
-                  sectionDistance,
+                (scrollPosition - current.top) / sectionDistance,
                 0,
                 1
               );
-
-              progressPosition =
-                i + fraction;
+              progressPosition = i + fraction;
             } else {
               progressPosition = i;
             }
@@ -759,8 +727,7 @@ const Navbar = () => {
         document.documentElement.scrollHeight - 5
       ) {
         progressPosition = sections.length - 1;
-        currentActive =
-          sections[sections.length - 1].id;
+        currentActive = sections[sections.length - 1].id;
       }
 
       const index = Math.min(
@@ -768,24 +735,14 @@ const Navbar = () => {
         sections.length - 1
       );
 
-      const nextIndex = Math.min(
-        index + 1,
-        sections.length - 1
-      );
-
+      const nextIndex = Math.min(index + 1, sections.length - 1);
       const fraction = progressPosition - index;
 
-      const currentPosition = getLinkPosition(
-        sections[index].id
-      );
-
-      const nextPosition = getLinkPosition(
-        sections[nextIndex].id
-      );
+      const currentPosition = getLinkPosition(sections[index].id);
+      const nextPosition = getLinkPosition(sections[nextIndex].id);
 
       const interpolated =
-        currentPosition +
-        (nextPosition - currentPosition) * fraction;
+        currentPosition + (nextPosition - currentPosition) * fraction;
 
       targetXRef.current = interpolated;
 
@@ -796,20 +753,17 @@ const Navbar = () => {
       }
 
       if (robotRef.current) {
-        robotRef.current.dataset.direction =
-          directionRef.current;
+        robotRef.current.dataset.direction = directionRef.current;
       }
 
       setActive(currentActive);
 
       clearTimeout(idleTimerRef.current);
-
       idleTimerRef.current = setTimeout(() => {
         if (
-          Math.abs(targetXRef.current - currentXRef.current) <
-          2
+          Math.abs(targetXRef.current - currentXRef.current) < 2
         ) {
-          if (robotRef.current && !isJumpingRef.current) {
+          if (robotRef.current && robotRef.current.dataset.state !== "jumping") {
             robotRef.current.dataset.state = "idle";
           }
         }
@@ -818,19 +772,14 @@ const Navbar = () => {
 
     const handleScroll = () => {
       if (scrollFrame) return;
-
-      scrollFrame =
-        requestAnimationFrame(updateFromScroll);
+      scrollFrame = requestAnimationFrame(updateFromScroll);
     };
 
     const handleResize = () => {
       updateFromScroll();
     };
 
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
-
+    window.addEventListener("scroll", handleScroll, { passive: true });
     window.addEventListener("resize", handleResize);
 
     requestAnimationFrame(updateFromScroll);
@@ -838,13 +787,8 @@ const Navbar = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
       window.removeEventListener("resize", handleResize);
-
-      if (scrollFrame) {
-        cancelAnimationFrame(scrollFrame);
-      }
-
+      if (scrollFrame) cancelAnimationFrame(scrollFrame);
       clearTimeout(idleTimerRef.current);
-      clearTimeout(jumpTimerRef.current);
     };
   }, [getLinkPosition]);
 
@@ -855,7 +799,6 @@ const Navbar = () => {
   const goToSection = useCallback(
     (id) => {
       setMenuOpen(false);
-
       const targetId = id || "home";
 
       const targetElement =
@@ -873,14 +816,11 @@ const Navbar = () => {
         : 0;
 
       setActive(targetId === "home" ? "" : targetId);
-
-      moveRobotTo(targetId, true);
+      moveRobotTo(targetId);
 
       window.scrollTo({
         top: targetTop,
-        behavior: window.matchMedia(
-          "(prefers-reduced-motion: reduce)"
-        ).matches
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
           ? "auto"
           : "smooth",
       });
@@ -889,7 +829,7 @@ const Navbar = () => {
   );
 
   // ------------------------------------------------
-  // SET INITIAL ROBOT POSITION AFTER MOUNT
+  // INITIAL ROBOT POSITION
   // ------------------------------------------------
 
   useEffect(() => {
@@ -900,21 +840,18 @@ const Navbar = () => {
       targetXRef.current = position;
 
       if (robotRef.current) {
-        robotRef.current.style.transform =
-          `translate3d(${position}px, 0, 0)`;
-
+        robotRef.current.style.transform = `translate3d(${position}px, 0, 0)`;
         robotRef.current.dataset.state = "idle";
         robotRef.current.dataset.direction = "right";
       }
     };
 
     const timer = requestAnimationFrame(initialize);
-
     return () => cancelAnimationFrame(timer);
   }, [getLinkPosition]);
 
   // ------------------------------------------------
-  // MOBILE MENU
+  // MOBILE MENU LISTENERS
   // ------------------------------------------------
 
   useEffect(() => {
@@ -947,28 +884,32 @@ const Navbar = () => {
     <>
       <style>{robotStyles}</style>
 
-      {/* FULL-WIDTH OVERLAPPING NAVBAR WITH BACKGROUND */}
+      {/* FLOATING GLASS CONTAINER */}
 
       <header
-        className="
+        className={`
           fixed top-0 left-0 right-0 z-50
-          w-full
-          bg-[#050816]/75 backdrop-blur-md
-          border-b border-white/10
-          shadow-[0_10px_30px_-10px_rgba(0,0,0,0.8)]
-          transition-all duration-300
-        "
+          w-full flex justify-center
+          px-4 sm:px-6 lg:px-8
+          transition-all duration-500 ease-out
+          ${scrolled ? "pt-2 sm:pt-2.5" : "pt-3 sm:pt-4"}
+        `}
       >
         <div
-          className="
-            w-full min-h-[90px] sm:min-h-[100px]
+          className={`
+            w-full max-w-7xl
             flex items-center justify-between
             gap-4
-            px-5 sm:px-8 lg:px-10 xl:px-14 2xl:px-20
-            py-2.5
-          "
+            px-4 sm:px-6 py-1.5 sm:py-2
+            rounded-xl sm:rounded-2xl
+            transition-all duration-500
+            bg-[#09090f]/75 backdrop-blur-xl
+            border border-white/[0.12]
+            shadow-[0_8px_25px_rgba(0,0,0,0.5),0_0_30px_rgba(145,94,255,0.12)]
+            hover:border-white/[0.2]
+          `}
         >
-          {/* LOGO */}
+          {/* LOGO WITH GLOW EFFECT */}
 
           <Link
             to="/"
@@ -978,61 +919,65 @@ const Navbar = () => {
             }}
             className="
               flex items-center gap-3
-              shrink-0 group
+              shrink-0 group relative
             "
           >
-            <img
-              src={logo}
-              alt="Abhay"
-              className="
-                w-10 h-10 sm:w-11 sm:h-11
-                object-contain
-                transition-transform duration-300
-                group-hover:scale-110
-              "
-            />
+            <div className="relative">
+              <div className="
+                absolute -inset-1 rounded-full
+                bg-gradient-to-r from-[#915EFF] to-purple-400
+                opacity-40 blur-sm group-hover:opacity-80
+                transition duration-300
+              " />
+              <img
+                src={logo}
+                alt="Abhay Yadav"
+                className="
+                  relative w-8 h-8 sm:w-9 sm:h-9
+                  object-contain
+                  transition-transform duration-300
+                  group-hover:scale-105
+                "
+              />
+            </div>
 
             <div className="hidden sm:block">
-              <p className="
-                text-white text-[18px]
-                font-bold tracking-tight leading-none
-              ">
-                Abhay<span className="text-[#915EFF]">.</span>
-              </p>
+              <div className="flex items-center gap-2">
+                <p className="
+                  text-white text-[15px] font-extrabold
+                  tracking-tight leading-none
+                ">
+                  Abhay
+                </p>
+              </div>
 
               <p className="
-                mt-1.5 text-[9px]
-                uppercase tracking-[0.2em]
-                text-white/40
+                mt-0.5 text-[8px] uppercase tracking-[0.25em]
+                text-white/40 font-mono
               ">
-                Developer
+                AI & Full-Stack Engineer
               </p>
             </div>
           </Link>
 
-          {/* DESKTOP NAVIGATION */}
+          {/* DESKTOP NAVIGATION TRACK */}
 
           <nav
             className="
-              hidden lg:flex
-              flex-1
-              justify-center
-              min-w-0
-              mx-5 xl:mx-10
+              hidden lg:flex flex-1 justify-center
+              min-w-0 mx-4 xl:mx-8
             "
             aria-label="Main navigation"
           >
             <div
               ref={trackRef}
               className="
-                relative
-                flex items-center justify-between
-                w-full max-w-[540px]
-                px-2
-                pt-3 pb-7
+                relative flex items-center justify-between
+                w-full max-w-[500px]
+                px-2 pt-1 pb-4
               "
             >
-              {/* WALKING / JUMPING ROBOT */}
+              {/* WALKING ROBOT */}
 
               <div
                 ref={robotRef}
@@ -1055,26 +1000,22 @@ const Navbar = () => {
                 type="button"
                 onClick={() => goToSection("home")}
                 className={`
-                  relative z-10
-                  flex flex-col items-center
-                  gap-1.5
-                  min-w-[65px]
-                  transition-colors duration-300
+                  relative z-10 flex flex-col items-center gap-1
+                  min-w-[55px] px-2.5 py-1 rounded-lg
+                  transition-all duration-300
                   ${
                     !active
-                      ? "text-white"
-                      : "text-white/45 hover:text-white"
+                      ? "text-white bg-white/[0.06] shadow-[0_0_12px_rgba(145,94,255,0.2)]"
+                      : "text-white/45 hover:text-white hover:bg-white/[0.03]"
                   }
                 `}
               >
                 <FiHome
-                  size={19}
-                  className={
-                    !active ? "text-[#BDA5FF]" : ""
-                  }
+                  size={15}
+                  className={!active ? "text-[#BDA5FF]" : ""}
                 />
 
-                <span className="text-[11px] font-semibold">
+                <span className="text-[10px] font-semibold tracking-wide">
                   Home
                 </span>
               </button>
@@ -1092,35 +1033,28 @@ const Navbar = () => {
                     type="button"
                     onClick={() => goToSection(nav.id)}
                     className={`
-                      relative z-10
-                      flex flex-col items-center
-                      gap-1.5
-                      min-w-[65px]
+                      relative z-10 flex flex-col items-center gap-1
+                      min-w-[55px] px-2.5 py-1 rounded-lg
                       transition-all duration-300
                       ${
                         isActive
-                          ? "text-white"
-                          : "text-white/45 hover:text-white"
+                          ? "text-white bg-white/[0.06] shadow-[0_0_12px_rgba(145,94,255,0.2)]"
+                          : "text-white/45 hover:text-white hover:bg-white/[0.03]"
                       }
                     `}
                   >
                     <Icon
-                      size={19}
-                      className={
-                        isActive ? "text-[#BDA5FF]" : ""
-                      }
+                      size={15}
+                      className={isActive ? "text-[#BDA5FF]" : ""}
                     />
 
-                    <span className="
-                      text-[11px] font-semibold
-                      whitespace-nowrap
-                    ">
+                    <span className="text-[10px] font-semibold tracking-wide whitespace-nowrap">
                       {nav.title}
                     </span>
 
                     {isActive && (
                       <span className="
-                        absolute -bottom-2
+                        absolute -bottom-1.5
                         w-1 h-1 rounded-full
                         bg-[#915EFF]
                         shadow-[0_0_8px_#915EFF]
@@ -1130,24 +1064,17 @@ const Navbar = () => {
                 );
               })}
 
-              {/* TRACK BASELINE */}
+              {/* NEON LASER TRACK BASELINE */}
 
               <div className="
-                absolute
-                left-5 right-5
-                bottom-[19px]
-                h-[3px]
-                rounded-full
-                bg-white/[0.10]
-                -z-0
+                absolute left-3 right-3 bottom-[10px]
+                h-[2px] rounded-full
+                bg-white/[0.08] -z-0 overflow-hidden
               ">
                 <div className="
-                  h-full w-full
-                  rounded-full
-                  bg-gradient-to-r
-                  from-[#915EFF]/10
-                  via-[#915EFF]/50
-                  to-[#915EFF]/10
+                  h-full w-full rounded-full
+                  bg-gradient-to-r from-transparent via-[#915EFF] to-transparent
+                  opacity-75
                 " />
               </div>
             </div>
@@ -1156,15 +1083,11 @@ const Navbar = () => {
           {/* RIGHT SIDE SOCIAL LINKS + CTA */}
 
           <div className="
-            hidden lg:flex
-            items-center gap-3 xl:gap-5
-            shrink-0
+            hidden lg:flex items-center gap-3 shrink-0
           ">
             <div className="
-              hidden xl:flex
-              items-center gap-2
-              pr-4
-              border-r border-white/10
+              hidden xl:flex items-center gap-1
+              pr-3 border-r border-white/10
             ">
               {socialLinks.map((social) => {
                 const Icon = social.icon;
@@ -1178,16 +1101,14 @@ const Navbar = () => {
                     aria-label={social.name}
                     title={social.name}
                     className="
-                      w-9 h-9
-                      flex items-center justify-center
-                      rounded-lg
-                      text-white/65
-                      hover:text-[#BDA5FF]
-                      hover:bg-white/[0.06]
+                      w-7 h-7 flex items-center justify-center
+                      rounded-lg text-white/55
+                      hover:text-[#BDA5FF] hover:bg-white/[0.08]
+                      hover:shadow-[0_0_10px_rgba(145,94,255,0.2)]
                       transition-all duration-300
                     "
                   >
-                    <Icon size={18} />
+                    <Icon size={15} />
                   </a>
                 );
               })}
@@ -1205,22 +1126,26 @@ const Navbar = () => {
                 }
               }}
               className="
-                flex items-center justify-center
-                gap-2
-                px-5 py-3
-                rounded-xl
-                bg-[#915EFF]
-                text-white text-[13px]
-                font-semibold
-                hover:bg-[#8050e8]
-                hover:shadow-[0_5px_25px_rgba(145,94,255,0.3)]
-                active:scale-95
-                transition-all duration-300
-                whitespace-nowrap
+                group relative flex items-center justify-center gap-1.5
+                px-4 py-1.5 rounded-lg
+                bg-gradient-to-r from-[#915EFF] to-[#7c3aed]
+                text-white text-[12px] font-semibold
+                shadow-[0_3px_15px_rgba(145,94,255,0.4)]
+                hover:shadow-[0_4px_20px_rgba(145,94,255,0.6)]
+                hover:scale-[1.02] active:scale-95
+                transition-all duration-300 overflow-hidden
               "
             >
-              Let's Talk
-              <FiArrowUpRight size={16} />
+              <div className="
+                cta-shine absolute inset-0 w-1/2 h-full
+                bg-gradient-to-r from-transparent via-white/25 to-transparent
+                skew-x-[-20deg] pointer-events-none
+              " />
+
+              <span className="relative z-10 flex items-center gap-1.5">
+                Let's Talk
+                <FiZap size={13} className="text-yellow-300 group-hover:rotate-12 transition-transform duration-300" />
+              </span>
             </button>
           </div>
 
@@ -1232,39 +1157,29 @@ const Navbar = () => {
             aria-label="Toggle navigation"
             aria-expanded={menuOpen}
             className="
-              lg:hidden
-              w-10 h-10
+              lg:hidden w-8 h-8
               flex items-center justify-center
-              rounded-xl
-              border border-white/10
-              text-white
-              bg-white/[0.04]
-              hover:bg-white/10
-              transition-all
+              rounded-lg border border-white/10
+              text-white bg-white/[0.04]
+              hover:bg-white/10 transition-all
             "
           >
             {menuOpen ? (
-              <FiX size={21} />
+              <FiX size={18} />
             ) : (
-              <FiMenu size={21} />
+              <FiMenu size={18} />
             )}
           </button>
         </div>
 
-        {/* MOBILE MENU */}
+        {/* MOBILE MENU OVERLAY */}
 
         <div
           className={`
-            lg:hidden
-            absolute top-full
-            left-4 right-4
-            mt-1
-            bg-[#09090f]/95
-            backdrop-blur-2xl
-            border border-white/10
-            rounded-2xl
-            overflow-hidden
-            shadow-2xl
+            lg:hidden absolute top-full left-4 right-4 mt-2
+            bg-[#09090f]/95 backdrop-blur-2xl
+            border border-white/10 rounded-2xl
+            overflow-hidden shadow-2xl
             transition-all duration-300
             ${
               menuOpen
@@ -1273,48 +1188,34 @@ const Navbar = () => {
             }
           `}
         >
-          <div className="p-5">
-            <div className="
-              flex items-center justify-between
-              mb-5
-            ">
-              <span className="
-                text-[10px] uppercase
-                tracking-widest text-white/40
-              ">
-                Explore Portfolio
+          <div className="p-4">
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-[10px] uppercase tracking-widest text-white/40 font-mono">
+                Navigation
               </span>
 
-              <span className="text-[#A78BFA] text-xs">
+              <span className="text-[#A78BFA] text-xs font-semibold">
                 {active
-                  ? navLinks.find(
-                      (nav) => nav.id === active
-                    )?.title
+                  ? navLinks.find((nav) => nav.id === active)?.title
                   : "Home"}
               </span>
             </div>
-
-            {/* MOBILE NAV LINKS */}
 
             <div className="grid grid-cols-2 gap-2">
               <button
                 type="button"
                 onClick={() => goToSection("home")}
                 className={`
-                  flex items-center gap-3
-                  p-3.5 rounded-xl border
-                  transition-all
+                  flex items-center gap-2.5 p-2.5 rounded-lg border transition-all
                   ${
                     !active
-                      ? "bg-[#915EFF]/15 border-[#915EFF]/30 text-white"
-                      : "bg-white/[0.025] border-white/[0.06] text-white/55"
+                      ? "bg-[#915EFF]/20 border-[#915EFF]/40 text-white"
+                      : "bg-white/[0.02] border-white/[0.06] text-white/60 hover:text-white"
                   }
                 `}
               >
-                <FiHome size={18} />
-                <span className="text-sm font-medium">
-                  Home
-                </span>
+                <FiHome size={16} />
+                <span className="text-xs font-medium">Home</span>
               </button>
 
               {navLinks.map((nav) => {
@@ -1326,33 +1227,26 @@ const Navbar = () => {
                     type="button"
                     onClick={() => goToSection(nav.id)}
                     className={`
-                      flex items-center gap-3
-                      p-3.5 rounded-xl border
-                      transition-all
+                      flex items-center gap-2.5 p-2.5 rounded-lg border transition-all
                       ${
                         active === nav.id
-                          ? "bg-[#915EFF]/15 border-[#915EFF]/30 text-white"
-                          : "bg-white/[0.025] border-white/[0.06] text-white/55 hover:text-white"
+                          ? "bg-[#915EFF]/20 border-[#915EFF]/40 text-white"
+                          : "bg-white/[0.02] border-white/[0.06] text-white/60 hover:text-white"
                       }
                     `}
                   >
-                    <Icon size={18} />
-                    <span className="text-sm font-medium">
-                      {nav.title}
-                    </span>
+                    <Icon size={16} />
+                    <span className="text-xs font-medium">{nav.title}</span>
                   </button>
                 );
               })}
             </div>
 
-            {/* MOBILE SOCIAL LINKS */}
-
             <div className="
-              flex items-center justify-between
-              mt-5 pt-4
+              flex items-center justify-between mt-4 pt-3
               border-t border-white/10
             ">
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2">
                 {socialLinks.map((social) => {
                   const Icon = social.icon;
 
@@ -1365,12 +1259,12 @@ const Navbar = () => {
                       aria-label={social.name}
                       onClick={() => setMenuOpen(false)}
                       className="
-                        text-white/50
-                        hover:text-[#A78BFA]
+                        p-1.5 rounded-lg text-white/50
+                        hover:text-[#A78BFA] hover:bg-white/[0.05]
                         transition-colors
                       "
                     >
-                      <Icon size={19} />
+                      <Icon size={16} />
                     </a>
                   );
                 })}
@@ -1388,16 +1282,13 @@ const Navbar = () => {
                   }
                 }}
                 className="
-                  flex items-center gap-2
-                  px-4 py-2
-                  rounded-lg
-                  bg-[#915EFF]
-                  text-white text-xs
-                  font-semibold
+                  flex items-center gap-1.5 px-3 py-1.5 rounded-lg
+                  bg-[#915EFF] text-white text-xs font-semibold
+                  shadow-[0_2px_15px_rgba(145,94,255,0.4)]
                 "
               >
                 Let's Talk
-                <FiArrowUpRight size={14} />
+                <FiZap size={12} className="text-yellow-300" />
               </button>
             </div>
           </div>

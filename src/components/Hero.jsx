@@ -1,27 +1,29 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import {
   ArrowUpRight,
   Download,
-  Sparkles,
   Terminal,
   Circle,
+  Sparkles,
+  Code2,
+  Cpu,
+  Globe,
+  Bot,
 } from "lucide-react";
 
 const Hero = () => {
-  /* ================= JSON ================= */
-
-  const jsonContent = `{
-  "name": "Abhay Kumar Yadav",
-  "role": "Agentic AI Developer",
-  "focus": "RAG & Multi-Agent Systems",
-  "stack": ["React", "Node", "LangChain", "LangGraph"],
-  "status": "Open to Work"
+ const jsonContent = `{
+  "developer": "Abhay",
+  "building": "Intelligent Software",
+  "specialty": "Full-Stack & AI Engineering",
+  "tools": ["C++", "React", "Python", "LangChain","Langraph","MERN"],
+  "availability": "Let's Collaborate"
 }`;
 
   const [typedJson, setTypedJson] = useState("");
 
-  /* ================= JSON TYPING ================= */
-
+  /* ================= JSON TYPING EFFECT ================= */
   useEffect(() => {
     let index = 0;
     let interval;
@@ -34,14 +36,13 @@ const Hero = () => {
 
         if (index > jsonContent.length) {
           clearInterval(interval);
-
           timeout = setTimeout(() => {
             index = 0;
             setTypedJson("");
             startTyping();
-          }, 2200);
+          }, 3500);
         }
-      }, 28);
+      }, 25);
     };
 
     startTyping();
@@ -50,40 +51,44 @@ const Hero = () => {
       clearInterval(interval);
       clearTimeout(timeout);
     };
-  }, []);
+  }, [jsonContent]);
 
-  /* ================= JSON SYNTAX ================= */
-
+  /* ================= RICH SYNTAX HIGHLIGHTING ================= */
   const renderJson = () => {
     const lines = typedJson.split("\n");
 
-    return lines.map((line, index) => {
+    return lines.map((line, idx) => {
       const keyMatch = line.match(/^(\s*)"([^"]+)":\s*(.*)$/);
-
-      let content = line;
 
       if (keyMatch) {
         const [, spacing, key, value] = keyMatch;
 
+        let formattedValue = value;
+        if (value.startsWith('"') && value.endsWith('"')) {
+          formattedValue = (
+            <span className="text-emerald-300 font-mono">{value}</span>
+          );
+        } else if (value.startsWith("[")) {
+          formattedValue = <span className="text-amber-300">{value}</span>;
+        } else {
+          formattedValue = (
+            <span className="text-purple-300 font-mono">{value}</span>
+          );
+        }
+
         return (
           <div
-            key={index}
-            className="grid grid-cols-[28px_minmax(0,1fr)] gap-3"
+            key={idx}
+            className="group/line grid grid-cols-[32px_minmax(0,1fr)] gap-3 hover:bg-white/[0.02] px-2 py-0.5 rounded transition-colors"
           >
-            <span className="select-none text-right text-[10px] leading-7 text-zinc-700 sm:text-[11px]">
-              {index + 1}
+            <span className="select-none text-right font-mono text-[11px] leading-6 text-zinc-600 group-hover/line:text-zinc-400">
+              {idx + 1}
             </span>
-
-            <div className="min-w-0 whitespace-pre-wrap break-words leading-7">
-              <span className="text-zinc-400">{spacing}"</span>
-
-              <span className="text-cyan-300">{key}</span>
-
-              <span className="text-zinc-500">": </span>
-
-              <span className="break-words text-purple-300">
-                {value}
-              </span>
+            <div className="min-w-0 whitespace-pre-wrap break-words font-mono text-[12px] sm:text-[13px] leading-6">
+              <span className="text-zinc-500">{spacing}"</span>
+              <span className="text-cyan-300 font-semibold">{key}</span>
+              <span className="text-zinc-400">": </span>
+              {formattedValue}
             </div>
           </div>
         );
@@ -91,15 +96,14 @@ const Hero = () => {
 
       return (
         <div
-          key={index}
-          className="grid grid-cols-[28px_minmax(0,1fr)] gap-3"
+          key={idx}
+          className="group/line grid grid-cols-[32px_minmax(0,1fr)] gap-3 hover:bg-white/[0.02] px-2 py-0.5 rounded transition-colors"
         >
-          <span className="select-none text-right text-[10px] leading-7 text-zinc-700 sm:text-[11px]">
-            {index + 1}
+          <span className="select-none text-right font-mono text-[11px] leading-6 text-zinc-600 group-hover/line:text-zinc-400">
+            {idx + 1}
           </span>
-
-          <div className="min-w-0 whitespace-pre-wrap break-words leading-7 text-cyan-100">
-            {content}
+          <div className="min-w-0 whitespace-pre-wrap break-words font-mono text-[12px] sm:text-[13px] leading-6 text-zinc-300">
+            {line}
           </div>
         </div>
       );
@@ -107,628 +111,182 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen overflow-hidden bg-[#030014] text-white">
+    <section className="relative min-h-screen w-full overflow-hidden bg-[#030014] text-white selection:bg-cyan-500/30 selection:text-cyan-200">
+      
+      {/* ================= BACKGROUND GRAPHICS ================= */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        
+        {/* CYBER GRID BACKGROUND */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff06_1px,transparent_1px),linear-gradient(to_bottom,#ffffff06_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
 
-      {/* ================= BACKGROUND ================= */}
+        {/* DYNAMIC LIGHT ORBS */}
+        <div className="absolute top-1/4 left-1/4 -translate-x-1/2 -translate-y-1/2 h-[500px] w-[500px] rounded-full bg-gradient-to-tr from-cyan-600/20 to-blue-600/10 blur-[140px]" />
+        <div className="absolute bottom-1/4 right-1/4 translate-x-1/3 translate-y-1/3 h-[550px] w-[550px] rounded-full bg-gradient-to-bl from-purple-600/20 to-indigo-600/10 blur-[160px]" />
 
-      <div className="absolute inset-0 overflow-hidden">
-
-        {/* GRID */}
-        <div
-          className="
-            absolute inset-0
-            bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),
-            linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)]
-            bg-[size:55px_55px]
-          "
-        />
-
-        {/* CYAN GLOW */}
-        <div
-          className="
-            absolute
-            left-[-12%]
-            top-[-12%]
-            h-[420px]
-            w-[420px]
-            rounded-full
-            bg-cyan-500/10
-            blur-[130px]
-          "
-        />
-
-        {/* PURPLE GLOW */}
-        <div
-          className="
-            absolute
-            bottom-[-12%]
-            right-[-12%]
-            h-[460px]
-            w-[460px]
-            rounded-full
-            bg-[#915EFF]/15
-            blur-[140px]
-          "
-        />
-
-        {/* SMALL AMBIENT GLOW */}
-        <div
-          className="
-            absolute
-            left-[45%]
-            top-[35%]
-            h-[250px]
-            w-[250px]
-            rounded-full
-            bg-blue-500/5
-            blur-[110px]
-          "
-        />
-
-        {/* PARTICLES */}
-        {[...Array(20)].map((_, i) => (
-          <span
-            key={i}
-            className="
-              absolute
-              h-[2px]
-              w-[2px]
-              rounded-full
-              bg-cyan-300/50
-              animate-pulse
-            "
-            style={{
-              top: `${(i * 37) % 100}%`,
-              left: `${(i * 61) % 100}%`,
-              animationDelay: `${i * 150}ms`,
-            }}
-          />
-        ))}
+        {/* TOP ACCENT BEAM */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 h-px w-3/4 max-w-5xl bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent" />
       </div>
 
-      {/* ================= MAIN ================= */}
+      {/* ================= MAIN CONTAINER ================= */}
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center gap-12 px-6 py-20 lg:flex-row lg:gap-16">
+        
+        {/* ================= LEFT SECTION ================= */}
+        <motion.div
+          initial={{ opacity: 0, x: -30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="flex-1 text-center lg:text-left"
+        >
+          
 
-      <div
-        className="
-          relative
-          z-10
-          mx-auto
-          flex
-          min-h-screen
-          max-w-7xl
-          flex-col
-          items-center
-          justify-center
-          gap-14
-          px-6
-          py-24
-          lg:flex-row
-          lg:gap-20
-        "
-      >
-
-        {/* ================= LEFT ================= */}
-
-        <div className="flex-1 text-center lg:text-left">
-
-          {/* PREMIUM AVAILABILITY */}
-
-         <div
-  className="
-    mb-7
-    inline-flex
-    items-center
-    gap-3
-    border-l-2
-    border-cyan-400/70
-    pl-4
-  "
->
-  <span
-    className="
-      text-[10px]
-      font-semibold
-      uppercase
-      tracking-[0.22em]
-      text-cyan-300
-      sm:text-[11px]
-    "
-  >
-    Available for opportunities
-  </span>
-
-  <span className="h-px w-8 bg-gradient-to-r from-cyan-400/60 to-transparent" />
-
-
-</div>
-
-          {/* HEADING */}
-
-          <h1
-            className="
-              text-5xl
-              font-black
-              leading-[0.95]
-              tracking-[-3px]
-              sm:text-6xl
-              md:text-7xl
-            "
-          >
-            <span
-              className="
-                mb-3
-                block
-                text-2xl
-                font-medium
-                tracking-tight
-                text-zinc-500
-                sm:text-3xl
-                md:text-4xl
-              "
-            >
-              Hi, I'm
+          {/* MAIN HEADINGS */}
+          <h1 className="mt-14 text-4xl font-extrabold tracking-tight sm:text-6xl md:text-7xl lg:leading-[1.05]">
+            <span className="block text-2xl sm:text-3xl font-medium text-zinc-400 tracking-normal mb-1">
+              Hello, I'm
             </span>
-
-            <span
-              className="
-                bg-gradient-to-r
-                from-white
-                via-zinc-200
-                to-zinc-500
-                bg-clip-text
-                text-transparent
-              "
-            >
-              Abhay
+            <span className="bg-gradient-to-r from-white via-zinc-200 to-zinc-400 bg-clip-text text-transparent">
+              Abhay Kumar
             </span>{" "}
-
-            <span
-              className="
-                bg-gradient-to-r
-                from-zinc-300
-                via-zinc-500
-                to-zinc-700
-                bg-clip-text
-                text-transparent
-              "
-            >
-              Kumar Yadav
+            <span className="bg-gradient-to-r from-cyan-300 via-cyan-400 to-blue-500 bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(34,211,238,0.2)]">
+              Yadav
             </span>
           </h1>
 
-          <div
-  className="
-    mt-7
-    flex
-    items-center
-    justify-center
-    gap-3
-    lg:justify-start
-  "
->
-  <span className="h-px w-8 bg-gradient-to-r from-transparent to-cyan-400/60" />
-
-  <p
-    className="
-      font-mono
-      text-sm
-      font-medium
-      tracking-[0.18em]
-      text-cyan-300
-      sm:text-base
-    "
-  >
-    Agentic AI Developer
-  </p>
-
-  <span className="h-px w-12 bg-gradient-to-r from-cyan-400/60 to-transparent" />
-</div>
-
-          {/* DESCRIPTION */}
-
-          <p
-            className="
-              mx-auto
-              mt-5
-              max-w-md
-              text-sm
-              leading-7
-              text-zinc-400
-              lg:mx-0
-            "
-          >
-            Building intelligent applications with RAG,
-            multi-agent systems, and modern full-stack technologies.
+          {/* SUBTITLE */}
+          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-zinc-400 sm:text-lg lg:mx-0">
+            Specializing in building autonomous <strong className="text-zinc-200 font-semibold">Multi-Agent Systems</strong>, enterprise <strong className="text-zinc-200 font-semibold">RAG Pipelines</strong>, and modern full-stack web applications.
           </p>
 
-          {/* BUTTONS */}
-
-          <div
-            className="
-              mt-9
-              flex
-              flex-wrap
-              items-center
-              justify-center
-              gap-4
-              lg:justify-start
-            "
-          >
-
-            {/* CONTACT */}
-
-            <button
+          {/* CTAs */}
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4 lg:justify-start">
+            
+            {/* PRIMARY BUTTON */}
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
               onClick={() =>
-                window.open(
-                  "mailto:abhayyadav96312@gmail.com",
-                  "_blank"
-                )
+                window.open("mailto:abhayyadav96312@gmail.com", "_blank")
               }
-              className="
-                group
-                relative
-                overflow-hidden
-                rounded-2xl
-                bg-gradient-to-r
-                from-cyan-500
-                to-blue-600
-                px-6
-                py-3.5
-                text-sm
-                font-semibold
-                text-white
-                shadow-[0_0_40px_rgba(34,211,238,0.25)]
-                transition-all
-                duration-300
-                hover:-translate-y-1
-                hover:shadow-[0_0_50px_rgba(34,211,238,0.35)]
-                sm:px-7
-              "
+              className="group relative overflow-hidden rounded-xl bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 p-[1px] shadow-[0_0_30px_rgba(34,211,238,0.3)] transition-shadow hover:shadow-[0_0_50px_rgba(34,211,238,0.5)]"
             >
-              <div
-                className="
-                  absolute
-                  inset-0
-                  translate-x-[-100%]
-                  bg-white/20
-                  transition-transform
-                  duration-1000
-                  group-hover:translate-x-[100%]
-                "
-              />
+              <div className="flex items-center gap-2 rounded-[11px] bg-[#07070d] px-6 py-3.5 text-sm font-semibold text-white transition-colors group-hover:bg-transparent">
+                <span>Let's Build Together</span>
+                <ArrowUpRight size={18} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </div>
+            </motion.button>
 
-              <span className="relative flex items-center gap-2">
-                Let's Talk
-                <ArrowUpRight size={18} />
-              </span>
-            </button>
-
-            {/* RESUME */}
-
-            <a
+            {/* RESUME BUTTON */}
+            <motion.a
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
               href="/resume.pdf"
               target="_blank"
               rel="noopener noreferrer"
+              className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-6 py-3.5 text-sm font-semibold text-zinc-200 backdrop-blur-xl hover:border-cyan-500/30 hover:bg-cyan-500/10 hover:text-white transition-all"
             >
-              <button
-                className="
-                  group
-                  rounded-2xl
-                  border
-                  border-white/10
-                  bg-white/[0.035]
-                  px-6
-                  py-3.5
-                  text-sm
-                  font-semibold
-                  text-zinc-200
-                  backdrop-blur-xl
-                  transition-all
-                  duration-300
-                  hover:-translate-y-1
-                  hover:border-cyan-400/30
-                  hover:bg-cyan-400/5
-                  sm:px-7
-                "
-              >
-                <span className="flex items-center gap-2">
-                  Resume
-                  <Download
-                    size={18}
-                    className="transition-transform duration-300 group-hover:translate-y-0.5"
-                  />
-                </span>
-              </button>
-            </a>
-
+              <span>Download Resume</span>
+              <Download size={18} />
+            </motion.a>
           </div>
-        </div>
 
-        {/* ================= RIGHT ================= */}
+          {/* KEY SKILLS BADGES */}
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-6 border-t border-white/10 pt-8 lg:justify-start">
+            <div className="flex items-center gap-2 text-xs font-medium text-zinc-400">
+              <Bot className="h-4 w-4 text-cyan-400" />
+              <span>Multi-Agent Workflows</span>
+            </div>
+            <div className="flex items-center gap-2 text-xs font-medium text-zinc-400">
+              <Cpu className="h-4 w-4 text-purple-400" />
+              <span>RAG Pipelines</span>
+            </div>
+            <div className="flex items-center gap-2 text-xs font-medium text-zinc-400">
+              <Globe className="h-4 w-4 text-blue-400" />
+              <span>Full-Stack AI Solutions</span>
+            </div>
+          </div>
+        </motion.div>
 
-        <div
-          className="
-            relative
-            flex
-            w-full
-            flex-1
-            items-center
-            justify-center
-          "
+        {/* ================= RIGHT SECTION (CODE TERMINAL) ================= */}
+        <motion.div
+          initial={{ opacity: 0, x: 30 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          className="relative w-full max-w-[550px] flex-1"
         >
+          {/* TERMINAL GLOW FRAME */}
+          <div className="absolute -inset-1 rounded-[28px] bg-gradient-to-r from-cyan-500/30 to-purple-500/30 blur-xl opacity-70" />
 
-          {/* OUTER GLOW */}
-
-          <div
-            className="
-              absolute
-              h-[380px]
-              w-[380px]
-              rounded-full
-              bg-cyan-500/10
-              blur-[120px]
-            "
-          />
-
-          {/* ================= CODE WINDOW ================= */}
-
-          <div
-            className="
-              relative
-              w-full
-              max-w-[560px]
-              overflow-hidden
-              rounded-[26px]
-              border
-              border-white/[0.09]
-              bg-[#07070c]/95
-              shadow-[0_30px_100px_rgba(0,0,0,0.55)]
-              backdrop-blur-2xl
-              transition-all
-              duration-500
-              hover:-translate-y-2
-              hover:border-cyan-400/20
-              hover:shadow-[0_30px_100px_rgba(34,211,238,0.08)]
-            "
-          >
-
+          {/* TERMINAL CONTAINER */}
+          <div className="relative overflow-hidden rounded-[24px] border border-white/10 bg-[#080811]/90 shadow-[0_20px_80px_rgba(0,0,0,0.8)] backdrop-blur-2xl">
+            
             {/* TOP BAR */}
-
-            <div
-              className="
-                flex
-                h-[58px]
-                items-center
-                justify-between
-                border-b
-                border-white/[0.07]
-                bg-white/[0.018]
-                px-5
-              "
-            >
-
-              {/* MAC BUTTONS */}
-
+            <div className="flex h-12 items-center justify-between border-b border-white/10 bg-white/[0.02] px-4">
+              
+              {/* MAC DOTS */}
               <div className="flex items-center gap-2">
-                <div className="h-3 w-3 rounded-full bg-[#ff5f56]" />
-                <div className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
-                <div className="h-3 w-3 rounded-full bg-[#27c93f]" />
+                <div className="h-3 w-3 rounded-full bg-rose-500/80" />
+                <div className="h-3 w-3 rounded-full bg-amber-500/80" />
+                <div className="h-3 w-3 rounded-full bg-emerald-500/80" />
               </div>
 
               {/* FILE NAME */}
-
-              <div
-                className="
-                  absolute
-                  left-1/2
-                  flex
-                  -translate-x-1/2
-                  items-center
-                  gap-2
-                  rounded-lg
-                  border
-                  border-white/[0.06]
-                  bg-white/[0.025]
-                  px-3
-                  py-1.5
-                "
-              >
-                <Terminal
-                  size={12}
-                  className="text-cyan-400"
-                />
-
-                <span
-                  className="
-                    font-mono
-                    text-[10px]
-                    tracking-[0.12em]
-                    text-zinc-400
-                    sm:text-[11px]
-                  "
-                >
-                  developer.json
+              <div className="flex items-center gap-2 rounded-md border border-white/10 bg-white/[0.04] px-3 py-1">
+                <Terminal size={12} className="text-cyan-400" />
+                <span className="font-mono text-xs font-medium text-zinc-300">
+                  agent_profile.json
                 </span>
               </div>
 
-              {/* STATUS */}
-
-              <div className="flex items-center gap-2">
-                <Circle
-                  size={7}
-                  fill="currentColor"
-                  className="text-cyan-400"
-                />
-
-                <span className="hidden font-mono text-[9px] text-zinc-600 sm:block">
-                  LIVE
-                </span>
+              {/* STATUS INDICATOR */}
+              <div className="flex items-center gap-1.5">
+                <Circle size={6} fill="currentColor" className="text-emerald-400 animate-pulse" />
+                <span className="font-mono text-[10px] tracking-wider text-zinc-500">LIVE</span>
               </div>
             </div>
 
-            {/* CODE AREA */}
+            {/* TERMINAL BODY */}
+            <div className="relative min-h-[330px] p-4 sm:p-5 font-mono">
+              
+              {/* CODE LIGHTING ACCENT */}
+              <div className="pointer-events-none absolute top-0 left-0 h-full w-[2px] bg-gradient-to-b from-cyan-400 via-blue-500 to-purple-600" />
 
-            <div
-              className="
-                relative
-                min-h-[320px]
-                overflow-hidden
-                bg-[#050508]
-                px-4
-                py-6
-                sm:min-h-[350px]
-                sm:px-6
-                sm:py-7
-              "
-            >
-
-              {/* LEFT ACCENT */}
-
-              <div
-                className="
-                  absolute
-                  left-0
-                  top-0
-                  h-full
-                  w-[2px]
-                  bg-gradient-to-b
-                  from-cyan-400
-                  via-blue-500
-                  to-purple-500
-                "
-              />
-
-              {/* CODE GLOW */}
-
-              <div
-                className="
-                  pointer-events-none
-                  absolute
-                  inset-0
-                  bg-[radial-gradient(circle_at_top_right,rgba(34,211,238,0.07),transparent_38%)]
-                "
-              />
-
-              {/* SECONDARY GRID */}
-
-              <div
-                className="
-                  pointer-events-none
-                  absolute
-                  inset-0
-                  opacity-30
-                  bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),
-                  linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)]
-                  bg-[size:32px_32px]
-                "
-              />
-
-              {/* CODE */}
-
-              <div
-                className="
-                  relative
-                  z-10
-                  min-w-0
-                  overflow-hidden
-                  font-mono
-                  text-[12px]
-                  sm:text-[13px]
-                "
-              >
+              {/* TYPED CODE OUTPUT */}
+              <div className="relative z-10">
                 {renderJson()}
-
+                
                 {/* CURSOR */}
-
-                <div
-                  className="
-                    mt-1
-                    ml-[40px]
-                    h-4
-                    w-[2px]
-                    animate-pulse
-                    bg-cyan-400
-                  "
-                />
+                <span className="inline-block h-4 w-2 ml-1 translate-y-0.5 bg-cyan-400 animate-pulse" />
               </div>
             </div>
 
-            {/* FOOTER */}
-
-            <div
-              className="
-                flex
-                items-center
-                justify-between
-                border-t
-                border-white/[0.06]
-                bg-white/[0.018]
-                px-5
-                py-3
-              "
-            >
-              <span className="font-mono text-[9px] text-zinc-600">
-                UTF-8
+            {/* TERMINAL FOOTER */}
+            <div className="flex items-center justify-between border-t border-white/10 bg-white/[0.02] px-4 py-2 font-mono text-[10px] text-zinc-500">
+              <span className="flex items-center gap-1">
+                <Sparkles size={12} className="text-cyan-400" />
+                LangGraph Engine
               </span>
-
-              <span className="font-mono text-[9px] text-zinc-600">
-                JSON
-              </span>
-
-              <span className="font-mono text-[9px] text-cyan-400/60">
-                READY
-              </span>
+              <span>JSON | UTF-8</span>
             </div>
-
-            {/* BOTTOM LIGHT */}
-
-            <div
-              className="
-                absolute
-                bottom-0
-                left-1/2
-                h-[1px]
-                w-2/3
-                -translate-x-1/2
-                bg-gradient-to-r
-                from-transparent
-                via-cyan-400/70
-                to-transparent
-              "
-            />
           </div>
 
-          {/* ================= FLOATING LABEL ================= */}
-
-          <div
-            className="
-              absolute
-              -bottom-6
-              left-2
-              rounded-2xl
-              border
-              border-white/[0.08]
-              bg-[#08080d]/80
-              px-4
-              py-3
-              shadow-[0_15px_40px_rgba(0,0,0,0.35)]
-              backdrop-blur-xl
-              sm:left-6
-            "
+          {/* FLOATING BADGE */}
+          <motion.div
+            animate={{ y: [0, -8, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute -bottom-5 -left-4 rounded-xl border border-white/10 bg-[#090912]/90 px-4 py-2.5 shadow-2xl backdrop-blur-xl sm:-left-6"
           >
-            <p className="flex items-center gap-2 font-mono text-[11px] text-zinc-400">
-              <span className="text-cyan-400">&gt;</span>
+            <div className="flex items-center gap-3">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                <Code2 size={18} />
+              </div>
+              <div>
+                <p className="font-mono text-xs font-bold text-white">LangChain & LangGraph</p>
+                <p className="text-[10px] text-zinc-400">Agentic RAG Pipelines</p>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
 
-              <span>
-                building_ai
-                <span className="text-zinc-600">()</span>
-              </span>
-
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-400" />
-            </p>
-          </div>
-
-        </div>
       </div>
     </section>
   );
