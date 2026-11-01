@@ -19,9 +19,7 @@ import {
   FiLinkedin,
   FiMenu,
   FiX,
-  FiArrowUpRight,
   FiHome,
-  FiZap,
 } from "react-icons/fi";
 
 import {
@@ -282,21 +280,11 @@ const robotStyles = `
     50% { transform: scaleX(.6); opacity: .15; }
   }
 
-  @keyframes shineSweep {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(200%); }
-  }
-
-  .cta-shine {
-    animation: shineSweep 3.5s infinite;
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .robot-character *,
     .robot-antenna,
     .robot-eye,
-    .robot-core,
-    .cta-shine {
+    .robot-core {
       animation: none !important;
     }
   }
@@ -1080,73 +1068,35 @@ const Navbar = () => {
             </div>
           </nav>
 
-          {/* RIGHT SIDE SOCIAL LINKS + CTA */}
+          {/* RIGHT SIDE SOCIAL LINKS */}
 
-          <div className="
-            hidden lg:flex items-center gap-3 shrink-0
-          ">
-            <div className="
-              hidden xl:flex items-center gap-1
-              pr-3 border-r border-white/10
-            ">
-              {socialLinks.map((social) => {
-                const Icon = social.icon;
+          <div className="hidden lg:flex items-center gap-2 shrink-0">
+            {socialLinks.map((social) => {
+              const Icon = social.icon;
 
-                return (
-                  <a
-                    key={social.name}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.name}
-                    title={social.name}
-                    className="
-                      w-7 h-7 flex items-center justify-center
-                      rounded-lg text-white/55
-                      hover:text-[#BDA5FF] hover:bg-white/[0.08]
-                      hover:shadow-[0_0_10px_rgba(145,94,255,0.2)]
-                      transition-all duration-300
-                    "
-                  >
-                    <Icon size={15} />
-                  </a>
-                );
-              })}
-            </div>
-
-            <button
-              type="button"
-              onClick={() => {
-                const contact = navLinks.find((nav) =>
-                  nav.title.toLowerCase().includes("contact")
-                );
-
-                if (contact) {
-                  goToSection(contact.id);
-                }
-              }}
-              className="
-                group relative flex items-center justify-center gap-1.5
-                px-4 py-1.5 rounded-lg
-                bg-gradient-to-r from-[#915EFF] to-[#7c3aed]
-                text-white text-[12px] font-semibold
-                shadow-[0_3px_15px_rgba(145,94,255,0.4)]
-                hover:shadow-[0_4px_20px_rgba(145,94,255,0.6)]
-                hover:scale-[1.02] active:scale-95
-                transition-all duration-300 overflow-hidden
-              "
-            >
-              <div className="
-                cta-shine absolute inset-0 w-1/2 h-full
-                bg-gradient-to-r from-transparent via-white/25 to-transparent
-                skew-x-[-20deg] pointer-events-none
-              " />
-
-              <span className="relative z-10 flex items-center gap-1.5">
-                Let's Talk
-                <FiZap size={13} className="text-yellow-300 group-hover:rotate-12 transition-transform duration-300" />
-              </span>
-            </button>
+              return (
+                <a
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit ${social.name} profile`}
+                  title={social.name}
+                  className="
+                    group w-10 h-10 flex items-center justify-center
+                    rounded-xl border border-white/[0.08]
+                    bg-white/[0.03] text-white/65
+                    hover:text-[#C4B5FD] hover:bg-[#915EFF]/15
+                    hover:border-[#915EFF]/40
+                    hover:shadow-[0_0_18px_rgba(145,94,255,0.22)]
+                    hover:-translate-y-0.5
+                    transition-all duration-300
+                  "
+                >
+                  <Icon size={18} className="transition-transform duration-300 group-hover:scale-110" />
+                </a>
+              );
+            })}
           </div>
 
           {/* MOBILE MENU BUTTON */}
@@ -1282,13 +1232,12 @@ const Navbar = () => {
                   }
                 }}
                 className="
-                  flex items-center gap-1.5 px-3 py-1.5 rounded-lg
-                  bg-[#915EFF] text-white text-xs font-semibold
-                  shadow-[0_2px_15px_rgba(145,94,255,0.4)]
+                  px-3 py-1.5 rounded-lg border border-[#915EFF]/40
+                  bg-[#915EFF]/15 text-[#C4B5FD] text-xs font-semibold
+                  hover:bg-[#915EFF]/25 transition-colors
                 "
               >
-                Let's Talk
-                <FiZap size={12} className="text-yellow-300" />
+                Contact
               </button>
             </div>
           </div>
