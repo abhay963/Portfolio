@@ -1,4 +1,3 @@
-
 import React, {
   useState,
   useEffect,
@@ -155,6 +154,27 @@ const robotStyles = `
     animation: robotShadow .35s infinite ease-in-out;
   }
 
+  /* JUMPING STATE ON CLICK */
+  .robot-character[data-state="jumping"] .robot-flip {
+    animation: robotJump 0.6s cubic-bezier(0.28, 0.84, 0.42, 1);
+  }
+
+  .robot-character[data-state="jumping"] .robot-arm-left {
+    transform: rotate(-60deg);
+  }
+
+  .robot-character[data-state="jumping"] .robot-arm-right {
+    transform: rotate(60deg);
+  }
+
+  .robot-character[data-state="jumping"] .robot-leg-left {
+    transform: rotate(30deg);
+  }
+
+  .robot-character[data-state="jumping"] .robot-leg-right {
+    transform: rotate(-30deg);
+  }
+
   .robot-antenna {
     animation: antennaPulse 1.8s infinite ease-in-out;
   }
@@ -165,6 +185,24 @@ const robotStyles = `
 
   .robot-core {
     animation: robotCore 1.4s infinite ease-in-out;
+  }
+
+  @keyframes robotJump {
+    0% {
+      transform: translateY(0) scale(1, 1);
+    }
+    20% {
+      transform: translateY(4px) scale(1.15, 0.85);
+    }
+    50% {
+      transform: translateY(-22px) scale(0.9, 1.1);
+    }
+    80% {
+      transform: translateY(0) scale(1.05, 0.95);
+    }
+    100% {
+      transform: translateY(0) scale(1, 1);
+    }
   }
 
   @keyframes antennaPulse {
@@ -502,9 +540,9 @@ const Navbar = () => {
   const targetXRef = useRef(0);
   const directionRef = useRef("right");
   const animationRef = useRef(null);
-  const lastScrollYRef = useRef(0);
   const idleTimerRef = useRef(null);
-  const isMovingRef = useRef(false);
+  const jumpTimerRef = useRef(null);
+  const isJumpingRef = useRef(false);
 
   // ------------------------------------------------
   // GET CENTER POSITION OF EACH NAV ITEM
@@ -528,11 +566,30 @@ const Navbar = () => {
   }, []);
 
   // ------------------------------------------------
+  // TRIGGER JUMP ANIMATION ON CLICK
+  // ------------------------------------------------
+
+  const triggerJump = useCallback(() => {
+    if (!robotRef.current) return;
+
+    isJumpingRef.current = true;
+    robotRef.current.dataset.state = "jumping";
+
+    clearTimeout(jumpTimerRef.current);
+    jumpTimerRef.current = setTimeout(() => {
+      isJumpingRef.current = false;
+      if (robotRef.current) {
+        robotRef.current.dataset.state = "idle";
+      }
+    }, 600);
+  }, []);
+
+  // ------------------------------------------------
   // SET ROBOT TARGET
   // ------------------------------------------------
 
   const moveRobotTo = useCallback(
-    (id) => {
+    (id, isClick = false) => {
       const position = getLinkPosition(id);
 
       targetXRef.current = position;
@@ -547,8 +604,12 @@ const Navbar = () => {
         robotRef.current.dataset.direction =
           directionRef.current;
       }
+
+      if (isClick) {
+        triggerJump();
+      }
     },
-    [getLinkPosition]
+    [getLinkPosition, triggerJump]
   );
 
   // ------------------------------------------------
@@ -570,7 +631,7 @@ const Navbar = () => {
         targetXRef.current - currentXRef.current;
 
       if (Math.abs(difference) > 0.35) {
-        const factor = 10;
+        const factor = 12;
         const step =
           difference * Math.min(delta * factor, 1);
 
@@ -586,10 +647,10 @@ const Navbar = () => {
             robotRef.current.dataset.direction =
               direction;
 
-            robotRef.current.dataset.state = "walking";
+            if (!isJumpingRef.current) {
+              robotRef.current.dataset.state = "walking";
+            }
           }
-
-          isMovingRef.current = true;
         }
 
         if (robotRef.current) {
@@ -603,10 +664,10 @@ const Navbar = () => {
           robotRef.current.style.transform =
             `translate3d(${currentXRef.current}px, 0, 0)`;
 
-          robotRef.current.dataset.state = "idle";
+          if (!isJumpingRef.current) {
+            robotRef.current.dataset.state = "idle";
+          }
         }
-
-        isMovingRef.current = false;
       }
 
       animationRef.current =
@@ -662,9 +723,6 @@ const Navbar = () => {
       let progressPosition = 0;
       let currentActive = "";
 
-      // Find the current section and interpolate
-      // the robot's position between section markers.
-
       if (scrollPosition < sections[0].top) {
         progressPosition = 0;
       } else {
@@ -696,7 +754,6 @@ const Navbar = () => {
         }
       }
 
-      // Bottom-of-page correction
       if (
         window.scrollY + window.innerHeight >=
         document.documentElement.scrollHeight - 5
@@ -752,7 +809,7 @@ const Navbar = () => {
           Math.abs(targetXRef.current - currentXRef.current) <
           2
         ) {
-          if (robotRef.current) {
+          if (robotRef.current && !isJumpingRef.current) {
             robotRef.current.dataset.state = "idle";
           }
         }
@@ -776,7 +833,6 @@ const Navbar = () => {
 
     window.addEventListener("resize", handleResize);
 
-    // Initial position
     requestAnimationFrame(updateFromScroll);
 
     return () => {
@@ -788,6 +844,7 @@ const Navbar = () => {
       }
 
       clearTimeout(idleTimerRef.current);
+      clearTimeout(jumpTimerRef.current);
     };
   }, [getLinkPosition]);
 
@@ -817,7 +874,7 @@ const Navbar = () => {
 
       setActive(targetId === "home" ? "" : targetId);
 
-      moveRobotTo(targetId);
+      moveRobotTo(targetId, true);
 
       window.scrollTo({
         top: targetTop,
@@ -890,29 +947,25 @@ const Navbar = () => {
     <>
       <style>{robotStyles}</style>
 
-      {/* FULL-WIDTH TRANSPARENT NAVBAR */}
+      {/* FULL-WIDTH OVERLAPPING NAVBAR WITH BACKGROUND */}
 
       <header
         className="
           fixed top-0 left-0 right-0 z-50
           w-full
-          bg-transparent
-          border-0
-          shadow-none
+          bg-[#050816]/75 backdrop-blur-md
+          border-b border-white/10
+          shadow-[0_10px_30px_-10px_rgba(0,0,0,0.8)]
+          transition-all duration-300
         "
-        style={{
-          background: "transparent",
-          backdropFilter: "none",
-          WebkitBackdropFilter: "none",
-        }}
       >
         <div
           className="
-            w-full min-h-[104px]
+            w-full min-h-[90px] sm:min-h-[100px]
             flex items-center justify-between
             gap-4
             px-5 sm:px-8 lg:px-10 xl:px-14 2xl:px-20
-            py-3
+            py-2.5
           "
         >
           {/* LOGO */}
@@ -979,7 +1032,7 @@ const Navbar = () => {
                 pt-3 pb-7
               "
             >
-              {/* WALKING ROBOT */}
+              {/* WALKING / JUMPING ROBOT */}
 
               <div
                 ref={robotRef}
@@ -1221,7 +1274,6 @@ const Navbar = () => {
           `}
         >
           <div className="p-5">
-
             <div className="
               flex items-center justify-between
               mb-5
