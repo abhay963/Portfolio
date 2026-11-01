@@ -13,7 +13,7 @@ const educations = [
     title: "B.Tech in Information Technology",
     institute: "Chandigarh Engineering College, Landran",
     duration: "2023 - Present",
-    grade: "CGPA : 8.68",
+    grade: "CGPA : 8.8",
     icon: FaUniversity,
     tag: "Higher Education",
     gradient: "from-cyan-500 via-blue-500 to-indigo-500",
